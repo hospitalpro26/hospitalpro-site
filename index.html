@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!--
+  STEP 1: A doctor profile page in plain HTML + CSS.
+
+  How a web page works:
+  1. Your browser asks a server for this file (it must be named index.html).
+  2. The browser reads the HTML (the content and structure) from top to bottom.
+  3. The CSS inside <style> tells the browser how each part should look.
+
+  All names, hospitals and numbers below are made up (sample data).
+  Never put real patient information in a public page.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Makes the page fit a phone screen instead of shrinking a desktop layout -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dr. Ayesha Rehman | Consultant Physician (sample)</title>
+  <meta name="description" content="Sample doctor profile page: identity, weekly clinic timings and contact options.">
+
+  <!-- Optional font from Google Fonts. If it fails to load, the browser uses the fallback fonts in the CSS. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- 1. Design tokens: colours and sizes we reuse everywhere ---------- */
+    :root {
+      --paper:  #f2f6f7;   /* page background */
+      --white:  #ffffff;
+      --ink:    #10233a;   /* main text */
+      --muted:  #55677a;   /* secondary text */
+      --line:   #d5dfe4;   /* thin dividers */
+      --green:  #1c8a6b;   /* "available" and Hospital A */
+      --blue:   #1d63b8;   /* Clinic B */
+      --violet: #6b4fc4;   /* Medical Centre C */
+      --radius: 14px;
+    }
+
+    /* ---------- 2. Basic reset ---------- */
+    * { box-sizing: border-box; }           /* width includes padding: easier maths */
+    body {
+      margin: 0;
+      font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 1.0625rem;                 /* about 17px: comfortable on phones */
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    /* Centre the content and keep lines a readable length */
+    .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.25rem; }
+
+    /* ---------- 3. Sample-data notice ---------- */
+    .notice {
+      background: var(--ink);
+      color: #dbe6ee;
+      font-size: 0.875rem;
+      padding: 0.6rem 0;
+    }
+
+    /* ---------- 4. Header: who the doctor is ---------- */
+    .hero { padding: 2.5rem 0 2rem; }
+    .hero h1 {
+      margin: 0 0 0.25rem;
+      font-size: clamp(2rem, 7vw, 3rem);    /* grows with screen width, within limits */
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .credentials { margin: 0; color: var(--muted); font-weight: 500; }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: #dff3ec;
+      color: #0f5e47;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .status::before {                       /* the little green dot */
+      content: "";
+      width: 0.6rem; height: 0.6rem;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    /* ---------- 5. Sections ---------- */
+    section { padding: 1.75rem 0; border-top: 1px solid var(--line); }
+    h2 { margin: 0 0 0.35rem; font-size: 1.35rem; line-height: 1.25; }
+    .sub { margin: 0 0 1.25rem; color: var(--muted); }
+
+    /* ---------- 6. The weekly schedule: the main feature of this page ---------- */
+    .week { list-style: none; margin: 0; padding: 0; background: var(--white); border-radius: var(--radius); border: 1px solid var(--line); }
+    .week li {
+      display: grid;
+      grid-template-columns: 6.5rem 1fr;    /* day column | details column */
+      gap: 0.25rem 1rem;
+      padding: 0.9rem 1rem 0.9rem 1.1rem;
+      border-left: 6px solid var(--place);  /* colour tells you which location */
+      border-bottom: 1px solid var(--line);
+    }
+    .week li:first-child { border-top-left-radius: var(--radius); }
+    .week li:last-child  { border-bottom: 0; border-bottom-left-radius: var(--radius); }
+    .day   { font-weight: 700; }
+    .where { font-weight: 600; }
+    .time  { color: var(--muted); grid-column: 2; }   /* on phones the time sits under the place */
+
+    /* Each row picks its colour by setting --place */
+    .a { --place: var(--green); }
+    .b { --place: var(--blue); }
+    .c { --place: var(--violet); }
+    .off { --place: var(--line); color: var(--muted); }
+    .off .where { font-weight: 400; }
+
+    /* On wider screens, put place and time on one line */
+    @media (min-width: 34rem) {
+      .week li { grid-template-columns: 7rem 1fr auto; align-items: baseline; }
+      .time { grid-column: auto; }
+    }
+
+    /* ---------- 7. Text blocks ---------- */
+    p { margin: 0 0 1rem; max-width: 60ch; }
+    .services { margin: 0; padding-left: 1.2rem; columns: 2; column-gap: 2rem; }
+    .services li { margin-bottom: 0.4rem; break-inside: avoid; }
+    @media (max-width: 30rem) { .services { columns: 1; } }
+
+    /* ---------- 8. Contact buttons ---------- */
+    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.4rem;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid var(--ink);
+    }
+    .btn.primary { background: var(--ink); color: var(--white); }
+    .btn.secondary { background: transparent; color: var(--ink); }
+    /* Visible outline when someone navigates with a keyboard */
+    a:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+    /* ---------- 9. Footer ---------- */
+    footer { padding: 1.5rem 0 3rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+
+<body>
+  <!-- Every visible piece of content lives inside <body>. -->
+
+  <div class="notice">
+    <div class="wrap">Sample page for learning. All names and details are made up.</div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <h1>Dr. Ayesha Rehman</h1>
+      <p class="credentials">MBBS, FCPS &middot; Consultant Physician</p>
+      <!-- This badge is fixed text for now. In step 2, JavaScript will change it based on the time of day. -->
+      <span class="status">Available now</span>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>Where to find the doctor</h2>
+        <p class="sub">Weekly clinic timings. Each colour is a different place.</p>
+
+        <!-- <ul> is a list, <li> is one item in it. Class a/b/c picks the colour from the CSS above. -->
+        <ul class="week">
+          <li class="a"><span class="day">Monday</span>    <span class="where">Sample Hospital A</span>        <span class="time">4:00 PM to 8:00 PM</span></li>
+          <li class="a"><span class="day">Tuesday</span>   <span class="where">Sample Hospital A</span>        <span class="time">4:00 PM to 8:00 PM</span></li>
+          <li class="a"><span class="day">Wednesday</span> <span class="where">Sample Hospital A</span>        <span class="time">4:00 PM to 8:00 PM</span></li>
+          <li class="b"><span class="day">Thursday</span>  <span class="where">Sample Clinic B</span>          <span class="time">2:00 PM to 5:00 PM</span></li>
+          <li class="c"><span class="day">Friday</span>    <span class="where">Sample Medical Centre C</span> <span class="time">6:00 PM to 9:00 PM</span></li>
+          <li class="c"><span class="day">Saturday</span>  <span class="where">Sample Medical Centre C</span> <span class="time">6:00 PM to 9:00 PM</span></li>
+          <li class="off"><span class="day">Sunday</span>  <span class="where">No routine clinic</span>       <span class="time"></span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>About</h2>
+        <p>Dr. Ayesha Rehman is a consultant physician with a focus on adult general medicine and long-term conditions. She sees patients at three locations during the week.</p>
+        <h2 style="margin-top:1.5rem">Services</h2>
+        <ul class="services">
+          <li>General medical check-ups</li>
+          <li>Diabetes care</li>
+          <li>Blood pressure management</li>
+          <li>Fever and infections</li>
+          <li>Follow-up visits</li>
+          <li>Second opinions</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Contact reception</h2>
+        <p class="sub">Please contact the clinic or hospital reception for appointments. The number below is fake.</p>
+        <div class="actions">
+          <!-- tel: opens the phone dialler on a phone. -->
+          <a class="btn primary" href="tel:+920000000000">Call reception</a>
+          <!-- wa.me links open WhatsApp with a chat to that number. -->
+          <a class="btn secondary" href="https://wa.me/920000000000">Message on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Sample profile built as a learning project.</div>
+  </footer>
+</body>
+</html>
