@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<!--
+  TOKEN BOOKING DEMO (pay at the clinic)
+
+  What this page is: a working PROTOTYPE of the flow we designed, so you can click through it.
+    1. Patient requests a token online (verifies phone with a WhatsApp code).
+    2. Reception confirms, takes payment at the desk, and issues the FINAL token.
+    3. Doctor portal shows counts, money entered by reception, and WhatsApp message status.
+
+  What is FAKE here (so you know what a real version must add):
+    - There is no server or database. Data is kept in THIS browser only (localStorage).
+      Open "Patient" in one tab and "Reception" in another tab of the same browser and they
+      update each other. A patient's phone and the reception computer would NOT share data
+      until a real database exists.
+    - WhatsApp messages are simulated. Nothing is really sent.
+    - Nobody logs in. A real version needs login with roles: doctor, reception.
+  Use made-up names only.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Token booking demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f2f6f7; --white:#fff; --ink:#10233a; --muted:#55677a; --line:#d5dfe4;
+            --green:#1c8a6b; --blue:#1d63b8; --amber:#b7791f; --red:#b3261e; --radius:12px; }
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    body { margin:0; background:var(--paper); color:var(--ink); line-height:1.5;
+           font-family:"Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    .wrap { max-width:62rem; margin:0 auto; padding:0 1rem; }
+    .topbar { background:var(--ink); color:#dbe6ee; }
+    .topbar .wrap { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.6rem; padding-top:.7rem; padding-bottom:.7rem; }
+    .brand { font-weight:800; letter-spacing:-.01em; }
+    .brand small { font-weight:500; opacity:.75; margin-left:.4rem; }
+    nav { display:flex; gap:.4rem; flex-wrap:wrap; }
+    nav a { color:#dbe6ee; text-decoration:none; padding:.4rem .9rem; border-radius:999px; font-weight:600; font-size:.95rem; border:1px solid transparent; }
+    nav a.on { background:#fff; color:var(--ink); }
+    nav a:not(.on):hover { border-color:#4a6178; }
+    .demo { background:#fff8e6; border-bottom:1px solid #f0d99a; font-size:.88rem; padding:.45rem 0; }
+    h1 { font-size:1.7rem; line-height:1.2; margin:1.5rem 0 .25rem; letter-spacing:-.01em; }
+    h2 { font-size:1.15rem; margin:0 0 .6rem; }
+    .lead { margin:0 0 1.1rem; color:var(--muted); max-width:62ch; }
+    .muted { color:var(--muted); }
+    .card { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:1rem 1.1rem; margin-bottom:1rem; }
+    .grid { display:grid; gap:1rem; }
+    @media (min-width:44rem) { .g2 { grid-template-columns:1fr 1fr; } .g3 { grid-template-columns:repeat(3,1fr); } }
+    .stats { display:grid; grid-template-columns:repeat(2,1fr); gap:.7rem; margin-bottom:1rem; }
+    @media (min-width:44rem) { .stats { grid-template-columns:repeat(4,1fr); } }
+    .stat { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:.7rem .9rem; }
+    .stat b { display:block; font-size:1.55rem; line-height:1.15; }
+    .stat span { font-size:.82rem; color:var(--muted); }
+    label { display:block; font-size:.85rem; font-weight:600; color:var(--muted); margin-bottom:.2rem; }
+    input, select { width:100%; font:inherit; color:var(--ink); background:#fff; border:1px solid #b9c7d0; border-radius:8px; padding:.55rem .65rem; }
+    input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible, summary:focus-visible { outline:3px solid var(--blue); outline-offset:1px; }
+    .fields { display:grid; gap:.7rem; }
+    @media (min-width:44rem) { .fields.c2 { grid-template-columns:1fr 1fr; } .fields.c3 { grid-template-columns:repeat(3,1fr); } .fields.c6 { grid-template-columns:repeat(6,1fr); } }
+    .btn { font:inherit; font-weight:700; border-radius:10px; padding:.6rem 1.1rem; border:2px solid var(--ink); background:transparent; color:var(--ink); cursor:pointer; }
+    .btn.primary { background:var(--ink); color:#fff; }
+    .btn.green { background:var(--green); border-color:var(--green); color:#fff; }
+    .btn.small { padding:.3rem .7rem; font-size:.85rem; border-width:1.5px; }
+    .btn.danger { border-color:var(--red); color:var(--red); }
+    .btn:disabled { opacity:.45; cursor:not-allowed; }
+    .row-actions { display:flex; flex-wrap:wrap; gap:.4rem; align-items:center; }
+    .err { color:var(--red); font-weight:600; margin:.5rem 0 0; }
+    .pill { display:inline-block; border-radius:999px; padding:.1rem .65rem; font-size:.8rem; font-weight:700; white-space:nowrap; }
+    .p-requested { background:#fff4d6; color:#7a5300; } .p-paid { background:#dff3ec; color:#0f5e47; }
+    .p-seen { background:#e2ecfa; color:#17467f; } .p-noshow { background:#fde3e1; color:#8a1c14; }
+    .p-cancelled, .p-expired { background:#eceff2; color:#4a5a6a; }
+    .m-sent { background:#eceff2; color:#4a5a6a; } .m-delivered { background:#dff3ec; color:#0f5e47; } .m-failed { background:#fde3e1; color:#8a1c14; }
+    /* doctor cards */
+    .doc { display:flex; flex-direction:column; gap:.5rem; }
+    .doc h3 { margin:0; font-size:1.1rem; }
+    .doc .st { font-size:.9rem; font-weight:600; }
+    .doc .st.ok { color:var(--green); } .doc .st.no { color:var(--amber); }
+    /* ticket */
+    .ticket { position:relative; background:#fff; border:1px solid var(--line); border-radius:14px; padding:1.1rem 1.3rem; max-width:32rem; }
+    .ticket .lbl { font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+    .ticket .ref { font-size:2rem; font-weight:800; letter-spacing:.02em; }
+    .perf { position:relative; border-top:2px dashed #c3d0d8; margin:.9rem -1.3rem; }
+    .perf::before, .perf::after { content:""; position:absolute; top:-11px; width:20px; height:20px; border-radius:50%; background:var(--paper); border:1px solid var(--line); }
+    .perf::before { left:-11px; } .perf::after { right:-11px; }
+    .wa { background:#e7f7dc; border:1px solid #cfe9bb; border-radius:4px 14px 14px 14px; padding:.6rem .8rem; font-size:.92rem; max-width:32rem; margin-top:.4rem; }
+    .wa small { display:block; color:#5b7a4a; font-weight:700; margin-bottom:.15rem; }
+    /* lists */
+    .list .row { display:grid; grid-template-columns:1fr; gap:.4rem; padding:.7rem 0; border-top:1px solid var(--line); }
+    .list .row:first-child { border-top:0; }
+    @media (min-width:44rem) { .list .row { grid-template-columns:2.4fr 1fr .6fr 2.6fr; align-items:center; } }
+    .tk { font-weight:800; font-size:1.1rem; }
+    table { width:100%; border-collapse:collapse; font-size:.88rem; }
+    th, td { text-align:left; padding:.45rem .5rem; border-top:1px solid var(--line); vertical-align:top; }
+    th { font-size:.78rem; text-transform:uppercase; color:var(--muted); border-top:0; }
+    .scroll { overflow-x:auto; }
+    dialog { border:1px solid var(--line); border-radius:14px; padding:1.2rem; max-width:26rem; width:calc(100% - 2rem); }
+    dialog::backdrop { background:rgba(16,35,58,.45); }
+    details { margin-bottom:1rem; } summary { cursor:pointer; font-weight:600; }
+    #slipWrap { display:none; }
+    .slip { border:2px solid #000; padding:14px; width:300px; font-family:Arial, sans-serif; color:#000; }
+    .slip .big { font-size:64px; font-weight:800; line-height:1; margin:6px 0; }
+    @media print {
+      body.print-slip > *:not(#slipWrap) { display:none !important; }
+      body.print-slip #slipWrap { display:block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">HospitalPro <small>token booking demo</small></div>
+      <nav aria-label="Views">
+        <a href="#patient" id="n-patient">Patient</a>
+        <a href="#reception" id="n-reception">Reception</a>
+        <a href="#doctor" id="n-doctor">Doctor portal</a>
+      </nav>
+    </div>
+  </header>
+  <div class="demo"><div class="wrap">Demo with made-up data, kept only in this browser. WhatsApp and payments are simulated.</div></div>
+
+  <main class="wrap" id="app"></main>
+
+  <dialog id="dlg"></dialog>
+  <div id="slipWrap"></div>
+
+<script>
+'use strict';
+/* =====================================================================
+   1. DATA. Everything the demo knows lives in one object called S ("state").
+   ===================================================================== */
+const DOCTORS = [
+  { id: "d1", name: "Dr. Ayesha Rehman", spec: "Consultant Physician", clinic: "Sample Hospital A" },
+  { id: "d2", name: "Dr. Bilal Ahmed",   spec: "Paediatrician",        clinic: "Sample Clinic B" }
+];
+/* Settings a doctor can change:
+   cap      = final tokens the doctor will see in a day
+   reserve  = tokens kept back for walk-in patients at reception
+   extra    = extra online bookings accepted, because some people never show up
+   opens    = time the day before when booking opens
+   deadline = time on the day by which the patient must reach reception and pay */
+const DEFAULTS = { cap: 100, reserve: 10, extra: 10, fee: 500, opens: "18:00", deadline: "09:00" };
+const KEY = "hospitalpro_token_demo_v1";
+const NAMES = ["Ali Raza","Sana Malik","Hamza Khan","Ayesha Noor","Imran Shah","Fatima Zahra","Usman Ghani","Hina Baloch","Bilal Memon","Zainab Soomro"];
+
+const pad = (n, w) => String(n).padStart(w, "0");
+const ymd = d => d.getFullYear() + "-" + pad(d.getMonth() + 1, 2) + "-" + pad(d.getDate(), 2);
+function freshState() {
+  const t = new Date(); t.setDate(t.getDate() + 1);
+  return { v: 1, sessionDate: ymd(t),
+    settings: { d1: { ...DEFAULTS }, d2: { ...DEFAULTS, cap: 60, reserve: 6, extra: 6, fee: 800 } },
+    bookings: [], tok: { d1: 0, d2: 0 }, nextReceipt: 1, nextId: 1, clock: "open", failRate: 0 };
+}
+function load() {
+  try { const r = localStorage.getItem(KEY); if (r) { const s = JSON.parse(r); if (s && s.v === 1) return s; } } catch (e) {}
+  return freshState();
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+let S = load();
+const ui = { p: { step: "list" }, recDoc: "d1", docDoc: "d1", search: "", filter: "all" };
+
+/* =====================================================================
+   2. SMALL HELPERS
+   ===================================================================== */
+const $ = s => document.querySelector(s);
+/* Always run typed-in text through esc() before putting it on the page,
+   otherwise someone could type HTML/JavaScript into a name field and it would run. */
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const doc = id => DOCTORS.find(d => d.id === id);
+const byId = id => S.bookings.find(b => b.id === Number(id));
+const hm = t => { const [h, m] = String(t).split(":").map(Number); return [h || 0, m || 0]; };
+function t12(t) { const [h, m] = hm(t); return ((h % 12) || 12) + ":" + pad(m, 2) + " " + (h >= 12 ? "PM" : "AM"); }
+const dLabel = () => new Date(S.sessionDate + "T00:00:00").toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
+const dtLabel = ts => new Date(ts).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true });
+
+/* =====================================================================
+   3. THE BOOKING WINDOW: opens the evening before, closes at the deadline.
+   The demo clock lets you jump to "before opening", "open", or "after deadline".
+   ===================================================================== */
+function opensAt(d) { const s = S.settings[d], x = new Date(S.sessionDate + "T00:00:00"); x.setDate(x.getDate() - 1); const [h, m] = hm(s.opens); x.setHours(h, m, 0, 0); return x; }
+function deadlineAt(d) { const s = S.settings[d], x = new Date(S.sessionDate + "T00:00:00"); const [h, m] = hm(s.deadline); x.setHours(h, m, 0, 0); return x; }
+function nowFor(d) {
+  if (S.clock === "real") return new Date();
+  if (S.clock === "before") return new Date(opensAt(d).getTime() - 6 * 3600e3);
+  if (S.clock === "open") return new Date(opensAt(d).getTime() + 2 * 3600e3);
+  return new Date(deadlineAt(d).getTime() + 30 * 60e3);
+}
+function windowState(d) { const n = nowFor(d); return n < opensAt(d) ? "notopen" : n > deadlineAt(d) ? "closed" : "open"; }
+
+/* =====================================================================
+   4. COUNTING. The rules that stop over-booking live here.
+   ===================================================================== */
+const bk = d => S.bookings.filter(b => b.doc === d);
+const issued = d => bk(d).filter(b => b.token != null).length;                       // final tokens handed out
+const walkins = d => bk(d).filter(b => b.source === "walkin").length;
+const onlineCount = d => bk(d).filter(b => b.source === "online" && b.status !== "cancelled" && b.status !== "expired").length;
+const onlineLimit = d => { const s = S.settings[d]; return Math.max(0, s.cap - s.reserve + s.extra); };
+
+function normPhone(p) {
+  let x = String(p || "").replace(/[\s\-()]/g, "");
+  if (x.startsWith("+92")) x = "0" + x.slice(3); else if (x.startsWith("0092")) x = "0" + x.slice(4);
+  else if (x.startsWith("92") && x.length === 12) x = "0" + x.slice(2);
+  return /^03\d{9}$/.test(x) ? x : null;
+}
+
+/* =====================================================================
+   5. WHATSAPP MESSAGES (simulated). Each message has a status you can see in the portal.
+   ===================================================================== */
+function addMsg(b, kind, text) {
+  const failed = Math.random() * 100 < S.failRate;
+  const m = { kind, text, at: Date.now(), status: failed ? "failed" : "sent" };
+  b.msgs.push(m);
+  if (!failed) setTimeout(() => { m.status = "delivered"; save(); refreshLive(); }, 1500);   // a real system learns this from WhatsApp
+  return m;
+}
+const msgReceived = b => "Hello " + b.name + ". Your booking request with " + doc(b.doc).name + " for " + dLabel() + " is received. Reference: " + b.ref + ". Please come to reception before " + t12(S.settings[b.doc].deadline) + " and pay Rs " + S.settings[b.doc].fee + " to get your token. Unclaimed bookings are released.";
+const msgToken = b => "Your token for " + doc(b.doc).name + " on " + dLabel() + " is No. " + b.token + ". Receipt " + b.receipt + ". Please keep this message.";
+const msgExpired = b => "Your booking " + b.ref + " with " + doc(b.doc).name + " expired because it was not claimed before " + t12(S.settings[b.doc].deadline) + ". You can book again for another day.";
+
+/* =====================================================================
+   6. THE ACTIONS THAT CHANGE DATA
+   ===================================================================== */
+function createBooking(o) {
+  let ref; do { ref = "HP-" + (1000 + Math.floor(Math.random() * 9000)); } while (S.bookings.some(b => b.ref === ref));
+  const b = { id: S.nextId++, ref, doc: o.doc, name: o.name, age: o.age, phone: o.phone || "", source: o.source,
+              status: "requested", token: null, receipt: null, amount: 0, mode: "", createdAt: Date.now(), paidAt: null, msgs: [] };
+  S.bookings.push(b);
+  if (o.source === "online") addMsg(b, "received", msgReceived(b));
+  save();
+  return b;
+}
+function issueToken(b, amount, mode) {
+  const d = b.doc;
+  if (issued(d) >= S.settings[d].cap) return "All tokens for this doctor have been issued.";
+  S.tok[d]++;
+  b.token = S.tok[d]; b.status = "paid"; b.amount = amount; b.mode = mode;
+  b.receipt = "R-" + pad(S.nextReceipt++, 4); b.paidAt = Date.now();
+  addMsg(b, "token", msgToken(b));
+  save();
+  return null;
+}
+/* After the deadline, bookings nobody has claimed at reception are released. */
+function expireUnclaimed() {
+  let n = 0;
+  DOCTORS.forEach(D => { if (windowState(D.id) === "closed") bk(D.id).forEach(b => {
+    if (b.status === "requested") { b.status = "expired"; addMsg(b, "expired", msgExpired(b)); n++; } }); });
+  if (n) save();
+}
+
+/* =====================================================================
+   7. SCREENS. Each function returns HTML text for one screen.
+   ===================================================================== */
+const pill = s => '<span class="pill p-' + esc(s) + '">' + esc({ requested: "Waiting to pay", paid: "Token issued", seen: "Seen", noshow: "No-show", cancelled: "Cancelled", expired: "Expired" }[s] || s) + "</span>";
+const mpill = s => '<span class="pill m-' + esc(s) + '">' + esc(s) + "</span>";
+const lastMsg = b => b.msgs.length ? b.msgs[b.msgs.length - 1] : null;
+
+function aboutBox() {
+  return '<details class="card"><summary>How this demo works</summary><p class="muted" style="margin:.6rem 0 0">' +
+    'Open <b>Patient</b> in one browser tab and <b>Reception</b> in another, then book as a patient and watch the request appear at reception. ' +
+    'Use the <b>Doctor portal</b> to see the counts and change the rules. Data stays in this browser and is fake. ' +
+    'A real version needs a database, logins for doctors and reception, and the real WhatsApp service.</p></details>';
+}
+
+/* ---------- Patient ---------- */
+function vPatient() {
+  const P = ui.p;
+  let h = '<h1>Book a token</h1><p class="lead">Request a token for <b>' + esc(dLabel()) + '</b>. You pay the fee at the clinic reception, and reception gives you your final token number.</p>' + aboutBox();
+  if (P.step === "done") h += ticketHtml(P.booking) + '<p><button class="btn" data-a="again">Book another token</button></p>';
+  else if (P.step === "form") h += formHtml();
+  else h += '<div class="grid g2">' + DOCTORS.map(cardHtml).join("") + "</div>";
+  h += '<section class="card" style="margin-top:1rem"><h2>Check my booking</h2><form data-form="check" class="row-actions"><input id="cRef" placeholder="Reference, e.g. HP-4821" style="max-width:16rem" aria-label="Booking reference"><button class="btn primary">Check</button></form><div id="checkOut" role="status"></div></section>';
+  return h;
+}
+function cardHtml(d) {
+  const s = S.settings[d.id], w = windowState(d.id), left = Math.max(0, onlineLimit(d.id) - onlineCount(d.id));
+  let msg, ok = false;
+  if (w === "notopen") msg = "Bookings open at " + t12(s.opens) + " the evening before";
+  else if (w === "closed") msg = "Bookings closed";
+  else if (left <= 0) msg = "No bookings available right now";
+  else { msg = "Bookings open until " + t12(s.deadline) + ". " + left + " places left"; ok = true; }
+  return '<article class="card doc"><h3>' + esc(d.name) + '</h3><div class="muted">' + esc(d.spec) + " &middot; " + esc(d.clinic) + '</div><div>Fee at clinic: <b>Rs ' + esc(s.fee) + '</b></div>' +
+    '<div class="st ' + (ok ? "ok" : "no") + '">' + esc(msg) + '</div><div><button class="btn primary" data-a="pick" data-doc="' + esc(d.id) + '"' + (ok ? "" : " disabled") + ">Request a token</button></div></article>";
+}
+function formHtml() {
+  const P = ui.p, d = doc(P.doc);
+  let h = '<section class="card"><h2>Request a token with ' + esc(d.name) + '</h2><form data-form="book"><div class="fields c3">' +
+    '<div><label for="pName">Patient name</label><input id="pName" value="' + esc(P.name || "") + '" autocomplete="off"></div>' +
+    '<div><label for="pAge">Age</label><input id="pAge" inputmode="numeric" value="' + esc(P.age || "") + '"></div>' +
+    '<div><label for="pPhone">WhatsApp number</label><input id="pPhone" inputmode="tel" placeholder="0300 1234567" value="' + esc(P.phone || "") + '"></div></div>' +
+    '<p class="row-actions" style="margin:.8rem 0 0"><button type="button" class="btn" data-a="sendcode">Send WhatsApp code</button><button type="button" class="btn small" data-a="back">Back</button></p>';
+  if (P.codeSent) h += '<div class="wa"><small>WhatsApp (simulated)</small>Your HospitalPro code is <b>' + esc(P.code) + '</b>. Do not share it.</div>' +
+    '<div class="fields" style="max-width:14rem;margin-top:.8rem"><div><label for="pCode">Enter the code</label><input id="pCode" inputmode="numeric" autocomplete="off"></div></div>' +
+    '<p style="margin:.8rem 0 0"><button class="btn green">Confirm booking</button></p>';
+  if (P.err) h += '<p class="err" role="alert">' + esc(P.err) + "</p>";
+  return h + "</form></section>";
+}
+function ticketHtml(b) {
+  const d = doc(b.doc), s = S.settings[b.doc], m = b.msgs[0];
+  return '<section class="ticket"><div class="lbl">Booking request received</div><div class="ref">' + esc(b.ref) + '</div>' +
+    '<div><b>' + esc(b.name) + '</b> &middot; ' + esc(d.name) + '<br>' + esc(d.clinic) + " &middot; " + esc(dLabel()) + '</div>' +
+    '<div class="perf"></div><div class="lbl">What to do next</div><p style="margin:.2rem 0">Come to the reception <b>before ' + esc(t12(s.deadline)) + '</b> with this reference and pay <b>Rs ' + esc(s.fee) + '</b>. Reception will give you your final token number. Bookings not claimed by then are released.</p>' +
+    (m ? '<div class="wa"><small>WhatsApp message (simulated)</small>' + esc(m.text) + "</div>" : "") + "</section>";
+}
+
+/* ---------- Reception ---------- */
+function vReception() {
+  const d = ui.recDoc, s = S.settings[d];
+  const waiting = bk(d).filter(b => b.status === "requested").length;
+  return '<h1>Reception desk</h1><p class="lead">Find a patient by reference, name or phone. Take the fee, press <b>Mark paid</b>, and the final token number is issued.</p>' +
+    '<div class="card fields c3"><div><label for="recDoc">Doctor</label><select id="recDoc">' + DOCTORS.map(x => '<option value="' + esc(x.id) + '"' + (x.id === d ? " selected" : "") + ">" + esc(x.name) + "</option>").join("") + '</select></div>' +
+    '<div><label for="recSearch">Search</label><input id="recSearch" placeholder="Reference, name or phone" value="' + esc(ui.search) + '" autocomplete="off"></div>' +
+    '<div><label for="recFilter">Show</label><select id="recFilter">' + [["all", "Everyone"], ["requested", "Waiting to pay"], ["paid", "Token issued"], ["seen", "Seen"], ["noshow", "No-show"], ["expired", "Expired"], ["cancelled", "Cancelled"]].map(x => '<option value="' + x[0] + '"' + (ui.filter === x[0] ? " selected" : "") + ">" + x[1] + "</option>").join("") + "</select></div></div>" +
+    '<div class="stats"><div class="stat"><b>' + issued(d) + " / " + s.cap + '</b><span>Tokens issued</span></div><div class="stat"><b>' + waiting + '</b><span>Waiting to pay</span></div><div class="stat"><b>' + Math.max(0, s.reserve - walkins(d)) + '</b><span>Walk-in tokens still reserved</span></div><div class="stat"><b>' + esc({ notopen: "Not open yet", open: "Open", closed: "Closed" }[windowState(d)]) + '</b><span>Booking until ' + esc(t12(s.deadline)) + '</span></div></div>' +
+    '<p><button class="btn primary" data-a="walkin">Add a walk-in patient</button></p><section class="card list" id="recList">' + recListHtml() + "</section>";
+}
+function recListHtml() {
+  const d = ui.recDoc, q = ui.search.trim().toLowerCase();
+  const rows = bk(d).filter(b => (ui.filter === "all" || b.status === ui.filter) && (!q || (b.ref + " " + b.name + " " + b.phone).toLowerCase().includes(q))).sort((a, b) => b.id - a.id);
+  if (!rows.length) return '<p class="muted" style="margin:0">No bookings to show.</p>';
+  return rows.map(b => {
+    let a = "";
+    if (b.status === "requested") a += '<button class="btn green small" data-a="pay" data-id="' + b.id + '">Mark paid</button><button class="btn small danger" data-a="cancel" data-id="' + b.id + '">Cancel</button>';
+    if (b.token != null) a += '<button class="btn small" data-a="slip" data-id="' + b.id + '">Print token</button>';
+    if (b.status === "paid") a += '<button class="btn small" data-a="seen" data-id="' + b.id + '">Seen</button><button class="btn small" data-a="noshow" data-id="' + b.id + '">No-show</button>';
+    return '<div class="row"><div><b>' + esc(b.name) + '</b> <span class="muted">' + esc(b.age) + " yrs &middot; " + esc(b.phone || "no phone") + " &middot; " + esc(b.ref) + (b.source === "walkin" ? " &middot; walk-in" : "") + "</span></div><div>" + pill(b.status) + '</div><div class="tk">' + (b.token != null ? "#" + b.token : "&ndash;") + '</div><div class="row-actions">' + a + "</div></div>";
+  }).join("");
+}
+
+/* ---------- Doctor portal ---------- */
+function vDoctor() {
+  const d = ui.docDoc, s = S.settings[d], list = bk(d), online = list.filter(b => b.source === "online");
+  const collected = list.reduce((t, b) => t + (b.token != null ? Number(b.amount) || 0 : 0), 0);
+  const msgs = list.flatMap(b => b.msgs);
+  const cnt = st => list.filter(b => b.status === st).length;
+  const stat = (n, l) => '<div class="stat"><b>' + esc(n) + "</b><span>" + esc(l) + "</span></div>";
+  let h = '<h1>Doctor portal</h1><p class="lead">Everything about the day\'s tokens: bookings, money entered by reception, and whether the WhatsApp messages went out.</p>' +
+    '<div class="card fields c3"><div><label for="docDoc">Doctor</label><select id="docDoc">' + DOCTORS.map(x => '<option value="' + esc(x.id) + '"' + (x.id === d ? " selected" : "") + ">" + esc(x.name) + "</option>").join("") + "</select></div></div>" +
+    '<div class="stats">' + stat(online.length, "Online bookings received") + stat(issued(d) + " / " + s.cap, "Tokens issued") + stat(Math.max(0, s.cap - issued(d)), "Tokens remaining") + stat("Rs " + collected, "Collected at reception") +
+    stat(cnt("requested"), "Waiting to pay") + stat(cnt("seen"), "Seen") + stat(cnt("noshow"), "No-shows") + stat(cnt("expired") + cnt("cancelled"), "Expired or cancelled") + "</div>";
+  h += '<section class="card"><h2>Rules for this doctor</h2><form data-form="settings"><div class="fields c6">' +
+    [["cap", "Token cap", "number"], ["reserve", "Walk-in reserve", "number"], ["extra", "Extra bookings", "number"], ["fee", "Fee (Rs)", "number"], ["opens", "Booking opens (evening before)", "time"], ["deadline", "Arrive and pay by", "time"]]
+      .map(f => '<div><label for="s_' + f[0] + '">' + f[1] + '</label><input id="s_' + f[0] + '" type="' + f[2] + '" value="' + esc(s[f[0]]) + '"></div>').join("") +
+    '</div><p class="muted" style="margin:.6rem 0">Online booking limit = cap &minus; walk-in reserve + extra = <b>' + onlineLimit(d) + '</b></p><button class="btn primary">Save rules</button> <span id="setMsg" class="muted" role="status"></span></form></section>';
+  h += '<section class="card"><h2>Bookings and payments</h2><div class="scroll"><table><thead><tr><th>Ref</th><th>Name</th><th>Phone</th><th>Status</th><th>Token</th><th>Receipt</th><th>Paid</th><th>Booked</th><th>WhatsApp</th></tr></thead><tbody>' +
+    (list.length ? list.slice().sort((a, b) => b.id - a.id).map(b => { const m = lastMsg(b); return "<tr><td>" + esc(b.ref) + "</td><td>" + esc(b.name) + "</td><td>" + esc(b.phone) + "</td><td>" + pill(b.status) + "</td><td>" + (b.token != null ? "#" + b.token : "") + "</td><td>" + esc(b.receipt || "") + "</td><td>" + (b.paidAt ? "Rs " + esc(b.amount) + " " + esc(b.mode) : "") + "</td><td>" + esc(dtLabel(b.createdAt)) + "</td><td>" + (m ? mpill(m.status) : "") + "</td></tr>"; }).join("") : '<tr><td colspan="9" class="muted">No bookings yet.</td></tr>') + "</tbody></table></div></section>";
+  const failed = [];
+  list.forEach(b => b.msgs.forEach((m, i) => { if (m.status === "failed") failed.push([b, i, m]); }));
+  h += '<section class="card"><h2>WhatsApp messages</h2><p class="muted" style="margin:0 0 .5rem">' + msgs.length + (msgs.length === 1 ? " message: " : " messages: ") + msgs.filter(m => m.status === "delivered").length + " delivered, " + msgs.filter(m => m.status === "sent").length + " sent, " + msgs.filter(m => m.status === "failed").length + " failed.</p>" +
+    (failed.length ? failed.map(f => '<div class="row-actions" style="padding:.4rem 0;border-top:1px solid var(--line)"><span>' + esc(f[0].name) + " (" + esc(f[0].ref) + "): " + esc(f[2].kind) + ' message failed</span><button class="btn small" data-a="resend" data-id="' + f[0].id + '" data-mi="' + f[1] + '">Resend</button></div>').join("") : '<p class="muted" style="margin:0">No failed messages.</p>') + "</section>";
+  h += '<section class="card"><h2>Demo tools</h2><div class="fields c3"><div><label for="clock">Demo clock</label><select id="clock">' + [["before", "Before booking opens"], ["open", "Booking open"], ["after", "After the deadline"], ["real", "Real time"]].map(x => '<option value="' + x[0] + '"' + (S.clock === x[0] ? " selected" : "") + ">" + x[1] + "</option>").join("") + "</select></div>" +
+    '<div><label for="fail">WhatsApp failure rate</label><select id="fail">' + [0, 20, 50, 100].map(x => '<option value="' + x + '"' + (S.failRate === x ? " selected" : "") + ">" + x + "%</option>").join("") + "</select></div></div>" +
+    '<p class="muted">Moving the clock to "After the deadline" releases all unclaimed bookings. Moving it back does not restore them. Use Reset to start over.</p>' +
+    '<p class="row-actions"><button class="btn" data-a="fake">Add 20 fake bookings</button><button class="btn" data-a="export">Download as CSV</button><button class="btn danger" data-a="reset">Reset demo data</button></p></section>';
+  return h;
+}
+
+/* =====================================================================
+   8. DRAWING THE SCREEN AND HANDLING CLICKS
+   ===================================================================== */
+const dlg = $("#dlg");
+function render() {
+  expireUnclaimed();
+  const v = ["patient", "reception", "doctor"].includes((location.hash || "").slice(1)) ? location.hash.slice(1) : "patient";
+  ["patient", "reception", "doctor"].forEach(x => $("#n-" + x).classList.toggle("on", x === v));
+  $("#app").innerHTML = v === "reception" ? vReception() : v === "doctor" ? vDoctor() : vPatient();
+}
+function refreshLive() {                       // when data changes in the background (e.g. another tab)
+  const v = (location.hash || "").slice(1);
+  if ((v === "reception" || v === "doctor") && !dlg.open) render();
+}
+window.addEventListener("hashchange", render);
+window.addEventListener("storage", e => { if (e.key === KEY) { S = load(); refreshLive(); } });
+
+function readPatient() {
+  const P = ui.p;
+  P.name = $("#pName").value.trim(); P.age = $("#pAge").value.trim(); P.phone = $("#pPhone").value.trim();
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-a]"); if (!t) return;
+  const a = t.dataset.a, id = t.dataset.id;
+  if (a === "pick") { ui.p = { step: "form", doc: t.dataset.doc, name: "", age: "", phone: "", codeSent: false, err: "" }; render(); }
+  else if (a === "back" || a === "again") { ui.p = { step: "list" }; render(); }
+  else if (a === "sendcode") {
+    readPatient(); const P = ui.p, ph = normPhone(P.phone), age = Number(P.age);
+    P.err = "";
+    if (P.name.length < 2) P.err = "Please enter the patient's name.";
+    else if (!(age >= 0 && age <= 120) || P.age === "") P.err = "Please enter a valid age.";
+    else if (!ph) P.err = "Please enter a valid mobile number, like 0300 1234567.";
+    else if (bk(P.doc).filter(b => b.phone === ph && (b.status === "requested" || b.status === "paid")).length >= 2) P.err = "This number already has 2 active bookings with this doctor.";
+    else { P.phone = ph; P.code = String(1000 + Math.floor(Math.random() * 9000)); P.codeSent = true; }
+    render(); const c = $("#pCode"); if (c) c.focus();
+  }
+  else if (a === "pay") openPay(id);
+  else if (a === "walkin") openWalkin();
+  else if (a === "slip") printSlip(id);
+  else if (a === "seen" || a === "noshow") { byId(id).status = a; save(); render(); }
+  else if (a === "cancel") { if (confirm("Cancel this booking?")) { byId(id).status = "cancelled"; save(); render(); } }
+  else if (a === "resend") { const b = byId(id), m = b.msgs[Number(t.dataset.mi)]; m.status = "sent"; m.at = Date.now(); setTimeout(() => { m.status = "delivered"; save(); refreshLive(); }, 1500); save(); render(); }
+  else if (a === "fake") {
+    const d = ui.docDoc; let n = 0;
+    for (let i = 0; i < 20 && windowState(d) === "open" && onlineCount(d) < onlineLimit(d); i++) {
+      createBooking({ doc: d, name: NAMES[Math.floor(Math.random() * NAMES.length)], age: String(1 + Math.floor(Math.random() * 80)), phone: "03" + pad(Math.floor(Math.random() * 1e9), 9), source: "online" }); n++;
+    }
+    render(); if (!n) alert("No bookings added. Booking is closed or full for this doctor.");
+  }
+  else if (a === "export") exportCsv();
+  else if (a === "reset") { if (confirm("Delete all demo data and start over?")) { S = freshState(); save(); ui.p = { step: "list" }; render(); } }
+  else if (a === "closedlg") dlg.close();
+});
+document.addEventListener("change", e => {
+  const t = e.target;
+  if (t.id === "recDoc") { ui.recDoc = t.value; render(); }
+  else if (t.id === "docDoc") { ui.docDoc = t.value; render(); }
+  else if (t.id === "recFilter") { ui.filter = t.value; $("#recList").innerHTML = recListHtml(); }
+  else if (t.id === "clock") { S.clock = t.value; save(); render(); }
+  else if (t.id === "fail") { S.failRate = Number(t.value); save(); }
+});
+document.addEventListener("input", e => { if (e.target.id === "recSearch") { ui.search = e.target.value; $("#recList").innerHTML = recListHtml(); } });
+
+document.addEventListener("submit", e => {
+  e.preventDefault();
+  const f = e.target.dataset.form;
+  if (f === "book") {
+    readPatient(); const P = ui.p;
+    if (!P.codeSent) { P.err = "Please press Send WhatsApp code first."; render(); return; }
+    if ($("#pCode").value.trim() !== P.code) { P.err = "That code is not correct."; render(); return; }
+    if (windowState(P.doc) !== "open" || onlineCount(P.doc) >= onlineLimit(P.doc)) { P.err = "Sorry, no bookings are available right now."; P.codeSent = false; render(); return; }
+    P.booking = createBooking({ doc: P.doc, name: P.name, age: P.age, phone: normPhone(P.phone), source: "online" }); P.step = "done"; render();
+  }
+  else if (f === "check") {
+    const ref = $("#cRef").value.trim().toUpperCase(), b = S.bookings.find(x => x.ref === ref), out = $("#checkOut");
+    out.innerHTML = !b ? '<p class="err">No booking found with that reference.</p>' :
+      '<p style="margin:.6rem 0 0"><b>' + esc(b.name) + "</b> &middot; " + esc(doc(b.doc).name) + "<br>" + pill(b.status) + (b.token != null ? " Your token is <b>#" + b.token + "</b>" : "") + "</p>" +
+      b.msgs.map(m => '<div class="wa"><small>WhatsApp (simulated) &middot; ' + esc(m.status) + "</small>" + esc(m.text) + "</div>").join("");
+  }
+  else if (f === "pay" || f === "walkin") {
+    const q = k => e.target.elements[k], err = $("#dlgErr"); err.textContent = "";
+    const amount = Number(q("amount").value), mode = q("mode").value;
+    if (!(amount >= 0)) { err.textContent = "Enter the amount received."; return; }
+    let b;
+    if (f === "pay") b = byId(e.target.dataset.id);
+    else {
+      const d = ui.recDoc, name = q("name").value.trim(), age = q("age").value.trim(), ph = q("phone").value.trim();
+      if (name.length < 2) { err.textContent = "Enter the patient's name."; return; }
+      if (!(Number(age) >= 0 && Number(age) <= 120) || age === "") { err.textContent = "Enter a valid age."; return; }
+      if (ph && !normPhone(ph)) { err.textContent = "That phone number is not valid."; return; }
+      if (walkins(d) >= S.settings[d].reserve && windowState(d) !== "closed") { err.textContent = "The walk-in reserve is used up. Unclaimed bookings can be released after the deadline."; return; }
+      b = createBooking({ doc: d, name, age, phone: ph ? normPhone(ph) : "", source: "walkin" });
+    }
+    const problem = issueToken(b, amount, mode);
+    if (problem) { err.textContent = problem; if (f === "walkin") { S.bookings = S.bookings.filter(x => x !== b); save(); } return; }
+    dlg.close(); render(); printSlip(b.id);
+  }
+  else if (f === "settings") {
+    const d = ui.docDoc, g = k => e.target.elements["s_" + k].value, n = {
+      cap: Number(g("cap")), reserve: Number(g("reserve")), extra: Number(g("extra")), fee: Number(g("fee")), opens: g("opens"), deadline: g("deadline") };
+    const msg = $("#setMsg");
+    if (!(n.cap >= 1 && n.cap <= 500) || !(n.reserve >= 0 && n.reserve <= n.cap) || !(n.extra >= 0 && n.extra <= 100) || !(n.fee >= 0) || !n.opens || !n.deadline) { msg.textContent = "Please check the numbers: reserve cannot be more than the cap."; return; }
+    S.settings[d] = n; save(); render(); $("#setMsg").textContent = "Saved.";
+  }
+});
+
+/* ---------- Dialogs, printing, export ---------- */
+function openPay(id) {
+  const b = byId(id), s = S.settings[b.doc];
+  dlg.innerHTML = '<form data-form="pay" data-id="' + b.id + '"><h2>Mark paid and issue token</h2><p style="margin:0 0 .6rem"><b>' + esc(b.name) + '</b><br><span class="muted">' + esc(b.ref) + " &middot; " + esc(doc(b.doc).name) + '</span></p>' +
+    '<div class="fields"><div><label for="d_amount">Amount received (Rs)</label><input id="d_amount" name="amount" type="number" min="0" value="' + esc(s.fee) + '"></div>' +
+    '<div><label for="d_mode">Paid by</label><select id="d_mode" name="mode"><option>Cash</option><option>Other</option></select></div></div>' +
+    '<p id="dlgErr" class="err" role="alert"></p><p class="row-actions"><button class="btn green">Issue token</button><button type="button" class="btn" data-a="closedlg">Cancel</button></p></form>';
+  dlg.showModal();
+}
+function openWalkin() {
+  const s = S.settings[ui.recDoc];
+  dlg.innerHTML = '<form data-form="walkin"><h2>Add a walk-in patient</h2><div class="fields"><div><label for="w_name">Name</label><input id="w_name" name="name" autocomplete="off"></div>' +
+    '<div><label for="w_age">Age</label><input id="w_age" name="age" inputmode="numeric"></div><div><label for="w_phone">Phone (optional)</label><input id="w_phone" name="phone" inputmode="tel"></div>' +
+    '<div><label for="w_amount">Amount received (Rs)</label><input id="w_amount" name="amount" type="number" min="0" value="' + esc(s.fee) + '"></div>' +
+    '<div><label for="w_mode">Paid by</label><select id="w_mode" name="mode"><option>Cash</option><option>Other</option></select></div></div>' +
+    '<p id="dlgErr" class="err" role="alert"></p><p class="row-actions"><button class="btn green">Issue token</button><button type="button" class="btn" data-a="closedlg">Cancel</button></p></form>';
+  dlg.showModal();
+}
+function printSlip(id) {
+  const b = byId(id), d = doc(b.doc);
+  $("#slipWrap").innerHTML = '<div class="slip"><b>HospitalPro (demo)</b><br>' + esc(d.name) + "<br>" + esc(d.clinic) + "<br>" + esc(dLabel()) + '<div class="big">' + esc(b.token) + "</div>" +
+    "<b>" + esc(b.name) + "</b><br>Ref " + esc(b.ref) + "<br>Receipt " + esc(b.receipt) + " &middot; Rs " + esc(b.amount) + "<br><small>Demo slip with made-up data</small></div>";
+  document.body.classList.add("print-slip");
+  window.print();
+  setTimeout(() => document.body.classList.remove("print-slip"), 500);
+}
+window.addEventListener("afterprint", () => document.body.classList.remove("print-slip"));
+
+function exportCsv() {
+  /* A cell starting with = + - or @ can be run as a formula when opened in Excel, so we add a quote in front. */
+  const cell = v => { let s = String(v == null ? "" : v); if (/^[=+\-@]/.test(s)) s = "'" + s; return '"' + s.replace(/"/g, '""') + '"'; };
+  const rows = [["Reference", "Doctor", "Name", "Age", "Phone", "Source", "Status", "Token", "Receipt", "Amount", "Paid by", "Booked at", "Paid at", "WhatsApp status"]];
+  S.bookings.forEach(b => { const m = lastMsg(b); rows.push([b.ref, doc(b.doc).name, b.name, b.age, b.phone, b.source, b.status, b.token, b.receipt, b.token != null ? b.amount : "", b.mode, new Date(b.createdAt).toISOString(), b.paidAt ? new Date(b.paidAt).toISOString() : "", m ? m.status : ""]); });
+  const blob = new Blob([rows.map(r => r.map(cell).join(",")).join("\n")], { type: "text/csv" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "token-bookings-" + S.sessionDate + ".csv"; document.body.appendChild(a); a.click(); a.remove();
+}
+
+render();
+</script>
+</body>
+</html>
