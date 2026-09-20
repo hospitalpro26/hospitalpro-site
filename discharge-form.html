@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Discharge Summary Form</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Noto+Nastaliq+Urdu&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#eaf0f6;--paper:#ffffff;--ink:#17202b;--muted:#586577;--line:#c7d1dc;
+  --head:#14325c;--accent:#0e7c86;--field:#f6f9fc;--btn:#14325c;--btn-ink:#ffffff;--danger:#a4262c;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e151d;--paper:#16202b;--ink:#e6edf5;--muted:#93a1b2;--line:#2c3b4b;
+    --head:#9dbdf0;--accent:#4fc1cb;--field:#101923;--btn:#3b7ddd;--btn-ink:#fff;--danger:#ff8a8f;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e151d;--paper:#16202b;--ink:#e6edf5;--muted:#93a1b2;--line:#2c3b4b;
+  --head:#9dbdf0;--accent:#4fc1cb;--field:#101923;--btn:#3b7ddd;--btn-ink:#fff;--danger:#ff8a8f;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.45 "Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:16px 14px 110px}
+.paper{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:20px 18px}
+.masthead{text-align:center;border-bottom:3px double var(--head);padding-bottom:14px;margin-bottom:6px}
+.masthead h1{margin:0;font-size:1.6rem;font-weight:700;color:var(--head);letter-spacing:.2px}
+.masthead p{margin:2px 0 0;color:var(--muted);font-size:.95rem}
+details.hdr{margin:10px 0 0;text-align:left}
+details.hdr summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:.95rem}
+h2{font-size:1.15rem;font-weight:700;color:var(--head);margin:26px 0 10px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+h2 small{font-weight:400;color:var(--muted);font-size:.85rem;margin-inline-start:6px}
+.grid{display:grid;gap:10px 12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.grid.wide{grid-template-columns:1fr}
+label.f{display:block;font-size:.85rem;font-weight:600;color:var(--muted)}
+label.f>span.ur{font-family:"Noto Nastaliq Urdu",serif;font-weight:400;margin-inline-start:6px}
+input[type=text],input[type=date],select,textarea{
+  display:block;width:100%;margin-top:3px;padding:9px 10px;font:inherit;color:var(--ink);
+  background:var(--field);border:1px solid var(--line);border-radius:5px;min-height:42px}
+textarea{resize:vertical;min-height:88px}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,.chip input:focus-visible+span{outline:3px solid var(--accent);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0;width:100%;height:100%}
+.chip span{display:inline-block;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:var(--field);font-size:.95rem;min-height:38px;line-height:24px}
+.chip input:checked+span{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.addrow{display:flex;gap:8px;max-width:380px;margin-bottom:6px}
+.addrow input{margin-top:0}
+.panels{display:grid;gap:12px;margin-top:8px}
+.panel{border:1px solid var(--line);border-inline-start:4px solid var(--accent);border-radius:5px;padding:10px 12px 12px;background:var(--field)}
+.panel[hidden]{display:none}
+.panel h3{margin:0 0 8px;font-size:1rem;color:var(--head);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.panel input[type=text],.panel select,.panel textarea{background:var(--paper)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:5px}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th{background:var(--field);text-align:left;font-size:.85rem;padding:8px;border-bottom:1px solid var(--line);color:var(--muted)}
+td{padding:4px;border-bottom:1px solid var(--line)}
+td input{margin:0;min-height:38px}
+.btn{font:600 1rem "Source Sans 3",system-ui,sans-serif;border:1px solid var(--btn);background:var(--btn);color:var(--btn-ink);padding:10px 16px;border-radius:6px;min-height:44px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--head);border-color:var(--line)}
+.btn.small{min-height:38px;padding:6px 12px}
+.btn.del{color:var(--danger);border-color:transparent;background:transparent;padding:6px 10px;min-height:38px;font-weight:600}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--line);
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;justify-content:center;flex-wrap:wrap;z-index:5}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);
+  padding:9px 16px;border-radius:6px;font-size:.95rem;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90%;text-align:center;z-index:6}
+.toast.show{opacity:1}
+.note{color:var(--muted);font-size:.85rem;margin:6px 0 0}
+@media print{
+  body{background:#fff;color:#000}.bar,.toast,details.hdr summary,.btn,.addrow,.chips{display:none}
+  .paper{border:none;padding:0}main{padding:0}
+}
+@media (prefers-reduced-motion: reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<div class="paper">
+  <div class="masthead">
+    <h1>Discharge Summary</h1>
+    <p id="mh1">Medicine Unit-II · GMMMC Teaching Hospital Sukkur</p>
+    <details class="hdr">
+      <summary>Hospital header details</summary>
+      <div class="grid" style="margin-top:10px">
+        <label class="f">Unit<input type="text" class="h" data-k="unit" value="Medicine Unit-II"></label>
+        <label class="f">Hospital<input type="text" class="h" data-k="hospital" value="GMMMC Teaching Hospital Sukkur"></label>
+        <label class="f">P.O. box<input type="text" class="h" data-k="pobox" value="65200"></label>
+        <label class="f">Telephone<input type="text" class="h" data-k="tel" value="+92311-3442811"></label>
+        <label class="f">Fax<input type="text" class="h" data-k="fax" value="+92-71-9310117"></label>
+        <label class="f">E-mail<input type="text" class="h" data-k="email" value="info@medical2gmc.com"></label>
+        <label class="f">Website<input type="text" class="h" data-k="web" value="www.medical2gmc.com"></label>
+      </div>
+    </details>
+  </div>
+
+  <h2>Personal information</h2>
+  <div class="grid">
+    <label class="f">Patient name<input type="text" data-k="name" autocomplete="off"></label>
+    <label class="f">Gender
+      <select data-k="gender"><option value="">Select</option><option>Female</option><option>Male</option><option>Other</option></select></label>
+    <label class="f">Age<input type="text" data-k="age" inputmode="numeric" placeholder="e.g. 13"></label>
+  </div>
+  <div class="grid" style="margin-top:10px">
+    <label class="f">Admission date<input type="date" data-k="adm"></label>
+    <label class="f">Discharge date<input type="date" data-k="dis"></label>
+    <label class="f">Resident doctor<input type="text" data-k="doc"></label>
+    <label class="f">MR no.<input type="text" data-k="mr"></label>
+  </div>
+
+  <h2>Diagnosis</h2>
+  <div class="grid wide">
+    <label class="f">Associated diagnosis / significant co-morbids<input type="text" data-k="assoc" placeholder="e.g. NKCM"></label>
+    <label class="f">Principal diagnosis / reason for admission<input type="text" data-k="diag"></label>
+  </div>
+
+  <h2>Hospital course</h2>
+  <label class="f">Treatment given in hospital (one item per line)
+    <textarea data-k="course" rows="6"></textarea></label>
+  <div class="grid" style="margin-top:10px">
+    <label class="f">Condition on discharge
+      <select data-k="cond"><option value="">Select</option><option>Improved</option><option>Stable</option><option>Unchanged</option><option>Deteriorated</option></select></label>
+    <label class="f">Mode on discharge
+      <select data-k="mode"><option value="">Select</option><option>Planned</option><option>LAMA</option><option>Referred</option><option>Absconded</option><option>Expired</option></select></label>
+  </div>
+
+  <h2>Other investigations <small>optional, tap one to add it</small></h2>
+  <div class="chips" id="invChips"></div>
+  <div class="addrow">
+    <input type="text" id="invCustom" placeholder="Other investigation (e.g. CT scan)" aria-label="Other investigation name">
+    <button type="button" class="btn ghost small" id="invAdd">Add</button>
+  </div>
+  <div class="panels" id="invPanels"></div>
+
+  <h2>Instructions on discharge</h2>
+  <label class="f">Instructions for going home<span class="ur" lang="ur" dir="rtl">گھر جانے کے لیے ضروری ہدایات</span>
+    <textarea data-k="instr" rows="4"></textarea></label>
+
+  <h2>Take home prescription</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th><th>Duration of treatment</th><th></th></tr></thead>
+      <tbody id="rx"></tbody>
+    </table>
+  </div>
+  <p style="margin:10px 0 0"><button type="button" class="btn ghost small" id="addrx">Add drug</button></p>
+
+  <h2>Labs <small>optional, tap a lab to fill its results</small></h2>
+  <div class="chips" id="labChips"></div>
+  <div class="addrow">
+    <input type="text" id="labCustom" placeholder="Other lab (e.g. Blood sugar)" aria-label="Other lab name">
+    <button type="button" class="btn ghost small" id="labAdd">Add lab</button>
+  </div>
+  <div class="panels" id="labPanels"></div>
+  <p class="note">The PDF uses English labels. The Urdu heading is shown on this form only. Sections you don't select are left out of the PDF.</p>
+</div>
+</main>
+
+<div class="bar">
+  <button type="button" class="btn" id="save">Download PDF</button>
+  <button type="button" class="btn ghost" id="print">Print</button>
+  <button type="button" class="btn ghost" id="example">Load example</button>
+  <button type="button" class="btn ghost" id="clear">Clear form</button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('show')},2800)}
+
+  var POS=['','Negative','Positive','Pending'];
+  var INV_DEFS=[
+    {name:'Ultrasound',fields:[{l:'Findings',area:1}]},
+    {name:'X-ray',fields:[{l:'Findings',area:1}]}
+  ];
+  var LAB_DEFS=[
+    {name:'CBC',fields:[{l:'Hemoglobin (Hb)'},{l:'WBC'},{l:'Platelets'},{l:'MCV'}]},
+    {name:'U/C/E',fields:[{l:'Urea'},{l:'S. creatinine'},{l:'Sodium'},{l:'Potassium'},{l:'Chloride'}]},
+    {name:'HBsAg',fields:[{l:'Result',opts:POS}]},
+    {name:'Anti-HCV',fields:[{l:'Result',opts:POS}]},
+    {name:'LFTs',fields:[{l:'Total bilirubin'},{l:'Bilirubin direct'},{l:'Bilirubin indirect'},{l:'ALP'},{l:'SGPT (ALT)'}]},
+    {name:'S. Albumin',fields:[{l:'Value'}]},
+    {name:'PT',fields:[{l:'Value'}]},
+    {name:'INR',fields:[{l:'Value'}]},
+    {name:'MP',fields:[{l:'Result'}]}
+  ];
+  var CUSTOM_FIELDS=[{l:'Result / findings',area:1}];
+
+  function Picker(o){
+    var api={};
+    function mk(name,fields,custom){
+      var chip=document.createElement('label');chip.className='chip';
+      var cb=document.createElement('input');cb.type='checkbox';cb.value=name;
+      var sp=document.createElement('span');sp.textContent=name;
+      chip.appendChild(cb);chip.appendChild(sp);o.chips.appendChild(chip);
+      var p=document.createElement('div');p.className='panel';p.hidden=true;
+      var h=document.createElement('h3');var ht=document.createElement('span');ht.textContent=name;h.appendChild(ht);
+      if(custom){
+        var rm=document.createElement('button');rm.type='button';rm.className='btn del';rm.textContent='Remove';
+        rm.onclick=function(){chip.remove();p.remove()};h.appendChild(rm);
+      }
+      p.appendChild(h);
+      var g=document.createElement('div');g.className='grid';
+      fields.forEach(function(f){
+        var lab=document.createElement('label');lab.className='f';lab.appendChild(document.createTextNode(f.l));
+        var el;
+        if(f.opts){el=document.createElement('select');f.opts.forEach(function(v){var op=document.createElement('option');op.value=v;op.textContent=v||'Select';el.appendChild(op)})}
+        else if(f.area){el=document.createElement('textarea');el.rows=3}
+        else{el=document.createElement('input');el.type='text'}
+        el.className='pf';el.dataset.l=f.l;el.dataset.a=f.area?'1':'';
+        lab.appendChild(el);if(f.area)lab.style.gridColumn='1/-1';
+        g.appendChild(lab);
+      });
+      p.appendChild(g);o.panels.appendChild(p);
+      cb._panel=p;cb._chip=chip;cb._custom=!!custom;
+      cb.addEventListener('change',function(){p.hidden=!cb.checked});
+      return cb;
+    }
+    function find(n){return $$('.chip input',o.chips).filter(function(c){return c.value.toLowerCase()===n.toLowerCase()})[0]}
+    o.defs.forEach(function(d){mk(d.name,d.fields,false)});
+    api.reset=function(){
+      $$('.chip input',o.chips).forEach(function(cb){
+        if(cb._custom){cb._chip.remove();cb._panel.remove();return}
+        cb.checked=false;cb._panel.hidden=true;
+        $$('.pf',cb._panel).forEach(function(e){e.value=''});
+      });
+    };
+    api.get=function(){
+      return $$('.chip input:checked',o.chips).map(function(cb){
+        return {name:cb.value,f:$$('.pf',cb._panel).map(function(e){return {l:e.dataset.l,t:e.value.trim(),a:!!e.dataset.a}})};
+      });
+    };
+    api.load=function(obj){
+      api.reset();
+      Object.keys(obj).forEach(function(n){
+        var cb=find(n)||mk(n,CUSTOM_FIELDS,true);
+        cb.checked=true;cb._panel.hidden=false;
+        $$('.pf',cb._panel).forEach(function(e,i){e.value=obj[n][i]||''});
+      });
+    };
+    function add(){
+      var v=o.input.value.trim();if(!v)return;
+      var cb=find(v)||mk(v,CUSTOM_FIELDS,true);
+      cb.checked=true;cb._panel.hidden=false;o.input.value='';
+      var f=$('.pf',cb._panel);if(f)f.focus();
+    }
+    o.add.onclick=add;
+    o.input.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();add()}});
+    return api;
+  }
+  var inv=Picker({chips:$('#invChips'),panels:$('#invPanels'),defs:INV_DEFS,input:$('#invCustom'),add:$('#invAdd')});
+  var labs=Picker({chips:$('#labChips'),panels:$('#labPanels'),defs:LAB_DEFS,input:$('#labCustom'),add:$('#labAdd')});
+
+  function addRx(v){
+    v=v||[];var tr=document.createElement('tr');
+    ['Drug','Dose','Route','Frequency','Duration'].forEach(function(n,idx){
+      var td=document.createElement('td');var i=document.createElement('input');
+      i.type='text';i.value=v[idx]||'';i.setAttribute('aria-label',n);
+      if(idx===3)i.placeholder='e.g. 1+0+1';
+      td.appendChild(i);tr.appendChild(td);
+    });
+    var td=document.createElement('td');var b=document.createElement('button');
+    b.type='button';b.className='btn del';b.textContent='Remove';
+    b.onclick=function(){tr.remove()};td.appendChild(b);tr.appendChild(td);
+    $('#rx').appendChild(tr);
+  }
+  addRx();
+  $('#addrx').onclick=function(){addRx()};
+
+  function syncHead(){$('#mh1').textContent=($('[data-k=unit]').value||'')+' · '+($('[data-k=hospital]').value||'')}
+  $$('.h').forEach(function(e){e.addEventListener('input',syncHead)});
+  syncHead();
+
+  function get(){
+    var d={};
+    $$('[data-k]').forEach(function(e){d[e.dataset.k]=e.value.trim()});
+    d.inv=inv.get();d.labs=labs.get();
+    d.rx=$$('#rx tr').map(function(tr){return $$('input',tr).map(function(i){return i.value.trim()})})
+        .filter(function(r){return r.some(Boolean)});
+    return d;
+  }
+  function set(vals,invObj,labObj,rx){
+    $$('[data-k]:not(.h)').forEach(function(e){e.value=vals[e.dataset.k]||''});
+    inv.load(invObj||{});labs.load(labObj||{});
+    $('#rx').innerHTML='';
+    (rx&&rx.length?rx:[[]]).forEach(addRx);
+  }
+
+  $('#clear').onclick=function(){
+    if(!confirm('Clear everything you entered?'))return;
+    set({});window.scrollTo({top:0});toast('Form cleared');
+  };
+  $('#example').onclick=function(){
+    set({name:'Sample Patient',gender:'Female',age:'13',adm:'2025-01-10',dis:'2025-01-15',doc:'Dr Sample',mr:'00001',
+      assoc:'None',diag:'Sample diagnosis',
+      course:'INJ sample antibiotic 1g IV BD\nINJ sample drug 500mg IV TDS\nINJ 0.9% NS 1L IV stat then 500ml IV BD',
+      cond:'Improved',mode:'Planned',
+      instr:'Follow up in OPD after one week\nReturn early if fever or vomiting'},
+      {'Ultrasound':['Sample ultrasound finding.'],'X-ray':['Unremarkable']},
+      {'CBC':['11.2','8000','250000','85'],'U/C/E':['20','0.6','140','4.1','101'],'HBsAg':['Negative'],'Anti-HCV':['Negative'],
+       'LFTs':['1.0','0.3','0.7','120','30'],'S. Albumin':['4.2']},
+      [['Cap Sample A','40 mg','Oral','1+0+0','2 weeks'],['Tab Sample B','5 mg','Oral','1+0+1','1 month']]);
+    toast('Example loaded');
+  };
+
+  function fd(s){var m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(s||'');return m?m[3]+'/'+m[2]+'/'+m[1]:(s||'')}
+
+  function buildPDF(d){
+    var jsPDF=window.jspdf.jsPDF,doc=new jsPDF({unit:'pt',format:'a4'});
+    var W=595.28,H=841.89,M=40,CW=W-2*M,y=0,NAVY=[20,50,92],GAP=8;
+    function hdr(){
+      doc.setTextColor(0);doc.setFont('helvetica','bold');doc.setFontSize(12);
+      doc.text(d.unit||'',W/2,42,{align:'center'});doc.text(d.hospital||'',W/2,57,{align:'center'});
+      doc.setFont('helvetica','normal');doc.setFontSize(9);
+      var L=['P.O. box '+(d.pobox||''),'Tel: '+(d.tel||''),'Fax: '+(d.fax||''),'E-mail: '+(d.email||''),'Website: '+(d.web||'')];
+      L.forEach(function(t,i){doc.text(t,W/2,70+i*11,{align:'center'})});
+      doc.setFont('helvetica','bolditalic');doc.setFontSize(17);doc.text('Discharge Summary',W/2,140,{align:'center'});
+      doc.setDrawColor(NAVY[0],NAVY[1],NAVY[2]);doc.setLineWidth(1.2);doc.line(M,148,W-M,148);
+      y=166;
+    }
+    function need(h){if(y+h>H-M-10){doc.addPage();hdr()}}
+    function txtFont(){doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(0)}
+    function wrap(t,w){txtFont();return doc.splitTextToSize(t||'',w-12)}
+    function hh(L){return Math.max(24,L.length*12+10)}
+    function label(t,x,yy){doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(40);doc.text(t.toUpperCase(),x,yy)}
+    function rect(x,yy,w,h){doc.setDrawColor(190);doc.setLineWidth(.6);doc.rect(x,yy,w,h)}
+    function section(t){need(44);y+=6;doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(NAVY[0],NAVY[1],NAVY[2]);doc.text(t,M,y+12);y+=24}
+    function split(n){return (CW-(n-1)*GAP)/n}
+    function row(fs){
+      var Ls=fs.map(function(f){return wrap(f.t,f.w)});
+      var h=Math.max.apply(null,Ls.map(hh));
+      need(12+h+10);var x=M;
+      fs.forEach(function(f,i){
+        label(f.l,x,y+8);rect(x,y+12,f.w,h);txtFont();
+        Ls[i].forEach(function(s,k){doc.text(s,x+6,y+12+15+k*12)});
+        x+=f.w+GAP;
+      });
+      y+=12+h+10;
+    }
+    function block(l,t){
+      var L=wrap(t,CW),i=0;
+      do{
+        need(12+24+10);
+        var room=H-M-10-y-12-10;
+        var n=Math.max(1,Math.floor((room-10)/12));
+        var chunk=L.slice(i,i+n),h=hh(chunk);
+        label(l,M,y+8);rect(M,y+12,CW,h);txtFont();
+        chunk.forEach(function(s,k){doc.text(s,M+6,y+12+15+k*12)});
+        y+=12+h+10;i+=chunk.length;
+      }while(i<L.length);
+    }
+    function table(rows){
+      var cols=[['Drug',185],['Dose',60],['Route',55],['Frequency',85],['Duration of treatment',130.28]];
+      need(60);
+      doc.setFillColor(234,238,243);doc.rect(M,y,CW,22,'F');
+      var x=M;
+      cols.forEach(function(c){
+        rect(x,y,c[1],22);doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(0);
+        doc.text(c[0],x+6,y+14);x+=c[1];
+      });
+      y+=22;
+      (rows.length?rows:[['','','','','']]).forEach(function(r){
+        txtFont();
+        var Ls=cols.map(function(c,i){return doc.splitTextToSize(r[i]||'',c[1]-12)});
+        var h=Math.max(24,Math.max.apply(null,Ls.map(function(l){return l.length}))*12+10);
+        need(h);var xx=M;
+        cols.forEach(function(c,i){
+          rect(xx,y,c[1],h);txtFont();
+          Ls[i].forEach(function(s,k){doc.text(s,xx+6,y+15+k*12)});xx+=c[1];
+        });
+        y+=h;
+      });
+      y+=10;
+    }
+    function items(title,arr){
+      if(!arr.length)return;
+      section(title);
+      arr.forEach(function(it){
+        need(60);
+        doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor(0);
+        doc.text(it.name,M,y+10);y+=16;
+        var small=it.f.filter(function(f){return !f.a}),big=it.f.filter(function(f){return f.a});
+        if(small.length){
+          var per=Math.ceil(small.length/Math.ceil(small.length/4)),w=split(Math.max(per,3));
+          for(var i=0;i<small.length;i+=per){
+            row(small.slice(i,i+per).map(function(f){return {l:f.l,t:f.t,w:w}}));
+          }
+        }
+        big.forEach(function(f){block(f.l,f.t)});
+      });
+    }
+
+    hdr();
+    section('Personal Information');
+    var w3=split(3),w4=split(4),w2=split(2);
+    row([{l:'Patient name',t:d.name,w:w3},{l:'Gender',t:d.gender,w:w3},{l:'Age',t:d.age,w:w3}]);
+    row([{l:'Admission date',t:fd(d.adm),w:w4},{l:'Discharge date',t:fd(d.dis),w:w4},{l:'Resident doctor',t:d.doc,w:w4},{l:'MR no.',t:d.mr,w:w4}]);
+    block('Associated diagnosis / significant co-morbids',d.assoc);
+    block('Principal diagnosis / reason for admission',d.diag);
+    block('Hospital course',d.course);
+    row([{l:'Condition on discharge',t:d.cond,w:w2},{l:'Mode on discharge',t:d.mode,w:w2}]);
+    items('Other Investigations',d.inv);
+    if(d.instr){section('Instructions on Discharge');block('Instructions',d.instr)}
+    section('Take Home');
+    label('Prescription for home',M,y+8);y+=14;
+    table(d.rx);
+    items('Labs',d.labs);
+
+    var n=doc.getNumberOfPages();
+    for(var p=1;p<=n;p++){
+      doc.setPage(p);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(110);
+      doc.text('Page '+p+' of '+n,W-M,H-20,{align:'right'});
+    }
+    return doc;
+  }
+
+  $('#save').onclick=async function(){
+    var d=get();
+    if(!d.name){toast('Enter the patient name first');$('[data-k=name]').focus();return}
+    if(!window.jspdf){toast('PDF tool did not load. Use Print instead.');return}
+    var blob;
+    try{blob=buildPDF(d).output('blob')}catch(e){toast('Could not build the PDF');return}
+    var safe=(d.name+(d.mr?'_'+d.mr:'')).replace(/[^\w\-]+/g,'_');
+    try{
+      var url=URL.createObjectURL(blob),link=document.createElement('a');
+      link.href=url;link.download='Discharge_'+safe+'.pdf';
+      document.body.appendChild(link);link.click();link.remove();
+      setTimeout(function(){URL.revokeObjectURL(url)},4000);
+      toast('PDF downloaded');
+    }catch(e){toast('Could not save the PDF. Try Print.')}
+  };
+  $('#print').onclick=function(){window.print()};
+})();
+</script>
+</body>
+</html>
