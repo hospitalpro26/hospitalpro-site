@@ -257,6 +257,86 @@ section{padding:44px 0 6px}
 .km-loc-t{font-size:15px;font-weight:800;color:#10213f;margin-top:4px}
 .km-cta{display:inline-block;background:#fff;color:#0b5f57;font-weight:800;padding:15px 28px;border-radius:999px;font-size:15.5px;box-shadow:0 14px 24px -14px rgba(0,0,0,.5);transition:.15s}
 .km-cta:hover{transform:translateY(-2px)}
+.hero-in>div{min-width:0}
+.perk{min-width:0}
+.hero-in{overflow:hidden}
+/* ---- moving effects ---- */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.15)}100%{transform:translate(0,0) scale(1)}}
+@keyframes shine{0%{transform:translateX(-120%) skewX(-20deg)}60%,100%{transform:translateX(320%) skewX(-20deg)}}
+@keyframes pulseDot{0%,100%{box-shadow:0 0 0 0 rgba(31,164,99,.55)}70%{box-shadow:0 0 0 10px rgba(31,164,99,0)}}
+.hero h1,.hero p.lead,.hero .search,.hero .perks{opacity:0;animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) forwards}
+.hero h1{animation-delay:.05s}.hero p.lead{animation-delay:.2s}.hero .search{animation-delay:.35s}.hero .perks{animation-delay:.5s}
+.hero::after{content:"";position:absolute;left:-80px;bottom:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(closest-side,rgba(42,123,255,.28),transparent);animation:drift 14s ease-in-out infinite;pointer-events:none}
+.hero::before{animation:drift 18s ease-in-out infinite}
+.docs .p:nth-child(1){animation:floaty 5s ease-in-out infinite}
+.docs .p:nth-child(2){animation:floaty 6s ease-in-out -2s infinite}
+.docs .p:nth-child(3){animation:floaty 5.5s ease-in-out -1s infinite}
+.cross{animation:floaty 4s ease-in-out infinite}
+.badges div{animation:floaty 4.5s ease-in-out infinite}
+.badges div:nth-child(2){animation-delay:-1.2s}.badges div:nth-child(3){animation-delay:-2.4s}
+.perk i{transition:transform .3s}
+.perk:hover i{transform:scale(1.15) rotate(-6deg)}
+.od-ok{position:relative;overflow:hidden}
+.btn,.od-btns a,.km-cta{position:relative;overflow:hidden}
+.btn::after,.od-btns a.p::after,.km-cta:not(.km-cta2)::after{content:"";position:absolute;top:0;left:0;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-120%) skewX(-20deg);animation:shine 4.5s ease-in-out infinite;pointer-events:none}
+.km-av{animation:floaty 5s ease-in-out infinite}
+.km-ad::before{animation:drift 12s ease-in-out infinite}
+.km-ad::after{animation:drift 16s ease-in-out -4s infinite}
+.od-box .tm::before{animation:pulseDot 2s infinite}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.sc,.ct{transition:transform .25s,box-shadow .25s,border-color .25s,background .25s}
+.ct:hover{transform:translateY(-5px) scale(1.03);box-shadow:0 18px 30px -18px rgba(0,0,0,.6)}
+
+/* ---- cinematic Slashcure finale ---- */
+.cine{position:relative;overflow:hidden;margin-top:56px;background:radial-gradient(ellipse at 50% 40%,#10285c 0%,#071334 55%,#030a1f 100%);color:#fff;padding:120px 20px 96px;scroll-margin-top:70px;text-align:center;isolation:isolate}
+.cine::before,.cine::after{content:"";position:absolute;left:0;right:0;height:0;background:#000;z-index:5;transition:height 1.1s cubic-bezier(.2,.7,.2,1)}
+.cine::before{top:0}.cine::after{bottom:0}
+.cine.play::before,.cine.play::after{height:34px}
+.cine-stars{position:absolute;inset:0;z-index:0;opacity:0;transition:opacity 1.6s ease .3s;background-image:
+ radial-gradient(1.5px 1.5px at 12% 22%,#fff,transparent),radial-gradient(1px 1px at 28% 70%,#9fc0ff,transparent),
+ radial-gradient(1.5px 1.5px at 44% 15%,#fff,transparent),radial-gradient(1px 1px at 63% 80%,#fff,transparent),
+ radial-gradient(1.5px 1.5px at 78% 30%,#9fc0ff,transparent),radial-gradient(1px 1px at 90% 62%,#fff,transparent),
+ radial-gradient(1px 1px at 6% 88%,#fff,transparent),radial-gradient(1.5px 1.5px at 55% 50%,#ff9fb0,transparent),
+ radial-gradient(1px 1px at 35% 40%,#fff,transparent),radial-gradient(1px 1px at 84% 10%,#fff,transparent)}
+.cine.play .cine-stars{opacity:.9;animation:twinkle 5s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.5}50%{opacity:1}}
+.cine-beam{position:absolute;top:-20%;left:50%;width:520px;height:140%;margin-left:-260px;z-index:1;background:conic-gradient(from 180deg at 50% 0%,transparent 160deg,rgba(120,170,255,.28) 180deg,transparent 200deg);opacity:0;filter:blur(8px);transform-origin:50% 0}
+.cine.play .cine-beam{animation:beamIn 1.8s ease .4s forwards,sweep 9s ease-in-out 2.2s infinite}
+@keyframes beamIn{to{opacity:1}}
+@keyframes sweep{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+.cine-in{position:relative;z-index:2;display:grid;gap:14px;justify-items:center}
+.cine-k{position:relative;z-index:6;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#a9bde8;font-weight:700;opacity:0;transform:translateY(12px);transition:opacity 1.2s ease .2s,transform 1.2s ease .2s}
+.cine.play .cine-k{opacity:1;transform:none}
+.cine-logo{position:relative;display:block;width:min(62vw,250px);aspect-ratio:1;margin:26px 0 22px;border-radius:50%;opacity:0;transform:scale(.5);transition:opacity 1.1s ease .7s,transform 1.4s cubic-bezier(.2,.8,.25,1) .7s}
+.cine.play .cine-logo{opacity:1;transform:none}
+.cine-logo img{position:relative;z-index:2;width:100%;height:100%;object-fit:contain;border-radius:50%;display:block;background:#fff;box-shadow:0 0 60px rgba(60,120,255,.55),0 0 140px rgba(232,67,90,.3)}
+.cine.play .cine-logo img{animation:glow 3.2s ease-in-out 2.4s infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 50px rgba(60,120,255,.5),0 0 120px rgba(232,67,90,.25)}50%{box-shadow:0 0 90px rgba(60,120,255,.85),0 0 190px rgba(232,67,90,.5)}}
+.cine-ring{position:absolute;inset:-22px;border-radius:50%;z-index:1;border:2px solid transparent;border-top-color:rgba(255,255,255,.85);border-right-color:rgba(232,67,90,.8);opacity:0}
+.cine.play .cine-ring{opacity:1;animation:spin 5s linear 1.6s infinite;transition:opacity 1s ease 1.6s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cine-shine{display:none}
+.cine-shine::after{content:"";position:absolute;top:-10%;left:0;width:36%;height:120%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);transform:translateX(-160%) skewX(-18deg)}
+.cine h2{font-size:clamp(34px,8vw,64px);letter-spacing:-1.5px;font-weight:800;line-height:1.05;opacity:0;transform:translateY(24px);transition:all 1.1s cubic-bezier(.2,.7,.2,1) 1.6s}
+.cine h2 b{color:#e8435a}
+.cine.play h2{opacity:1;transform:none}
+.cine-tag{font-size:clamp(14px,3.6vw,18px);letter-spacing:4px;text-transform:uppercase;color:#b9c9ee;opacity:0;transform:translateY(16px);transition:all 1s ease 2.1s}
+.cine.play .cine-tag{opacity:1;transform:none}
+.cine-btn{display:inline-block;margin-top:12px;background:linear-gradient(120deg,#e8435a,#c81f3d);color:#fff;font-weight:800;font-size:16px;padding:16px 34px;border-radius:999px;box-shadow:0 20px 36px -16px rgba(232,67,90,.9);opacity:0;transform:translateY(16px);transition:opacity 1s ease 2.6s,transform 1s ease 2.6s,box-shadow .2s}
+.cine.play .cine-btn{opacity:1;transform:none}
+.cine.play .cine-btn:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 26px 44px -16px rgba(232,67,90,1)}
+.cine-credit{margin-top:6px;font-size:12px;color:#7f93c2;opacity:0;transition:opacity 1s ease 3s}
+.cine.play .cine-credit{opacity:1}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv,.hero h1,.hero p.lead,.hero .search,.hero .perks,.cine-k,.cine-logo,.cine h2,.cine-tag,.cine-btn,.cine-credit,.cine-stars,.cine-beam{opacity:1!important;transform:none!important;filter:none!important}
+}
+.km-btns{display:flex;flex-wrap:wrap;gap:12px}
+.km-cta2{background:transparent;color:#fff;border:2px solid #fff;box-shadow:none;padding:13px 26px}
+.km-cta2:hover{background:rgba(255,255,255,.16)}
 .km-note{font-size:12px;color:#c6f6ec}
 @media(min-width:860px){.km-ad{grid-template-columns:260px 1fr;gap:40px;padding:42px 44px;align-items:center}.km-art{flex-direction:column;text-align:center}.km-av{width:170px;height:170px;font-size:56px}}
 </style>
@@ -347,6 +427,24 @@ section{padding:44px 0 6px}
   </div>
 </main>
 
+<!-- Cinematic Slashcure finale -->
+<section class="cine" id="slashcure-finale" aria-label="Slashcure advertisement">
+  <div class="cine-stars" aria-hidden="true"></div>
+  <div class="cine-beam" aria-hidden="true"></div>
+  <div class="cine-in">
+    <div class="cine-k">Advertisement · Presented by</div>
+    <a class="cine-logo" href="https://slashcure.com" aria-label="Slashcure.com">
+      <span class="cine-ring" aria-hidden="true"></span>
+      <img src="slashcure-logo.png" alt="Slashcure.com logo" width="720" height="720">
+      <span class="cine-shine" aria-hidden="true"></span>
+    </a>
+    <h2>Slash<b>cure</b>.com</h2>
+    <div class="cine-tag">Health Care, Connected</div>
+    <a class="cine-btn" href="https://slashcure.com">Visit Slashcure.com →</a>
+    <div class="cine-credit">Smarter health. Simpler life.</div>
+  </div>
+</section>
+
 <div class="bar">
   <div class="wrap bar-in">
     <a href="#top" class="logo"><div class="mark">+</div><div><b>HospitalPro</b><small>A promotional platform by Slashcure</small></div></a>
@@ -422,10 +520,10 @@ var CITIES = [
 ];
 
 var HOSPITALS = [
-  {n:"NEO Medical Center", loc:"Karachi & Lahore", tags:["Multi-Specialty Care","Modern Facilities"], g:"#3a78d8,#12347a", url:SLASHCURE},
-  {n:"Tabba Medical Center", loc:"Hyderabad", tags:["Cardiac Care","Diagnostic Services"], g:"#5b6c86,#26324a", url:SLASHCURE},
+  {n:"NEO Medical Center", loc:"Karachi & Lahore", tags:["Multi-Specialty Care","Modern Facilities"], g:"#3a78d8,#12347a", url:"https://slashcure.com/hospitals/lahore/neo-medical-center"},
+  {n:"Tabba Medical Center", loc:"Hyderabad", tags:["Cardiac Care","Diagnostic Services"], g:"#5b6c86,#26324a", url:"https://slashcure.com/hospitals/hyderabad/tabba-heart-institute"},
   {n:"SMBBIT Trauma Centre", loc:"Karachi", tags:["Emergency & Trauma","Specialist OPD"], g:"#d4553f,#7d2214", url:SLASHCURE},
-  {n:"Haseeb Medicare Hospital", loc:"Pano Aqil", tags:["24/7 Emergency","ICU / NICU"], g:"#2f9a8a,#115247", url:SLASHCURE},
+  {n:"Haseeb Medicare Hospital", loc:"Pano Aqil", tags:["24/7 Emergency","ICU / NICU"], g:"#2f9a8a,#115247", url:"https://slashcure.com/hospitals/pano-aqil/haseeb-medicare-hospital"},
   {n:"Hussain Diagnostic Center", loc:"Khairpur Mir's", tags:["Ultrasound","Laboratory"], g:"#2f6fb5,#123e6e", url:SLASHCURE}
 ];
 /* ------------------------------------------------------------- */
@@ -445,6 +543,8 @@ function dCard(d){
     '<a class="btn" href="'+esc(d.url)+'">View on Slashcure →</a></div></article>';
 }
 var KOMAL_URL="https://slashcure.com/consultant-physiotherapists/sukkur/dr-komal-kandhir-pt";
+/* Page on this site with more about Dr. Komal. Upload your own HTML file to the repo with exactly this name. */
+var KOMAL_PAGE="https://hospitalpro.online/dr-komal-kandhir.html";
 var KOMAL_AD='<aside class="km-ad">'+
   '<div class="km-art"><div class="km-av">KK<img src="images/dr-komal.jpg" alt="Dr. Komal Kandhir" loading="lazy" onerror="this.remove()"></div>'+
   '<div class="km-name"><b>Dr. Komal Kandhir</b><span>Consultant Physiotherapist (DPT)</span><small>PPA S-8197</small></div></div>'+
@@ -455,7 +555,8 @@ var KOMAL_AD='<aside class="km-ad">'+
   '<div class="km-chips"><span>Pain Relief</span><span>Improved Mobility</span><span>Stronger Function</span><span>Better Quality of Life</span></div>'+
   '<div class="km-chips"><span>Manual Therapy</span><span>Rehabilitation</span><span>Therapeutic Exercises</span></div>'+
   '<div class="km-loc"><div class="km-loc-k">📍 Visit her at</div><div class="km-loc-h">Mustafai Trust Hospital, Sukkur</div><div class="km-loc-a">Near DHO Office, Opposite Civil Hospital, Sukkur</div><div class="km-loc-t">🕒 Everyday, 3:00 PM to 7:00 PM</div></div>'+
-  '<a class="km-cta" href="'+KOMAL_URL+'">View Profile on Slashcure →</a>'+
+  '<div class="km-btns"><a class="km-cta" href="'+KOMAL_URL+'">Slashcure Profile →</a>'+
+  '<a class="km-cta km-cta2" href="'+KOMAL_PAGE+'">Know more about Dr. Komal</a></div>'+
   '<div class="km-note">Physiotherapy supports recovery and does not replace medical advice.</div></div></aside>';
 
 function withAds(list){
@@ -549,6 +650,36 @@ document.getElementById('goBtn').addEventListener('click',function(){
 });
 
 render();
+
+/* ---- moving effects: reveal on scroll + cinematic finale ---- */
+(function(){
+  var io=null;
+  function reveal(){
+    var els=document.querySelectorAll('.od,.km-ad,.sl-ad,.hc,.sc,.ct,.sh,.dual>div');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+    if(!io){io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12});}
+    els.forEach(function(e,i){
+      if(e.classList.contains('in')||e.dataset.rv)return;
+      e.dataset.rv='1';e.classList.add('rv');
+      e.style.transitionDelay=((i%3)*90)+'ms';
+      io.observe(e);
+    });
+  }
+  var _render=render;
+  render=function(){_render();reveal();};
+  reveal();
+  var cine=document.getElementById('slashcure-finale');
+  if(cine){
+    if(!('IntersectionObserver' in window)){cine.classList.add('play');}
+    else{
+      var co=new IntersectionObserver(function(es){es.forEach(function(en){
+        if(en.isIntersecting){cine.classList.add('play');}
+        else if(en.boundingClientRect.top>0){cine.classList.remove('play');}
+      });},{threshold:.35});
+      co.observe(cine);
+    }
+  }
+})();
 </script>
 </body>
 </html>
