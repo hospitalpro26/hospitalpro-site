@@ -1,221 +1,505 @@
-<!DOCTYPE html>
-<!--
-  STEP 1: A doctor profile page in plain HTML + CSS.
-
-  How a web page works:
-  1. Your browser asks a server for this file (it must be named index.html).
-  2. The browser reads the HTML (the content and structure) from top to bottom.
-  3. The CSS inside <style> tells the browser how each part should look.
-
-  All names, hospitals and numbers below are made up (sample data).
-  Never put real patient information in a public page.
--->
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <!-- Makes the page fit a phone screen instead of shrinking a desktop layout -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dr. Ayesha Rehman | Consultant Physician (sample)</title>
-  <meta name="description" content="Sample doctor profile page: identity, weekly clinic timings and contact options.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HospitalPro | Discover Trusted Hospitals and Doctors Across Pakistan</title>
+<meta name="description" content="HospitalPro is a promotional platform by Slashcure connecting you to quality healthcare across Pakistan.">
+<style>
+:root{
+  --blue:#1558d6; --blue-d:#0b2f7a; --blue-dd:#071f55; --sky:#e8f1fe; --sky2:#d7e7fd;
+  --ink:#10213f; --muted:#5a6a83; --line:#dfe7f2; --bg:#f6f9fd; --white:#fff;
+  --red:#e8435a; --teal:#12a38a; --amber:#f08a24; --violet:#7a4fd6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--white);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
 
-  <!-- Optional font from Google Fonts. If it fails to load, the browser uses the fallback fonts in the CSS. -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px}
+.mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#2a7bff,var(--blue-d));display:grid;place-items:center;color:#fff;font-size:24px;font-weight:800;line-height:1;box-shadow:0 8px 18px -8px rgba(21,88,214,.7)}
+.logo b{font-size:22px;letter-spacing:-.6px;color:var(--blue-d);display:block;line-height:1.05}
+.logo small{display:block;font-size:8.5px;letter-spacing:1.1px;color:var(--muted);text-transform:uppercase;font-weight:600}
+.menu{display:none;gap:26px;font-size:15px;font-weight:500}
+.menu a{color:var(--ink);padding:6px 0;border-bottom:2px solid transparent}
+.menu a:hover,.menu a.on{color:var(--blue);border-color:var(--blue)}
+.btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;border:0;border-radius:999px;font-weight:700;font-size:15px;padding:12px 24px;cursor:pointer;background:var(--blue);color:#fff;transition:.15s}
+.btn:hover{background:#0f47b3;transform:translateY(-1px)}
+.btn.sm{padding:9px 16px;font-size:14px}
+.btn.light{background:#fff;color:var(--blue)}
+.btn.light:hover{background:var(--sky)}
 
-  <style>
-    /* ---------- 1. Design tokens: colours and sizes we reuse everywhere ---------- */
-    :root {
-      --paper:  #f2f6f7;   /* page background */
-      --white:  #ffffff;
-      --ink:    #10233a;   /* main text */
-      --muted:  #55677a;   /* secondary text */
-      --line:   #d5dfe4;   /* thin dividers */
-      --green:  #1c8a6b;   /* "available" and Hospital A */
-      --blue:   #1d63b8;   /* Clinic B */
-      --violet: #6b4fc4;   /* Medical Centre C */
-      --radius: 14px;
-    }
+/* hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#f2f7ff 0%,#e3eefd 55%,#cfe1fb 100%)}
+.hero::before{content:"";position:absolute;right:-12%;top:-30%;width:70%;height:170%;background:radial-gradient(closest-side,#bcd5fa,transparent);opacity:.8}
+.hero-in{position:relative;display:grid;gap:30px;padding:44px 20px 0}
+.hero h1{font-size:clamp(34px,8.5vw,58px);line-height:1.04;letter-spacing:-1.8px;font-weight:800;color:var(--blue-dd)}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero p.lead{font-size:18px;color:#31456b;margin:16px 0 22px;max-width:480px}
+.search{display:flex;background:#fff;border:2px solid var(--blue);border-radius:16px;overflow:hidden;box-shadow:0 18px 36px -20px rgba(21,88,214,.6);max-width:620px}
+.search input{flex:1;min-width:0;border:0;outline:0;padding:16px 16px;font-size:16px;font-family:inherit;color:var(--ink)}
+.search button{border:0;background:var(--blue);color:#fff;font-weight:700;font-size:16px;padding:0 26px;cursor:pointer}
+.search button:hover{background:#0f47b3}
+.perks{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0 30px}
+.perk{display:flex;gap:10px;align-items:center;font-size:13.5px;font-weight:600;color:var(--blue-dd);line-height:1.25}
+.perk i{flex:none;width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--sky2);display:grid;place-items:center;font-style:normal;font-size:19px}
 
-    /* ---------- 2. Basic reset ---------- */
-    * { box-sizing: border-box; }           /* width includes padding: easier maths */
-    body {
-      margin: 0;
-      font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      font-size: 1.0625rem;                 /* about 17px: comfortable on phones */
-      line-height: 1.6;
-      color: var(--ink);
-      background: var(--paper);
-    }
+.art{position:relative;min-height:330px;align-self:end}
+.bld{position:absolute;right:0;bottom:0;left:8%;height:78%;border-radius:22px 22px 0 0;background:
+  linear-gradient(#fff6,#fff0),
+  repeating-linear-gradient(90deg,#9fc0ee 0 18px,#b9d2f5 18px 22px);
+  opacity:.55}
+.cross{position:absolute;left:18%;top:6%;width:60px;height:60px;border-radius:14px;background:#fff;display:grid;place-items:center;color:var(--red);font-size:42px;font-weight:800;box-shadow:0 14px 24px -12px rgba(0,0,0,.35)}
+.docs{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;align-items:flex-end;gap:0}
+.docs .p{width:34%;max-width:170px;aspect-ratio:3/4.2;border-radius:90px 90px 0 0;position:relative;display:flex;align-items:flex-start;justify-content:center;padding-top:16%;color:#fff;font-weight:800;font-size:36px}
+.docs .p::after{content:"";position:absolute;left:14%;right:14%;bottom:0;height:56%;background:#fff;border-radius:60px 60px 0 0;z-index:0;opacity:.96}
+.docs .p span{position:relative;z-index:1}
+.docs .p:nth-child(1){background:#5a89d6;margin-right:-6%;transform:scale(.9);transform-origin:bottom}
+.docs .p:nth-child(2){background:var(--blue);z-index:2;transform:scale(1.08);transform-origin:bottom}
+.docs .p:nth-child(3){background:#3c6fcb;margin-left:-6%;transform:scale(.9);transform-origin:bottom}
+.badges{position:absolute;right:4px;top:6px;display:flex;gap:16px;color:#fff;font-size:12px;font-weight:700;text-align:center;z-index:3}
+.badges div{display:grid;gap:2px;justify-items:center}
+.badges i{font-style:normal;font-size:24px}
+.tag{position:absolute;left:0;bottom:12px;z-index:4;font-style:italic;font-weight:700;color:#fff;font-size:14px;background:var(--blue-d);padding:8px 16px;border-radius:12px 12px 12px 0}
+.hero-band{background:var(--blue-d);height:14px;position:relative}
 
-    /* Centre the content and keep lines a readable length */
-    .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.25rem; }
+/* sections */
+section{padding:44px 0 6px}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+.sh h2{font-size:clamp(26px,5vw,34px);letter-spacing:-.9px;color:var(--blue-dd);font-weight:800;line-height:1.1}
+.sh p{color:var(--muted);font-size:15px;margin-top:4px}
+.more{color:var(--blue);font-weight:700;font-size:15px}
+.more:hover{text-decoration:underline}
 
-    /* ---------- 3. Sample-data notice ---------- */
-    .notice {
-      background: var(--ink);
-      color: #dbe6ee;
-      font-size: 0.875rem;
-      padding: 0.6rem 0;
-    }
+/* doctors */
+.dgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.dc{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:.18s}
+.dc:hover{transform:translateY(-4px);box-shadow:0 22px 40px -24px rgba(11,47,122,.5)}
+.ph{position:relative;aspect-ratio:1/1;display:grid;place-items:center;color:#fff;font-size:44px;font-weight:800;letter-spacing:-1px}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.ph .ic{position:absolute;left:10px;bottom:-14px;width:36px;height:36px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:18px;box-shadow:0 6px 14px -6px rgba(0,0,0,.4);z-index:2}
+.db{padding:22px 14px 16px;display:flex;flex-direction:column;gap:3px;flex:1}
+.db h3{font-size:16px;line-height:1.2;color:var(--blue-dd)}
+.db .sp{color:var(--blue);font-weight:600;font-size:13.5px}
+.db .dg{color:var(--muted);font-size:12.5px}
+.db .lc{color:var(--ink);font-size:13px;margin-top:6px;display:flex;gap:6px}
+.db .btn{margin-top:auto;border-radius:10px;font-size:13px;padding:10px 8px}
+.db .btn+*{display:none}
+.db .gap{flex:1}
 
-    /* ---------- 4. Header: who the doctor is ---------- */
-    .hero { padding: 2.5rem 0 2rem; }
-    .hero h1 {
-      margin: 0 0 0.25rem;
-      font-size: clamp(2rem, 7vw, 3rem);    /* grows with screen width, within limits */
-      line-height: 1.1;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-    .credentials { margin: 0; color: var(--muted); font-weight: 500; }
+/* specialties */
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.sc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 8px;display:grid;justify-items:center;gap:10px;font-size:13px;font-weight:600;text-align:center;cursor:pointer;transition:.15s;font-family:inherit;color:var(--ink)}
+.sc:hover,.sc.on{border-color:var(--blue);background:var(--sky);transform:translateY(-3px)}
+.sc i{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:23px;background:var(--bgc,var(--sky))}
 
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 1.25rem;
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      background: #dff3ec;
-      color: #0f5e47;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    .status::before {                       /* the little green dot */
-      content: "";
-      width: 0.6rem; height: 0.6rem;
-      border-radius: 50%;
-      background: var(--green);
-    }
+/* cities */
+.cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.ct{position:relative;border-radius:16px;overflow:hidden;min-height:92px;display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:700;font-size:15px;cursor:pointer;background:var(--g)}
+.ct::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 15%,rgba(255,255,255,.35),transparent 55%)}
+.ct::after{content:"🕌";position:absolute;right:10px;top:8px;font-size:26px;opacity:.9}
+.ct span{position:relative}
+.ct.more-c{background:var(--sky);color:var(--blue);border:1px solid var(--sky2);justify-content:center;align-items:center;flex-direction:column;gap:4px}
+.ct.more-c::before,.ct.more-c::after{display:none}
 
-    /* ---------- 5. Sections ---------- */
-    section { padding: 1.75rem 0; border-top: 1px solid var(--line); }
-    h2 { margin: 0 0 0.35rem; font-size: 1.35rem; line-height: 1.25; }
-    .sub { margin: 0 0 1.25rem; color: var(--muted); }
+/* hospitals */
+.hgrid{display:grid;gap:14px}
+.hc{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:.18s}
+.hc:hover{transform:translateY(-4px);box-shadow:0 22px 40px -24px rgba(11,47,122,.5)}
+.hi{height:130px;position:relative;display:flex;align-items:flex-end;padding:14px;color:#fff;font-weight:800;font-size:19px;letter-spacing:-.3px;background:var(--g)}
+.hi::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.12) 0 14px,transparent 14px 28px),linear-gradient(transparent 40%,rgba(0,0,0,.35))}
+.hi::after{content:"🏥";position:absolute;right:14px;top:10px;font-size:30px}
+.hi span{position:relative}
+.hb{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.hb h3{font-size:17px;color:var(--blue-dd)}
+.hb .lc{color:var(--muted);font-size:13.5px}
+.tg{display:flex;gap:6px;flex-wrap:wrap}
+.tg span{background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:4px 9px;font-size:12px;color:#33466b}
+.hb .btn{margin-top:auto;border-radius:10px;font-size:14px}
 
-    /* ---------- 6. The weekly schedule: the main feature of this page ---------- */
-    .week { list-style: none; margin: 0; padding: 0; background: var(--white); border-radius: var(--radius); border: 1px solid var(--line); }
-    .week li {
-      display: grid;
-      grid-template-columns: 6.5rem 1fr;    /* day column | details column */
-      gap: 0.25rem 1rem;
-      padding: 0.9rem 1rem 0.9rem 1.1rem;
-      border-left: 6px solid var(--place);  /* colour tells you which location */
-      border-bottom: 1px solid var(--line);
-    }
-    .week li:first-child { border-top-left-radius: var(--radius); }
-    .week li:last-child  { border-bottom: 0; border-bottom-left-radius: var(--radius); }
-    .day   { font-weight: 700; }
-    .where { font-weight: 600; }
-    .time  { color: var(--muted); grid-column: 2; }   /* on phones the time sits under the place */
+/* slashcure banner */
+.dual{display:grid;gap:16px;margin-top:40px}
+.sl{background:linear-gradient(120deg,#e8f1fe,#d5e6fd);border-radius:22px;padding:26px;display:grid;gap:14px}
+.sl h3{font-size:26px;letter-spacing:-.6px;color:var(--blue-dd)}
+.sl p{color:#31456b;font-size:15px}
+.pk{background:linear-gradient(135deg,var(--blue-d),var(--blue-dd));border-radius:22px;padding:26px;color:#fff;display:grid;gap:8px;align-content:center}
+.pk h3{font-size:26px;line-height:1.15;letter-spacing:-.6px}
+.pk p{color:#b8cdf2;font-size:14.5px}
+.pk .flag{font-size:30px}
 
-    /* Each row picks its colour by setting --place */
-    .a { --place: var(--green); }
-    .b { --place: var(--blue); }
-    .c { --place: var(--violet); }
-    .off { --place: var(--line); color: var(--muted); }
-    .off .where { font-weight: 400; }
+/* bottom bar */
+.bar{margin-top:40px;border-top:1px solid var(--line);background:#fff}
+.bar-in{display:grid;gap:16px;padding:22px 20px;align-items:center}
+.pt{display:flex;gap:12px;align-items:center;font-size:14px;font-weight:700;color:var(--blue-dd);line-height:1.25}
+.pt i{font-style:normal;font-size:26px;width:46px;height:46px;border-radius:50%;background:var(--sky);display:grid;place-items:center;flex:none}
+.pts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.copy{text-align:center;font-size:12.5px;color:var(--muted);padding:0 20px 28px}
+.empty{display:none;grid-column:1/-1;text-align:center;padding:30px;color:var(--muted);background:var(--bg);border-radius:16px}
 
-    /* On wider screens, put place and time on one line */
-    @media (min-width: 34rem) {
-      .week li { grid-template-columns: 7rem 1fr auto; align-items: baseline; }
-      .time { grid-column: auto; }
-    }
-
-    /* ---------- 7. Text blocks ---------- */
-    p { margin: 0 0 1rem; max-width: 60ch; }
-    .services { margin: 0; padding-left: 1.2rem; columns: 2; column-gap: 2rem; }
-    .services li { margin-bottom: 0.4rem; break-inside: avoid; }
-    @media (max-width: 30rem) { .services { columns: 1; } }
-
-    /* ---------- 8. Contact buttons ---------- */
-    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
-    .btn {
-      display: inline-block;
-      padding: 0.8rem 1.4rem;
-      border-radius: 10px;
-      font-weight: 700;
-      text-decoration: none;
-      border: 2px solid var(--ink);
-    }
-    .btn.primary { background: var(--ink); color: var(--white); }
-    .btn.secondary { background: transparent; color: var(--ink); }
-    /* Visible outline when someone navigates with a keyboard */
-    a:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
-
-    /* ---------- 9. Footer ---------- */
-    footer { padding: 1.5rem 0 3rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
-  </style>
+@media(min-width:720px){
+  .menu{display:flex}
+  .hero-in{grid-template-columns:1.05fr 1fr;padding-top:60px;align-items:center}
+  .perks{grid-template-columns:repeat(4,auto);gap:18px}
+  .art{min-height:420px}
+  .dgrid{grid-template-columns:repeat(3,1fr)}
+  .sgrid{grid-template-columns:repeat(4,1fr)}
+  .cgrid{grid-template-columns:repeat(4,1fr)}
+  .hgrid{grid-template-columns:repeat(2,1fr)}
+  .dual{grid-template-columns:1.5fr 1fr}
+  .bar-in{grid-template-columns:auto 1fr auto;gap:30px}
+  .pts{grid-template-columns:repeat(3,1fr)}
+}
+@media(min-width:1040px){
+  .dgrid{grid-template-columns:repeat(6,1fr)}
+  .sgrid{grid-template-columns:repeat(11,1fr)}
+  .sc{font-size:12px;padding:14px 4px}
+  .cgrid{grid-template-columns:repeat(10,1fr)}
+  .ct{font-size:13px;min-height:84px}
+  .ct::after{font-size:20px}
+  .hgrid{grid-template-columns:repeat(5,1fr)}
+  .hi{height:110px;font-size:16px}
+}
+/* ---- redesigned doctor cards ---- */
+.dlist{display:grid;grid-template-columns:1fr;gap:20px}
+.dr{background:#fff;border-radius:26px;border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 32px -24px rgba(11,47,122,.55);transition:.22s}
+.dr:hover{transform:translateY(-6px);box-shadow:0 32px 54px -28px rgba(11,47,122,.6)}
+.dr-top{position:relative;height:108px;overflow:hidden;background:linear-gradient(135deg,var(--c1),color-mix(in srgb,var(--c1) 50%,#0b2f7a))}
+.dr-top::before{content:attr(data-ic);position:absolute;right:-4px;top:-14px;font-size:120px;line-height:1;opacity:.2}
+.dr-top::after{content:"";position:absolute;left:-40px;bottom:-70px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.12)}
+.dr-tag{position:absolute;left:18px;top:16px;z-index:1;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);color:#fff;font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;letter-spacing:.2px}
+.dr-av{position:relative;z-index:2;width:96px;height:96px;border-radius:50%;margin:-50px auto 0;border:5px solid #fff;background:linear-gradient(135deg,var(--c1),color-mix(in srgb,var(--c1) 50%,#0b2f7a));display:grid;place-items:center;color:#fff;font-weight:800;font-size:31px;letter-spacing:-1px;overflow:hidden;box-shadow:0 14px 26px -12px rgba(0,0,0,.5)}
+.dr-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.dr-body{padding:14px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1;text-align:center}
+.dr h3{font-size:21px;letter-spacing:-.5px;color:var(--blue-dd);line-height:1.2}
+.dr-sp{color:var(--c1);font-weight:700;font-size:14px;line-height:1.3}
+.dr-deg{color:var(--muted);font-size:13px}
+.dr-info{display:grid;gap:10px;text-align:left;margin:12px 0 6px;background:var(--bg);border-radius:18px;padding:14px}
+.dr-row{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;line-height:1.35}
+.dr-row i{flex:none;width:32px;height:32px;border-radius:10px;background:#fff;display:grid;place-items:center;font-style:normal;font-size:15px;box-shadow:0 3px 8px -3px rgba(0,0,0,.18)}
+.dr-row b{display:block;font-weight:600;color:var(--ink)}
+.dr-row div>span{display:block;color:var(--muted);font-size:12.5px;margin-top:1px}
+.dr-foot{display:flex;gap:8px;margin-top:auto;padding-top:8px}
+.dr-foot .btn{flex:1;border-radius:14px;padding:13px 10px;font-size:14px}
+.dr-foot .btn.call{flex:none;width:50px;padding:0;background:var(--sky);color:var(--blue);font-size:18px}
+.dr-foot .btn.call:hover{background:var(--sky2)}
+@media(min-width:680px){.dlist{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1040px){.dlist{grid-template-columns:repeat(3,1fr)}}
+/* ---- doctor cards, list style ---- */
+.od{background:#fff;border-radius:22px;border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:16px;box-shadow:0 10px 28px -22px rgba(11,47,122,.6);transition:.2s}
+.od:hover{transform:translateY(-4px);box-shadow:0 28px 48px -28px rgba(11,47,122,.55)}
+.od-head{display:flex;gap:16px;align-items:flex-start}
+.od-av{position:relative;flex:none;width:88px;height:88px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:28px;letter-spacing:-1px;overflow:hidden;background:linear-gradient(135deg,var(--c1),color-mix(in srgb,var(--c1) 50%,#0b2f7a));box-shadow:0 0 0 4px #fff,0 0 0 6px var(--c1)}
+.od-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.od-id{min-width:0;display:grid;gap:5px;justify-items:start}
+.od-id h3{font-size:19px;letter-spacing:-.4px;color:var(--blue-dd);line-height:1.2}
+.od-ok{display:inline-flex;gap:6px;align-items:center;background:#e6f6ee;color:#17724a;font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:8px}
+.od-sp{color:var(--blue);font-weight:600;font-size:14px;line-height:1.3}
+.od-deg{color:var(--muted);font-size:13px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.od-stats{display:flex;padding:4px 0}
+.od-st{flex:1;text-align:center;padding:0 6px;border-left:1px solid var(--line)}
+.od-st:first-child{border-left:0}
+.od-st b{display:block;font-size:15.5px;color:var(--ink);line-height:1.3}
+.od-st span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.od-box{border:1.5px solid var(--blue-d);border-radius:16px;padding:13px 15px;display:grid;gap:7px}
+.od-box .t{display:flex;gap:9px;align-items:center;font-weight:700;font-size:14.5px;color:var(--blue-dd)}
+.od-box .t i{font-style:normal;width:28px;height:28px;border-radius:50%;background:var(--sky);display:grid;place-items:center;font-size:14px;flex:none}
+.od-box .tm{font-size:13.5px;color:#17724a;font-weight:600;display:flex;gap:8px;align-items:flex-start;line-height:1.4}
+.od-box .tm::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:#1fa463;margin-top:6px}
+.od-btns{display:flex;gap:10px}
+.od-btns a{flex:1;text-align:center;padding:14px 10px;border-radius:12px;font-weight:700;font-size:14.5px;border:1.5px solid var(--blue-d);color:var(--blue-d);background:#fff;transition:.15s}
+.od-btns a.p{background:var(--blue-d);color:#fff}
+.od-btns a:hover{transform:translateY(-1px);box-shadow:0 10px 18px -12px rgba(11,47,122,.7)}
+.sl-ad{grid-column:1/-1;display:grid;gap:18px;align-items:center;border-radius:24px;padding:26px;color:#fff;background:linear-gradient(120deg,#0b2f7a,#1558d6 70%,#2a7bff);position:relative;overflow:hidden}
+.sl-ad::after{content:"";position:absolute;right:-60px;top:-80px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.1)}
+.sl-ad-t{position:relative;z-index:1;display:grid;gap:10px;justify-items:start}
+.sl-ad-k{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:999px}
+.sl-ad h3{font-size:clamp(22px,4.5vw,30px);letter-spacing:-.7px;line-height:1.15}
+.sl-ad p{color:#cfe0fb;font-size:15px;max-width:520px}
+.sl-ad-b{background:#fff;color:var(--blue-d);font-weight:700;padding:13px 24px;border-radius:999px;font-size:15px}
+.sl-ad-b:hover{background:var(--sky)}
+.sl-ad-art{position:relative;z-index:1;display:none;text-align:center;background:#fff;border-radius:20px;padding:22px 30px;color:var(--blue-d)}
+.sl-ad-art span{display:block;color:#e8435a;font-size:34px;line-height:1}
+.sl-ad-art b{font-size:26px;letter-spacing:-.8px}
+.sl-ad-art small{font-size:15px;color:var(--muted);font-weight:600}
+@media(min-width:760px){.sl-ad{grid-template-columns:1fr auto;padding:32px 36px}.sl-ad-art{display:block}}
+.dlist{grid-template-columns:1fr}
+@media(min-width:760px){.dlist{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1040px){.dlist{grid-template-columns:repeat(2,1fr)}}
+</style>
 </head>
-
 <body>
-  <!-- Every visible piece of content lives inside <body>. -->
 
-  <div class="notice">
-    <div class="wrap">Sample page for learning. All names and details are made up.</div>
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo"><div class="mark">+</div><div><b>HospitalPro</b><small>A promotional platform by Slashcure</small></div></a>
+    <nav class="menu">
+      <a href="#top" class="on">Home</a>
+      <a href="#hospitals">Hospitals</a>
+      <a href="#doctors">Doctors</a>
+      <a href="#specialties">Specialties</a>
+      <a href="#cities">Cities</a>
+      <a href="#about">About</a>
+    </nav>
+    <a href="#doctors" class="btn sm">Explore Now</a>
   </div>
+</header>
 
-  <header class="hero">
-    <div class="wrap">
-      <h1>Dr. Ayesha Rehman</h1>
-      <p class="credentials">MBBS, FCPS &middot; Consultant Physician</p>
-      <!-- This badge is fixed text for now. In step 2, JavaScript will change it based on the time of day. -->
-      <span class="status">Available now</span>
+<div class="hero" id="top">
+  <div class="wrap hero-in">
+    <div>
+      <h1>Discover Trusted<br>Hospitals &amp; Doctors <em>Across Pakistan</em></h1>
+      <p class="lead">A promotional platform by Slashcure connecting you to quality healthcare.</p>
+      <form class="search" onsubmit="return false">
+        <input id="q" type="search" placeholder="Search doctors, hospitals, specialties or city..." aria-label="Search">
+        <button id="goBtn" type="button">Search</button>
+      </form>
+      <div class="perks">
+        <div class="perk"><i>🏢</i>Top Hospitals<br>in Your City</div>
+        <div class="perk"><i>🧑‍⚕️</i>Expert Doctors<br>Across Specialties</div>
+        <div class="perk"><i>📍</i>Easy Access<br>to Information</div>
+        <div class="perk"><i>🔗</i>Linked to<br>Slashcure Profiles</div>
+      </div>
     </div>
-  </header>
+    <div class="art" aria-hidden="true">
+      <div class="bld"></div>
+      <div class="cross">+</div>
+      <div class="badges"><div><i>🧑‍⚕️</i>Real<br>Doctors</div><div><i>🏢</i>Real<br>Hospitals</div><div><i>🤍</i>Real<br>Care</div></div>
+      <div class="docs"><div class="p"><span>+</span></div><div class="p"><span>+</span></div><div class="p"><span>+</span></div></div>
+      <div class="tag">Better Healthcare. For a Healthier Pakistan.</div>
+    </div>
+  </div>
+  <div class="hero-band"></div>
+</div>
 
-  <main>
-    <section>
-      <div class="wrap">
-        <h2>Where to find the doctor</h2>
-        <p class="sub">Weekly clinic timings. Each colour is a different place.</p>
+<main class="wrap">
 
-        <!-- <ul> is a list, <li> is one item in it. Class a/b/c picks the colour from the CSS above. -->
-        <ul class="week">
-          <li class="a"><span class="day">Monday</span>    <span class="where">Sample Hospital A</span>        <span class="time">4:00 PM to 8:00 PM</span></li>
-          <li class="a"><span class="day">Tuesday</span>   <span class="where">Sample Hospital A</span>        <span class="time">4:00 PM to 8:00 PM</span></li>
-          <li class="a"><span class="day">Wednesday</span> <span class="where">Sample Hospital A</span>        <span class="time">4:00 PM to 8:00 PM</span></li>
-          <li class="b"><span class="day">Thursday</span>  <span class="where">Sample Clinic B</span>          <span class="time">2:00 PM to 5:00 PM</span></li>
-          <li class="c"><span class="day">Friday</span>    <span class="where">Sample Medical Centre C</span> <span class="time">6:00 PM to 9:00 PM</span></li>
-          <li class="c"><span class="day">Saturday</span>  <span class="where">Sample Medical Centre C</span> <span class="time">6:00 PM to 9:00 PM</span></li>
-          <li class="off"><span class="day">Sunday</span>  <span class="where">No routine clinic</span>       <span class="time"></span></li>
-        </ul>
-      </div>
-    </section>
+  <section id="doctors">
+    <div class="sh">
+      <div><h2>Featured Doctors</h2><p>Meet experienced doctors from trusted hospitals. Click to view full profile on Slashcure.</p></div>
+      <a class="more" href="https://slashcure.com">View All Doctors →</a>
+    </div>
+    <div class="dlist" id="dgrid"></div>
+  </section>
 
-    <section>
-      <div class="wrap">
-        <h2>About</h2>
-        <p>Dr. Ayesha Rehman is a consultant physician with a focus on adult general medicine and long-term conditions. She sees patients at three locations during the week.</p>
-        <h2 style="margin-top:1.5rem">Services</h2>
-        <ul class="services">
-          <li>General medical check-ups</li>
-          <li>Diabetes care</li>
-          <li>Blood pressure management</li>
-          <li>Fever and infections</li>
-          <li>Follow-up visits</li>
-          <li>Second opinions</li>
-        </ul>
-      </div>
-    </section>
+  <section id="specialties">
+    <div class="sh"><div><h2>Browse by Specialty</h2><p>Find doctors in your required specialty.</p></div></div>
+    <div class="sgrid" id="sgrid"></div>
+  </section>
 
-    <section>
-      <div class="wrap">
-        <h2>Contact reception</h2>
-        <p class="sub">Please contact the clinic or hospital reception for appointments. The number below is fake.</p>
-        <div class="actions">
-          <!-- tel: opens the phone dialler on a phone. -->
-          <a class="btn primary" href="tel:+920000000000">Call reception</a>
-          <!-- wa.me links open WhatsApp with a chat to that number. -->
-          <a class="btn secondary" href="https://wa.me/920000000000">Message on WhatsApp</a>
-        </div>
-      </div>
-    </section>
-  </main>
+  <section id="cities">
+    <div class="sh"><div><h2>Popular Cities</h2><p>Explore hospitals and doctors in major cities.</p></div></div>
+    <div class="cgrid" id="cgrid"></div>
+  </section>
 
-  <footer>
-    <div class="wrap">Sample profile built as a learning project.</div>
-  </footer>
+  <section id="hospitals">
+    <div class="sh">
+      <div><h2>Featured Hospitals</h2><p>Top hospitals featured on Slashcure. Click to view full profile.</p></div>
+      <a class="more" href="https://slashcure.com">View All Hospitals →</a>
+    </div>
+    <div class="hgrid" id="hgrid"></div>
+  </section>
+
+  <div class="dual" id="about">
+    <div class="sl">
+      <h3>View Complete Details on Slashcure</h3>
+      <p>HospitalPro showcases doctors and hospitals to help you discover the best options. For full profiles, live OPD schedules, availability and more, visit their official pages on Slashcure.</p>
+      <div><a class="btn" href="https://slashcure.com">Explore on Slashcure →</a></div>
+    </div>
+    <div class="pk">
+      <div class="flag">🇵🇰</div>
+      <h3>Promoting Healthcare Across Pakistan</h3>
+      <p>Trusted Hospitals. Expert Doctors. Better Communities.</p>
+    </div>
+  </div>
+</main>
+
+<div class="bar">
+  <div class="wrap bar-in">
+    <a href="#top" class="logo"><div class="mark">+</div><div><b>HospitalPro</b><small>A promotional platform by Slashcure</small></div></a>
+    <div class="pts">
+      <div class="pt"><i>📣</i>Advertise<br>Your Hospital or Clinic</div>
+      <div class="pt"><i>👥</i>Reach More<br>Patients</div>
+      <div class="pt"><i>📊</i>Build Your<br>Brand Online</div>
+    </div>
+    <a class="btn" href="mailto:hello@slashcure.com">Get Featured →</a>
+  </div>
+  <div class="copy">© HospitalPro · A promotional platform by Slashcure. Listings link to official Slashcure profiles.</div>
+</div>
+
+<script>
+/* ---------- EDIT HERE: your content lives in these lists ---------- */
+var SLASHCURE = "https://slashcure.com";
+
+/* Each doctor: n=name, sp=title, cat=specialty filter, deg=degrees, loc=main place (shown on card),
+   tm=timings (shown on card), extra=more details kept for the profile pages, url=Slashcure profile link */
+var DOCTORS = [
+  {n:"Dr. Aneel Ahmed Ghanghro", sp:"Cardiologist & Advanced Cardiac Imaging Specialist", cat:"Cardiology",
+   deg:"MBBS, FCPS Cardiology, FESC (UK), FACC (USA)", loc:"Hira Medical Centre, Sukkur",
+   tm:"Mon to Sat 3:30 PM to 8:00 PM · Sun 11:00 AM to 3:00 PM",
+   extra:{role:"Assistant Professor of Cardiology", phone:"+92 315 8593769"},
+   col:"#e8435a", ic:"❤️", photo:"images/dr-aneel.jpg", url:"https://slashcure.com/consultant-cardiologists/sukkur/dr-aneel-ahmed-ghanghro"},
+
+  {n:"Dr. Ashfaque Ali Baloch", sp:"Consultant Physician", cat:"General Medicine",
+   deg:"MBBS, RMP, MD (Internal Medicine)", loc:"Ali Medical Center & Bismillah Clinic, Khairpur Mirs",
+   tm:"Everyday 4:00 PM to 8:00 PM (Ali Medical Center) · Everyday 3:00 PM to 5:00 PM (Bismillah Clinic)",
+   extra:{experience:"9+ years",
+     places:[
+       {name:"Ali Medical Center", address:"Chandia Mor, opposite Chandia petrol pump, Khairpur Mirs", timings:"Everyday 4:00 PM to 8:00 PM"},
+       {name:"Bismillah Clinic", address:"Technical College Road, Janwari Village, Khairpur", timings:"Everyday 3:00 PM to 5:00 PM"}],
+     treats:"Stomach and acid disorders, liver diseases, bowel and digestive problems, kidney and electrolyte disorders, diabetes and metabolic issues, hypertension and heart risk management, general medical care"},
+   col:"#12a38a", ic:"🩺", photo:"images/dr-ashfaque.jpg", url:"https://slashcure.com/general-physicians/khairpur/dr-ashfaque-ali-baloch"},
+
+  {n:"Dr. Komal Kandhir", sp:"Consultant Physiotherapist (DPT)", cat:"Physiotherapy",
+   deg:"DPT · PPA S-8197", loc:"Mustafai Trust Hospital, Sukkur",
+   tm:"Everyday 3:00 PM to 7:00 PM",
+   extra:{address:"Mustafai Trust Hospital, near DHO Office, opposite Civil Hospital, Sukkur", treats:"Pain relief, improved mobility, stronger function, better quality of life. Manual therapy, rehabilitation, therapeutic exercises"},
+   col:"#12a38a", ic:"🏃", photo:"images/dr-komal.jpg", url:"https://slashcure.com/consultant-physiotherapists/sukkur/dr-komal-kandhir-pt"},
+
+  {n:"Dr. Imran Ali Kalwar", sp:"Consultant Pulmonologist", cat:"Pulmonology",
+   deg:"MBBS, FCPS", loc:"Indus Hospital, Ghotki",
+   tm:"Mon to Sat 3:00 PM to 9:00 PM",
+   extra:{role:"Expert in lung and respiratory diseases", phone:"0335-2648572 (WhatsApp)", address:"Indus Hospital, near Shelton Bypass Road, Ghotki"},
+   col:"#d6455d", ic:"🫁", photo:"images/dr-imran.jpg", url:"https://slashcure.com/consultant-pulmonologists/ghotki/dr-imran-ali"},
+
+  {n:"Dr. Murk Channa", sp:"Gastroenterologist, Hepatologist & Consultant Physician", cat:"Gastroenterology",
+   deg:"MBBS, FCPS", loc:"River City Hospital, Sukkur",
+   tm:"Mon to Thu and Sat 2:00 PM to 5:00 PM",
+   extra:{phone:"03140081235", treats:"Stomach and digestive disorders, liver diseases and hepatitis, endoscopy (diagnostic and therapeutic), general medical consultation"},
+   col:"#e48a26", ic:"🍽️", photo:"images/dr-murk.jpg", url:"https://slashcure.com/gastroenterologists/sukkur/dr-murk-channa"},
+
+  {n:"Dr. Tofique Ahmed Kamboh", sp:"Consultant Physician", cat:"General Medicine",
+   deg:"MBBS, FCPS", loc:"Red Crescent Hospital, Sukkur",
+   tm:"Every Sat 4:00 PM to 8:00 PM · Every Sun 12:00 PM to 7:00 PM",
+   extra:{role:"Expert care for adult medicine", treats:"Digestive diseases, respiratory diseases, hypertension and cardio-metabolic care, liver diseases, general adult medicine"},
+   col:"#1f7fe0", ic:"🩺", photo:"images/dr-tofique.jpg", url:SLASHCURE}
+];
+
+var SPECIALTIES = [
+  ["General Medicine","🧑‍⚕️","#e1ecff"],["Cardiology","❤️","#ffe3e7"],["Pediatrics","🧒","#dff3ff"],
+  ["Gynecology","🌸","#f3e5ff"],["Orthopedics","🦴","#e1ecff"],["Pulmonology","🫁","#dcf5ef"],
+  ["Dermatology","🧴","#ffeedb"],["Gastroenterology","🍽️","#ffe6dc"],["Physiotherapy","🏃","#dcf5ef"],
+  ["Neurology","🧠","#ece4ff"],["More Specialties","⋯","#e8eef8"]
+];
+
+var CITIES = [
+  ["Karachi","#1f6fe0,#0b3d91"],["Lahore","#c2542f,#7a2a12"],["Sukkur","#2a8aa6,#145068"],["Khairpur","#b6842c,#6e4a10"],
+  ["Hyderabad","#c97a2c,#7f4310"],["Quetta","#7a6a52,#463a28"],["Peshawar","#b5532f,#6e2a14"],["Shikarpur","#a8812f,#6b4d12"],
+  ["Ghotki","#3c8c78,#1d5546"]
+];
+
+var HOSPITALS = [
+  {n:"NEO Medical Center", loc:"Karachi & Lahore", tags:["Multi-Specialty Care","Modern Facilities"], g:"#3a78d8,#12347a", url:SLASHCURE},
+  {n:"Tabba Medical Center", loc:"Hyderabad", tags:["Cardiac Care","Diagnostic Services"], g:"#5b6c86,#26324a", url:SLASHCURE},
+  {n:"SMBBIT Trauma Centre", loc:"Karachi", tags:["Emergency & Trauma","Specialist OPD"], g:"#d4553f,#7d2214", url:SLASHCURE},
+  {n:"Haseeb Medicare Hospital", loc:"Pano Aqil", tags:["24/7 Emergency","ICU / NICU"], g:"#2f9a8a,#115247", url:SLASHCURE},
+  {n:"Hussain Diagnostic Center", loc:"Khairpur Mir's", tags:["Ultrasound","Laboratory"], g:"#2f6fb5,#123e6e", url:SLASHCURE}
+];
+/* ------------------------------------------------------------- */
+
+function initials(n){return n.replace(/^Dr\.\s*/,'').split(' ').slice(0,2).map(function(w){return w[0]}).join('')}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+var dgrid=document.getElementById('dgrid'), hgrid=document.getElementById('hgrid');
+var q=document.getElementById('q'), cat='', term='';
+
+function dCard(d){
+  return '<article class="dc"><div class="ph" style="background:linear-gradient(160deg,'+d.col+',#10213f)">'+initials(d.n)+
+    '<img src="'+esc(d.photo)+'" alt="'+esc(d.n)+'" loading="lazy" onerror="this.remove()">'+
+    '<div class="ic">'+d.ic+'</div></div>'+
+    '<div class="db"><h3>'+esc(d.n)+'</h3><div class="sp">'+esc(d.sp)+'</div><div class="dg">'+esc(d.deg)+'</div>'+
+    '<div class="lc">📍 '+esc(d.loc)+'</div><div class="lc">🕒 '+esc(d.tm)+'</div><div class="gap"></div>'+
+    '<a class="btn" href="'+esc(d.url)+'">View on Slashcure →</a></div></article>';
+}
+var SL_AD='<aside class="sl-ad"><div class="sl-ad-t"><span class="sl-ad-k">Advertisement</span>'+
+  '<h3>Are you a doctor or run a clinic?</h3>'+
+  '<p>Get your own profile on Slashcure with clinic details, live timings and a QR code patients can scan. Smarter health. Simpler life.</p>'+
+  '<a class="sl-ad-b" href="'+SLASHCURE+'">Join Slashcure.com →</a></div>'+
+  '<div class="sl-ad-art" aria-hidden="true"><span>♥</span><b>Slashcure</b><small>.com</small></div></aside>';
+
+function dCard3(d){
+  var parts=d.loc.split(','); var city=parts[parts.length-1].trim();
+  var clinics=(d.extra&&d.extra.places)?d.extra.places.length:1;
+  var exp=d.extra&&d.extra.experience;
+  var phone=d.extra&&d.extra.phone?d.extra.phone.replace(/[^\d+]/g,''):'';
+  var stats='<div class="od-st"><b>'+esc(city)+'</b><span>City</span></div>'+
+    '<div class="od-st"><b>'+clinics+(clinics>1?' Clinics':' Clinic')+'</b><span>Practice at</span></div>'+
+    (exp?'<div class="od-st"><b>'+esc(exp)+'</b><span>Experience</span></div>':'');
+  var times=d.tm.split(' · ').map(function(t){return '<div class="tm">'+esc(t)+'</div>'}).join('');
+  return '<article class="od" style="--c1:'+d.col+'">'+
+    '<div class="od-head"><div class="od-av">'+initials(d.n)+'<img src="'+esc(d.photo)+'" alt="'+esc(d.n)+'" loading="lazy" onerror="this.remove()"></div>'+
+    '<div class="od-id"><h3>'+esc(d.n)+'</h3><span class="od-ok">✔ Listed on Slashcure</span>'+
+    '<div class="od-sp">'+esc(d.sp)+'</div><div class="od-deg">'+esc(d.deg)+'</div></div></div>'+
+    '<div class="od-stats">'+stats+'</div>'+
+    '<div class="od-box"><div class="t"><i>📍</i>'+esc(d.loc)+'</div>'+times+'</div>'+
+    '<div class="od-btns">'+(phone?'<a href="tel:'+phone+'">📞 Call Clinic</a>':'')+
+    '<a class="p" href="'+esc(d.url)+'">View Profile</a></div></article>';
+}
+
+function dCard2(d){
+  var times=d.tm.split(' · ').map(function(t){return esc(t)}).join('<br>');
+  var phone=d.extra&&d.extra.phone?d.extra.phone.replace(/[^\d+]/g,''):'';
+  return '<article class="dr" style="--c1:'+d.col+'">'+
+    '<div class="dr-top" data-ic="'+d.ic+'"><span class="dr-tag">'+esc(d.cat)+'</span></div>'+
+    '<div class="dr-av">'+initials(d.n)+'<img src="'+esc(d.photo)+'" alt="'+esc(d.n)+'" loading="lazy" onerror="this.remove()"></div>'+
+    '<div class="dr-body"><h3>'+esc(d.n)+'</h3><div class="dr-sp">'+esc(d.sp)+'</div><div class="dr-deg">'+esc(d.deg)+'</div>'+
+    '<div class="dr-info">'+
+      '<div class="dr-row"><i>📍</i><div><b>'+esc(d.loc)+'</b></div></div>'+
+      '<div class="dr-row"><i>🕒</i><div><b>'+times+'</b></div></div>'+
+    '</div>'+
+    '<div class="dr-foot"><a class="btn" href="'+esc(d.url)+'">View Profile →</a>'+
+    (phone?'<a class="btn call" href="tel:'+phone+'" aria-label="Call">📞</a>':'')+'</div></div></article>';
+}
+
+function hCard(h){
+  return '<article class="hc"><div class="hi" style="--g:linear-gradient(135deg,'+h.g+')"><span>'+esc(h.n)+'</span></div>'+
+    '<div class="hb"><h3>'+esc(h.n)+'</h3><div class="lc">📍 '+esc(h.loc)+'</div>'+
+    '<div class="tg">'+h.tags.map(function(t){return '<span>'+esc(t)+'</span>'}).join('')+'</div>'+
+    '<a class="btn" href="'+esc(h.url)+'">View on Slashcure →</a></div></article>';
+}
+function match(text){return !term || text.toLowerCase().indexOf(term)>-1}
+
+function render(){
+  var ds=DOCTORS.filter(function(d){return (!cat||d.cat===cat)&&match([d.n,d.sp,d.cat,d.loc,d.deg,(d.extra&&d.extra.treats)||''].join(' '))});
+  var hs=HOSPITALS.filter(function(h){return !cat&&match([h.n,h.loc,h.tags.join(' ')].join(' '))||(cat&&match(h.n+' '+h.loc)&&false)});
+  dgrid.innerHTML=ds.length?ds.map(dCard3).join('')+SL_AD:'<div class="empty" style="display:block">No doctors match that search yet. Try another word or clear the filter.</div>';
+  hgrid.innerHTML=(cat?HOSPITALS.filter(function(){return false}):hs).length?hs.map(hCard).join(''):
+    (cat?HOSPITALS.map(hCard).join(''):'<div class="empty" style="display:block">No hospitals match that search.</div>');
+}
+
+/* specialties */
+var sgrid=document.getElementById('sgrid');
+sgrid.innerHTML=SPECIALTIES.map(function(s){return '<button class="sc" data-c="'+esc(s[0])+'" style="--bgc:'+s[2]+'"><i>'+s[1]+'</i>'+esc(s[0])+'</button>'}).join('');
+sgrid.addEventListener('click',function(e){
+  var b=e.target.closest('.sc'); if(!b) return;
+  var c=b.dataset.c; var was=b.classList.contains('on');
+  sgrid.querySelectorAll('.sc').forEach(function(x){x.classList.remove('on')});
+  if(c==='More Specialties'||was){cat=''} else {cat=c;b.classList.add('on')}
+  render(); document.getElementById('doctors').scrollIntoView({behavior:'smooth'});
+});
+
+/* cities */
+document.getElementById('cgrid').innerHTML=CITIES.map(function(c){
+  return '<div class="ct" data-city="'+esc(c[0])+'" style="--g:linear-gradient(135deg,'+c[1]+')"><span>'+esc(c[0])+'</span></div>';
+}).join('')+'<div class="ct more-c"><span>📍</span><span>More Cities</span></div>';
+document.getElementById('cgrid').addEventListener('click',function(e){
+  var c=e.target.closest('.ct'); if(!c||!c.dataset.city) return;
+  q.value=c.dataset.city; term=q.value.toLowerCase(); cat=''; render();
+  document.getElementById('doctors').scrollIntoView({behavior:'smooth'});
+});
+
+/* search */
+q.addEventListener('input',function(){term=q.value.trim().toLowerCase();render()});
+document.getElementById('goBtn').addEventListener('click',function(){
+  term=q.value.trim().toLowerCase();render();
+  document.getElementById('doctors').scrollIntoView({behavior:'smooth'});
+});
+
+render();
+</script>
 </body>
 </html>
