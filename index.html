@@ -230,6 +230,35 @@ section{padding:44px 0 6px}
 .dlist{grid-template-columns:1fr}
 @media(min-width:760px){.dlist{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1040px){.dlist{grid-template-columns:repeat(2,1fr)}}
+/* ---- Dr. Komal featured advertisement ---- */
+.km-ad{grid-column:1/-1;position:relative;overflow:hidden;border-radius:28px;color:#fff;display:grid;gap:26px;padding:28px 22px;background:linear-gradient(125deg,#0b5f57 0%,#12a38a 55%,#4cc9b0 100%);box-shadow:0 30px 60px -34px rgba(11,95,87,.8)}
+.km-ad::before{content:"";position:absolute;right:-90px;top:-90px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.1)}
+.km-ad::after{content:"";position:absolute;left:-70px;bottom:-110px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.08)}
+.km-art{position:relative;z-index:1;display:flex;gap:16px;align-items:center}
+.km-av{position:relative;flex:none;width:112px;height:112px;border-radius:50%;display:grid;place-items:center;font-size:38px;font-weight:800;color:#0b5f57;background:#fff;overflow:hidden;box-shadow:0 0 0 6px rgba(255,255,255,.35),0 20px 36px -16px rgba(0,0,0,.5)}
+.km-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.km-name{display:grid;gap:2px}
+.km-name b{font-size:21px;letter-spacing:-.4px;line-height:1.2}
+.km-name span{font-size:14px;color:#d8fff6;font-weight:600}
+.km-name small{font-size:12.5px;color:#bdf3e6}
+.km-body{position:relative;z-index:1;display:grid;gap:14px;justify-items:start}
+.km-tag{font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.45);padding:6px 14px;border-radius:999px}
+.km-ad h3{font-size:clamp(26px,5.5vw,38px);letter-spacing:-1px;line-height:1.1}
+.km-ad p{font-size:15.5px;color:#e3fff9;max-width:640px;line-height:1.6}
+.km-chips{display:flex;flex-wrap:wrap;gap:8px}
+.km-chips span{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600}
+.km-info{display:grid;gap:8px;font-size:14px;color:#e3fff9}
+.km-info div{display:flex;gap:10px;align-items:flex-start}
+.km-sub{font-size:clamp(16px,3.2vw,20px);font-weight:700;color:#fff;line-height:1.35;max-width:640px}
+.km-loc{width:100%;max-width:640px;background:#fff;color:#0b2f3a;border-radius:20px;padding:18px 20px;display:grid;gap:4px;box-shadow:0 18px 32px -20px rgba(0,0,0,.55);border-left:8px solid #ffd54a}
+.km-loc-k{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#0b7a6c}
+.km-loc-h{font-size:clamp(21px,4.6vw,28px);font-weight:900;letter-spacing:-.5px;line-height:1.15;color:#0b5f57}
+.km-loc-a{font-size:16px;font-weight:800;color:#10213f}
+.km-loc-t{font-size:15px;font-weight:800;color:#10213f;margin-top:4px}
+.km-cta{display:inline-block;background:#fff;color:#0b5f57;font-weight:800;padding:15px 28px;border-radius:999px;font-size:15.5px;box-shadow:0 14px 24px -14px rgba(0,0,0,.5);transition:.15s}
+.km-cta:hover{transform:translateY(-2px)}
+.km-note{font-size:12px;color:#c6f6ec}
+@media(min-width:860px){.km-ad{grid-template-columns:260px 1fr;gap:40px;padding:42px 44px;align-items:center}.km-art{flex-direction:column;text-align:center}.km-av{width:170px;height:170px;font-size:56px}}
 </style>
 </head>
 <body>
@@ -376,7 +405,7 @@ var DOCTORS = [
    deg:"MBBS, FCPS", loc:"Red Crescent Hospital, Sukkur",
    tm:"Every Sat 4:00 PM to 8:00 PM · Every Sun 12:00 PM to 7:00 PM",
    extra:{role:"Expert care for adult medicine", treats:"Digestive diseases, respiratory diseases, hypertension and cardio-metabolic care, liver diseases, general adult medicine"},
-   col:"#1f7fe0", ic:"🩺", photo:"images/dr-tofique.jpg", url:SLASHCURE}
+   col:"#1f7fe0", ic:"🩺", photo:"images/dr-tofique.jpg", url:"https://slashcure.com/consultant-physicians/sukkur/dr-tofique-ahmed-kamboh"}
 ];
 
 var SPECIALTIES = [
@@ -415,6 +444,26 @@ function dCard(d){
     '<div class="lc">📍 '+esc(d.loc)+'</div><div class="lc">🕒 '+esc(d.tm)+'</div><div class="gap"></div>'+
     '<a class="btn" href="'+esc(d.url)+'">View on Slashcure →</a></div></article>';
 }
+var KOMAL_URL="https://slashcure.com/consultant-physiotherapists/sukkur/dr-komal-kandhir-pt";
+var KOMAL_AD='<aside class="km-ad">'+
+  '<div class="km-art"><div class="km-av">KK<img src="images/dr-komal.jpg" alt="Dr. Komal Kandhir" loading="lazy" onerror="this.remove()"></div>'+
+  '<div class="km-name"><b>Dr. Komal Kandhir</b><span>Consultant Physiotherapist (DPT)</span><small>PPA S-8197</small></div></div>'+
+  '<div class="km-body"><span class="km-tag">Featured · Physiotherapy for Women &amp; Children</span>'+
+  '<h3>Sukkur’s Trusted Female Physiotherapist</h3>'+
+  '<div class="km-sub">Experienced in Hands-On Manual Physiotherapy &amp; Personalized Rehabilitation</div>'+
+  '<p>Gentle, personal physiotherapy care for women and children. Whether it is back or neck pain, stiff joints, recovery after an injury or surgery, or helping a child build strong and healthy movement, the right exercises and hands-on therapy can ease pain and bring back confidence in everyday life.</p>'+
+  '<div class="km-chips"><span>Pain Relief</span><span>Improved Mobility</span><span>Stronger Function</span><span>Better Quality of Life</span></div>'+
+  '<div class="km-chips"><span>Manual Therapy</span><span>Rehabilitation</span><span>Therapeutic Exercises</span></div>'+
+  '<div class="km-loc"><div class="km-loc-k">📍 Visit her at</div><div class="km-loc-h">Mustafai Trust Hospital, Sukkur</div><div class="km-loc-a">Near DHO Office, Opposite Civil Hospital, Sukkur</div><div class="km-loc-t">🕒 Everyday, 3:00 PM to 7:00 PM</div></div>'+
+  '<a class="km-cta" href="'+KOMAL_URL+'">View Profile on Slashcure →</a>'+
+  '<div class="km-note">Physiotherapy supports recovery and does not replace medical advice.</div></div></aside>';
+
+function withAds(list){
+  var arr=list.map(dCard3);
+  if(!cat && !term && arr.length>=4){ arr.splice(4,0,KOMAL_AD); }
+  return arr.join('');
+}
+
 var SL_AD='<aside class="sl-ad"><div class="sl-ad-t"><span class="sl-ad-k">Advertisement</span>'+
   '<h3>Are you a doctor or run a clinic?</h3>'+
   '<p>Get your own profile on Slashcure with clinic details, live timings and a QR code patients can scan. Smarter health. Simpler life.</p>'+
@@ -466,7 +515,7 @@ function match(text){return !term || text.toLowerCase().indexOf(term)>-1}
 function render(){
   var ds=DOCTORS.filter(function(d){return (!cat||d.cat===cat)&&match([d.n,d.sp,d.cat,d.loc,d.deg,(d.extra&&d.extra.treats)||''].join(' '))});
   var hs=HOSPITALS.filter(function(h){return !cat&&match([h.n,h.loc,h.tags.join(' ')].join(' '))||(cat&&match(h.n+' '+h.loc)&&false)});
-  dgrid.innerHTML=ds.length?ds.map(dCard3).join('')+SL_AD:'<div class="empty" style="display:block">No doctors match that search yet. Try another word or clear the filter.</div>';
+  dgrid.innerHTML=ds.length?withAds(ds)+SL_AD:'<div class="empty" style="display:block">No doctors match that search yet. Try another word or clear the filter.</div>';
   hgrid.innerHTML=(cat?HOSPITALS.filter(function(){return false}):hs).length?hs.map(hCard).join(''):
     (cat?HOSPITALS.map(hCard).join(''):'<div class="empty" style="display:block">No hospitals match that search.</div>');
 }
