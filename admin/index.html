@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b2347">
+<title>HospitalPro Admin | Development Preview</title>
+<style>
+:root{--navy:#0b2347;--blue:#1765ca;--ink:#142b4b;--muted:#63748d;--line:#e1e9f4;--surface:#fff;--bg:#f4f7fc;--accent:#edf5ff;--green:#0b8c72}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.48}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.55}a{color:inherit}.shell{display:flex;min-height:100vh}
+.sidebar{width:255px;flex:none;background:var(--navy);color:#d8e7fa;position:sticky;top:0;height:100vh;padding:24px 14px;overflow:auto}
+.brand{display:flex;align-items:center;gap:10px;padding:5px 10px 28px;text-decoration:none}.brandmark{display:grid;place-items:center;width:39px;height:39px;border-radius:13px;background:linear-gradient(135deg,#2f91ff,#1765ca);font-weight:900;font-size:24px;color:#fff}.brand strong{color:#fff;font-size:20px;letter-spacing:-.5px}.brand small{display:block;color:#a3c2e7;font-size:11px}
+.navlabel{color:#86aacb;font-size:10px;text-transform:uppercase;letter-spacing:2px;font-weight:850;padding:12px 14px}
+.navitem{display:flex;align-items:center;gap:12px;width:100%;border:0;border-radius:12px;background:transparent;color:#d6e6f8;text-align:left;padding:12px 14px;margin:3px 0;font-weight:700;font-size:13.5px}
+.navitem:hover,.navitem.active{background:#22436d;color:#fff}.navitem.active{box-shadow:inset 3px 0 #60b5ff}
+.navicon{display:inline-grid;place-items:center;background:#ffffff13;width:29px;height:29px;border-radius:9px;font-size:16px}
+.sidebar-foot{margin-top:30px;background:#ffffff0d;border:1px solid #ffffff1c;padding:15px;border-radius:13px;font-size:11.5px;color:#b4cfed}
+.sidebar-foot strong{display:block;color:#fff;margin-bottom:5px}
+.workspace{min-width:0;flex:1}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px clamp(18px,4vw,44px);border-bottom:1px solid var(--line);background:#fff}
+.top-title{display:flex;align-items:center;gap:12px}.top-title h1{font-size:17px;letter-spacing:-.35px;margin:0}.top-title p{margin:2px 0 0;color:var(--muted);font-size:11.5px}
+.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--blue);border:1px solid var(--blue);border-radius:11px;color:#fff;font-weight:750;font-size:12.5px;padding:10px 15px;text-decoration:none;white-space:nowrap}.btn:hover:not(:disabled){background:#0c4ba4}.btn.outline{background:#fff;border-color:#cddbec;color:#1a528a}.btn.outline:hover:not(:disabled){background:#edf5ff}.btn.light{background:#edf5ff;color:#1658a1;border-color:#d4e7f8}.btn.danger{background:#fff5f5;border-color:#ffd6d6;color:#ae3030}
+.menu-btn{display:none}
+.main{max-width:1360px;margin:0 auto;padding:26px clamp(18px,4vw,44px) 70px}
+.notice{padding:15px 18px;background:#fff9e8;border:1px solid #f4e0af;border-radius:14px;color:#785c17;display:flex;gap:12px;margin-bottom:24px;font-size:12.5px}
+.notice strong{color:#624b18}.notice p{margin:2px 0 0}
+.pagehead{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 22px;flex-wrap:wrap}
+.pagehead h2{font-size:clamp(24px,3vw,32px);letter-spacing:-1px;margin:0;color:#102a51}.pagehead p{margin:6px 0 0;color:var(--muted);font-size:13px;max-width:750px}
+.page-actions{display:flex;flex-wrap:wrap;gap:9px}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:22px}
+.card,.panel{background:#fff;border:1px solid var(--line);border-radius:17px;box-shadow:0 10px 25px -23px #1f507a}
+.card{padding:20px}.card .count{font-size:clamp(23px,3vw,33px);font-weight:850;color:#0a3f89;margin:12px 0 4px;letter-spacing:-1px}.card .meta{font-size:12px;color:var(--muted)}.card .symbol{display:grid;place-items:center;border-radius:11px;background:#eaf3ff;width:37px;height:37px;color:#165ec4;font-size:20px}
+.grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}.panel{padding:22px;margin:0 0 16px}.panel h3{font-size:16px;margin:0 0 8px}.panel p{font-size:13px;color:var(--muted);margin:7px 0 14px;line-height:1.7}.panel small{font-size:11.5px;color:var(--muted)}
+.steps{list-style:none;margin:12px 0 0;padding:0}.steps li{padding:12px 0;border-top:1px solid var(--line);font-size:13px}.steps li strong{display:block;font-size:13px;margin-bottom:3px}.steps li span{color:var(--muted)}
+.callout{background:linear-gradient(110deg,#0d3670,#1666b9);color:#fff;overflow:hidden;position:relative}.callout p,.callout small{color:#dbeaff}.callout h3{font-size:20px}.callout:after{content:"✦";font-size:135px;position:absolute;right:-12px;top:-38px;color:#ffffff10;pointer-events:none}
+.filterbar{display:flex;gap:9px;margin-bottom:14px;flex-wrap:wrap}.filterbar input{min-width:230px;max-width:430px;flex:1}
+input,textarea,select{width:100%;border:1px solid #ccdaeb;border-radius:11px;padding:11px 12px;background:#fff;color:var(--ink);outline:none;font-size:13px}
+input:focus-visible,textarea:focus-visible,select:focus-visible{border-color:#2476d5;box-shadow:0 0 0 3px #2275d526}
+textarea{resize:vertical;min-height:110px;line-height:1.7}
+label{display:block;color:#28435f;font-size:12px;font-weight:750;margin:0 0 7px}
+.field{margin-bottom:16px}.field em{font-style:normal;font-weight:500;color:#7589a0;font-size:11px}
+.record-list{display:grid;gap:10px}.record{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--line);border-radius:13px;background:#fff}
+.record-avatar{display:grid;place-items:center;background:#e6f2ff;color:#2b67ab;border-radius:12px;width:44px;height:44px;flex:none;font-size:21px}
+.record-details{min-width:0;flex:1}.record-title{display:block;font-size:13.5px;font-weight:800;color:#142e4f;overflow-wrap:anywhere}.record-sub{color:#617791;font-size:11.5px;margin-top:3px;overflow-wrap:anywhere}.record-buttons{display:flex;gap:6px;flex-wrap:wrap}
+.empty{padding:50px 20px;text-align:center;border:1px dashed #bbd1e9;border-radius:15px;background:#fafcff;color:#647b96}.empty strong{display:block;font-size:16px;color:#264d75;margin-bottom:8px}.empty p{font-size:12.5px;max-width:480px;margin:auto}
+.editor{max-width:880px}.editor .panel{margin-bottom:14px}.editor p{margin:0 0 13px}
+.status{display:inline-flex;border-radius:999px;padding:5px 10px;background:#fff1cc;color:#825d0b;font-size:10.5px;font-weight:850;letter-spacing:.4px;text-transform:uppercase}
+.status.ok{background:#dcf8ef;color:#11694c}
+.technical{background:#edf4fd;padding:13px 14px;border-radius:10px;overflow-wrap:anywhere;font-family:ui-monospace,monospace;font-size:12px}
+dialog{width:min(92vw,600px);border:0;border-radius:19px;padding:0;box-shadow:0 27px 90px #05244e55;color:var(--ink);max-height:90vh}
+dialog::backdrop{background:#062448a8;backdrop-filter:blur(2px)}.dialoghead{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:20px 23px}.dialoghead h3{margin:0}.dialogbody{padding:20px 23px;max-height:60vh;overflow:auto}.dialogfoot{display:flex;justify-content:flex-end;gap:9px;padding:16px 23px;border-top:1px solid var(--line)}
+dialog .close{border:0;background:transparent;color:#647894;font-size:24px;line-height:1}.toggle-row{display:flex;align-items:center;gap:10px}.toggle-row input{width:auto}
+.toast{position:fixed;bottom:22px;right:22px;z-index:300;max-width:330px;background:#102f57;color:#fff;border-radius:11px;padding:13px 17px;box-shadow:0 15px 40px #0c325659;font-size:13px}
+[hidden]{display:none!important}
+@media(max-width:1100px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}.sidebar{width:220px}}
+@media(max-width:730px){.sidebar{position:fixed;z-index:100;top:0;left:0;width:270px;transform:translateX(-110%);transition:transform .2s;box-shadow:15px 0 45px #061b3a33}.sidebar.open{transform:translateX(0)}.menu-btn{display:inline-flex}.topbar{padding:14px 16px}.top-actions .small-hidden{display:none}.main{padding:20px 15px 60px}.pagehead h2{font-size:25px}.record{align-items:flex-start}.record-buttons{flex-direction:column}.notice{font-size:11.5px}}
+@media(max-width:410px){.cards{gap:8px}.card{padding:15px}.record{gap:8px}.record-avatar{width:33px;height:33px}.btn{padding:9px 11px}}
+@media(prefers-reduced-motion:reduce){.sidebar{transition:none}}
+</style>
+<script src="./app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar" id="sidebar" aria-label="Dashboard navigation">
+  <a class="brand" href="https://hospitalpro.online/" target="_blank" rel="noopener noreferrer"><span class="brandmark">+</span><span><strong>HospitalPro</strong><small>Admin Workspace · Preview</small></span></a>
+  <div class="navlabel">Overview</div>
+  <button class="navitem active" type="button" data-view="overview"><span class="navicon">◈</span>Dashboard</button>
+  <div class="navlabel">Manage content</div>
+  <button class="navitem" type="button" data-view="doctors"><span class="navicon">♧</span>Doctors</button>
+  <button class="navitem" type="button" data-view="hospitals"><span class="navicon">✚</span>Hospitals</button>
+  <button class="navitem" type="button" data-view="promotions"><span class="navicon">✦</span>Advertisements</button>
+  <button class="navitem" type="button" data-view="content"><span class="navicon">▣</span>Homepage Content</button>
+  <button class="navitem" type="button" data-view="faqs"><span class="navicon">?</span>FAQs</button>
+  <div class="navlabel">Administration</div>
+  <button class="navitem" type="button" data-view="publishing"><span class="navicon">⇧</span>Publishing Setup</button>
+  <div class="sidebar-foot"><strong>Development branch only</strong>Changes are draft-only and cannot affect the public site. Publishing and administrator authentication must be configured first.</div>
+</aside>
+<div class="workspace">
+<header class="topbar">
+  <div class="top-title"><button class="btn outline menu-btn" type="button" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button><div><h1>Website Control Panel</h1><p>HospitalPro.online / Staging workspace</p></div></div>
+  <div class="top-actions"><span class="status">Draft mode</span><a class="btn outline small-hidden" href="https://hospitalpro.online/" target="_blank" rel="noopener noreferrer">View live site ↗</a><button class="btn" id="exportTop" type="button">Export drafts ↓</button></div>
+</header>
+<main class="main">
+<div class="notice" role="note"><span aria-hidden="true">⚠</span><div><strong>Not a live control panel yet.</strong><p>This dashboard is being developed on a separate GitHub branch. Your edits save as local browser drafts only; they do not publish or change the public website. Secure login and publishing are deliberately disabled until configured.</p></div></div>
+<section data-panel="overview">
+ <div class="pagehead"><div><h2>Good to see you 👋</h2><p>Build and organize HospitalPro's doctors, hospitals, advertisements and website content in one workspace.</p></div><div class="page-actions"><button class="btn outline" id="importTop" type="button">Import drafts</button><button class="btn" data-goto="doctors" type="button">Manage doctors →</button></div></div>
+ <div class="cards">
+   <div class="card"><span class="symbol">♧</span><div class="count" data-count="doctors">0</div><span class="meta">Doctor draft records</span></div>
+   <div class="card"><span class="symbol">✚</span><div class="count" data-count="hospitals">0</div><span class="meta">Hospital draft records</span></div>
+   <div class="card"><span class="symbol">✦</span><div class="count" data-count="promotions">0</div><span class="meta">Advertisement drafts</span></div>
+   <div class="card"><span class="symbol">?</span><div class="count" data-count="faqs">0</div><span class="meta">Editable FAQ drafts</span></div>
+ </div>
+ <div class="grid2">
+   <div class="panel"><h3>Build roadmap</h3><p>The public website remains fully separate while we develop the dashboard.</p><ol class="steps"><li><strong>1. Draft management workspace</strong><span>Doctor, hospital, advertisement, quotation and FAQ editing — available in this prototype.</span></li><li><strong>2. Secure administrator sign-in</strong><span>Configure authorization and protect publishing endpoints; no passwords or tokens in the page.</span></li><li><strong>3. Connect real website content</strong><span>Migrate existing homepage listings into structured records with no visual redesign.</span></li><li><strong>4. Publishing and rollback</strong><span>Submit changes through a secured backend, generate static HTML and retain GitHub revision history.</span></li></ol></div>
+   <div class="panel callout"><h3>Same HospitalPro design.<br>Better control.</h3><p>Our goal is simple: your public homepage keeps its current appearance. The dashboard will manage the content behind it.</p><button type="button" class="btn light" data-goto="publishing">View the integration plan →</button></div>
+ </div>
+</section>
+<section data-panel="doctors" hidden>
+ <div class="pagehead"><div><h2>Doctor Listings</h2><p>Create and edit advertising entries. Draft records are not yet connected to the existing public doctor cards.</p></div><button class="btn" type="button" data-add="doctors">+ Add doctor</button></div>
+ <div class="filterbar"><input type="search" data-search="doctors" placeholder="Search draft doctors by name or specialty" aria-label="Search doctor drafts"></div>
+ <div class="record-list" data-list="doctors"></div>
+</section>
+<section data-panel="hospitals" hidden>
+ <div class="pagehead"><div><h2>Hospitals & Clinics</h2><p>Organize hospital advertising listings and their links back to Slashcure.</p></div><button class="btn" type="button" data-add="hospitals">+ Add hospital</button></div>
+ <div class="filterbar"><input type="search" data-search="hospitals" placeholder="Search draft hospitals by name or city" aria-label="Search hospital drafts"></div>
+ <div class="record-list" data-list="hospitals"></div>
+</section>
+<section data-panel="promotions" hidden>
+ <div class="pagehead"><div><h2>Advertisements</h2><p>Plan featured ads, partner highlights and promotional banners in a draft workspace.</p></div><button class="btn" type="button" data-add="promotions">+ Add advertisement</button></div>
+ <div class="filterbar"><input type="search" data-search="promotions" placeholder="Search draft advertisements" aria-label="Search advertisement drafts"></div>
+ <div class="record-list" data-list="promotions"></div>
+</section>
+<section data-panel="content" hidden>
+ <div class="pagehead"><div><h2>Homepage Content</h2><p>Prepare editable text for the existing landing page without altering its appearance.</p></div></div>
+ <form id="contentForm" class="editor">
+  <div class="panel"><h3>Slashcure quotation</h3><p>This is the approved quotation currently featured near the homepage About area.</p><div class="field"><label for="quoteInput">Quotation text</label><textarea id="quoteInput" name="quote" rows="5" required></textarea></div></div>
+  <div class="panel"><h3>Brand messaging</h3><div class="field"><label for="taglineInput">Short tagline</label><input id="taglineInput" name="tagline" required maxlength="180"></div><div class="field"><label for="aboutInput">About description</label><textarea id="aboutInput" name="about" rows="5"></textarea></div><button class="btn" type="submit">Save to local drafts</button></div>
+ </form>
+</section>
+<section data-panel="faqs" hidden>
+ <div class="pagehead"><div><h2>Frequently Asked Questions</h2><p>Review and prepare website FAQ text. This draft will later feed the public site's SEO-friendly HTML.</p></div><button class="btn" type="button" data-add="faqs">+ Add FAQ</button></div>
+ <div class="filterbar"><input type="search" data-search="faqs" placeholder="Find a question" aria-label="Search FAQ drafts"></div>
+ <div class="record-list" data-list="faqs"></div>
+</section>
+<section data-panel="publishing" hidden>
+ <div class="pagehead"><div><h2>Security & Publishing</h2><p>Required steps before this can become a live admin panel.</p></div></div>
+ <div class="editor">
+   <div class="panel"><h3>Current connection</h3><p><span class="status">Not connected</span></p><p>Publishing is intentionally disabled. This prototype does not collect or store GitHub access tokens or administrator passwords.</p><div class="technical">Repository: hospitalpro26/hospitalpro-site<br>Development branch: feature/hospitalpro-admin-dashboard<br>Live branch: main</div></div>
+   <div class="panel"><h3>Production architecture</h3><ol class="steps"><li><strong>Protect admin access</strong><span>Use a proper identity provider, such as Cloudflare Access, for administrator sign-in.</span></li><li><strong>Set up a server-side publishing API</strong><span>Only a protected backend may write to GitHub using a restricted secret stored on the server.</span></li><li><strong>Migrate current content safely</strong><span>Extract doctor and hospital entries into JSON, preserve their existing rendered cards and SEO-visible FAQ content.</span></li><li><strong>Review and deploy</strong><span>Test first on staging, then publish to main after an explicit go-live approval.</span></li></ol></div>
+   <div class="panel"><h3>Draft backup</h3><p>Export your current working records to a JSON file. Imports update only local drafts, not public listings.</p><div class="page-actions"><button class="btn outline" id="importHere" type="button">Import JSON</button><button class="btn" id="exportHere" type="button">Export JSON</button><button class="btn danger" id="resetDrafts" type="button">Reset local drafts</button></div></div>
+ </div>
+</section>
+</main>
+</div>
+</div>
+<dialog id="recordDialog" aria-labelledby="dialogTitle">
+ <form method="dialog" id="recordForm">
+  <div class="dialoghead"><h3 id="dialogTitle">Edit record</h3><button class="close" type="button" id="dialogClose" aria-label="Close">×</button></div>
+  <div class="dialogbody" id="dialogFields"></div>
+  <div class="dialogfoot"><button class="btn outline" type="button" id="dialogCancel">Cancel</button><button class="btn" id="dialogSave" type="submit">Save draft</button></div>
+ </form>
+</dialog>
+<input id="importFile" type="file" accept=".json,application/json" hidden aria-label="Import draft JSON">
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body></html>
