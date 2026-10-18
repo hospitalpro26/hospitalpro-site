@@ -438,6 +438,22 @@ section{padding:44px 0 6px}
 @media(min-width:780px){.hp-faq-grid{grid-template-columns:1fr 1fr;gap:13px 16px}.hp-faq{padding:75px 24px 82px}}
 @media(prefers-reduced-motion:reduce){.hp-faq-grid details,.hp-faq-cta a{transition:none}}
 
+
+/* Slashcure vision quotation — About area on the HospitalPro landing page */
+.hp-vision{position:relative;isolation:isolate;margin:30px 0 64px;padding:0;scroll-margin-top:95px}
+.hp-vision-card{position:relative;overflow:hidden;max-width:1120px;margin:0 auto;padding:clamp(33px,5vw,62px) clamp(22px,5vw,66px);text-align:center;background:linear-gradient(140deg,#ffffff 0%,#f4f9ff 58%,#eaf5ff 100%);border:1px solid #d7e6f6;border-radius:27px;box-shadow:0 20px 54px -40px rgba(6,52,120,.42)}
+.hp-vision-card::before,.hp-vision-card::after{content:"";position:absolute;z-index:-1;pointer-events:none;border-radius:50%}
+.hp-vision-card::before{width:270px;height:270px;top:-200px;right:-75px;background:radial-gradient(circle,rgba(23,119,218,.13),transparent 70%)}
+.hp-vision-card::after{width:240px;height:240px;bottom:-180px;left:-95px;background:radial-gradient(circle,rgba(0,164,162,.14),transparent 70%)}
+.hp-vision-label{display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border-radius:999px;background:#e6f2ff;color:#0f5a9f;border:1px solid #c9e1f7;text-transform:uppercase;letter-spacing:1.4px;font-size:11px;font-weight:850}
+.hp-vision-title{font-size:clamp(24px,3.5vw,36px);line-height:1.2;letter-spacing:-.9px;color:#092c60;font-weight:850;margin:17px auto 7px}
+.hp-vision-mark{display:block;font-family:Georgia,"Times New Roman",serif;font-size:clamp(63px,9vw,90px);line-height:.88;color:#8abce9;margin:12px auto 2px}
+.hp-vision-quote{font-family:Georgia,"Times New Roman",serif;font-size:clamp(20px,2.55vw,30px);line-height:1.57;font-style:italic;color:#233c62;max-width:920px;margin:0 auto;letter-spacing:-.25px;text-wrap:pretty}
+.hp-vision-rule{height:3px;width:83px;border-radius:999px;background:linear-gradient(90deg,#1f66c4,#13a7a5);margin:28px auto 15px}
+.hp-vision-sign{color:#2564a0;font-size:12px;letter-spacing:2px;font-weight:850;text-transform:uppercase}
+@media(max-width:600px){.hp-vision{margin:22px 0 44px}.hp-vision-card{border-radius:20px;padding:36px 19px 40px}.hp-vision-quote{line-height:1.67}.hp-vision-sign{letter-spacing:1.4px}}
+@media(prefers-reduced-motion:no-preference){.hp-vision-card{animation:hp-vision-arrive .72s ease-out both}@keyframes hp-vision-arrive{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}}
+
 </style>
 <!-- Publication refresh: HospitalPro homepage and Sukkur City FAQ updates, 2026-10-18. -->
 </head>
@@ -549,6 +565,18 @@ section{padding:44px 0 6px}
       <p>Trusted Hospitals. Expert Doctors. Better Communities.</p>
     </div>
   </div>
+
+  <!-- Slashcure's guiding commitment, shown beneath the About section -->
+  <section class="hp-vision" id="slashcure-vision" aria-labelledby="hp-vision-heading">
+    <div class="hp-vision-card">
+      <span class="hp-vision-label">Our Belief · Slashcure</span>
+      <h2 class="hp-vision-title" id="hp-vision-heading">A Message That Defines Slashcure</h2>
+      <span class="hp-vision-mark" aria-hidden="true">“</span>
+      <blockquote class="hp-vision-quote">Through innovation and technology, we bring people together on one platform, because healthcare is our duty and guiding people to the right care is our prime responsibility.</blockquote>
+      <div class="hp-vision-rule" aria-hidden="true"></div>
+      <p class="hp-vision-sign">Slashcure</p>
+    </div>
+  </section>
 </main>
 
 <!-- Cinematic Slashcure finale -->
