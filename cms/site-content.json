@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "site": {
+    "quote": "Through innovation and technology, we bring people together on one platform, because healthcare is our duty and guiding people to the right care is our prime responsibility.",
+    "tagline": "Better Healthcare. For a Healthier Pakistan.",
+    "about": "HospitalPro showcases doctors and hospitals to help visitors discover the best options. Fuller profiles and OPD updates are available through Slashcure."
+  },
+  "doctors": [],
+  "hospitals": [],
+  "promotions": [],
+  "faqs": [
+    {
+      "id": "homepage-faq-01",
+      "question": "How can I find the best doctor in my city?",
+      "answer": "Visit Slashcure.com to explore doctors by city, medical specialty and hospital. Review qualifications, experience, clinic addresses and consultation schedules to choose a suitable doctor for your needs."
+    },
+    {
+      "id": "homepage-faq-02",
+      "question": "How do I check a doctor's OPD schedule and availability?",
+      "answer": "Open the doctor's Slashcure profile to view their weekly clinic schedule and any available live updates. Where provided, status information can include availability at the clinic, delays, leave and closures. Confirm details with the clinic before travelling."
+    },
+    {
+      "id": "homepage-faq-03",
+      "question": "Can I explore hospitals and doctors in different cities of Pakistan?",
+      "answer": "Yes. Slashcure features participating doctors, hospitals, medical centers and clinics across Pakistan. Search by city, specialty or healthcare organization to explore available profiles."
+    },
+    {
+      "id": "homepage-faq-04",
+      "question": "What professional information can doctors display on Slashcure?",
+      "answer": "Doctors can maintain a professional profile with their specialty, qualifications, experience, designations, practice information, services and other relevant details. They can update the information supported by their account."
+    },
+    {
+      "id": "homepage-faq-05",
+      "question": "Can a doctor list multiple hospitals or clinics on one profile?",
+      "answer": "Yes. Doctors who practise at more than one location can display multiple clinics or hospitals, with separate OPD days, consultation timings, clinic addresses and contact information."
+    },
+    {
+      "id": "homepage-faq-06",
+      "question": "Can doctors add phone numbers, WhatsApp and clinic locations?",
+      "answer": "Yes. Slashcure profiles can show available telephone and WhatsApp contacts along with clinic addresses and location links, helping patients find the correct practice and contact the provider."
+    },
+    {
+      "id": "homepage-faq-07",
+      "question": "Can doctors publish OPD announcements and notifications?",
+      "answer": "Doctors can use supported status and announcement features to share changes such as updated OPD schedules, leave, delayed arrival or clinic closure. Notification availability depends on the account and feature settings."
+    },
+    {
+      "id": "homepage-faq-08",
+      "question": "Does a doctor receive a unique QR code and digital visiting card?",
+      "answer": "Each participating doctor can share a unique Slashcure profile QR code. The link or QR code can be placed on digital or printed visiting cards, posters and clinic displays so patients can open the doctor's profile quickly."
+    },
+    {
+      "id": "homepage-faq-09",
+      "question": "Can doctors share medical articles and educational videos?",
+      "answer": "Where enabled, doctors can add medical articles, educational information and videos to their Slashcure profiles to help patients learn about their services and healthcare topics."
+    },
+    {
+      "id": "homepage-faq-10",
+      "question": "What is the difference between HospitalPro and Slashcure?",
+      "answer": "HospitalPro.online is a healthcare advertising and discovery website featuring promotional doctor and hospital listings. Slashcure.com is the linked healthcare platform where visitors can explore fuller profiles, clinic schedules, availability information and supported digital healthcare services."
+    }
+  ]
+}
