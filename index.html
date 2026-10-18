@@ -412,6 +412,32 @@ section{padding:44px 0 6px}
 .partner-heading h2{font-size:clamp(31px,5.4vw,50px);letter-spacing:-1.6px;margin:16px 0 12px;font-weight:860;line-height:1.1;color:#0a2f6b}.partner-heading h2 span{background:linear-gradient(95deg,#0f63db,#00a8a9);-webkit-background-clip:text;background-clip:text;color:transparent}
 .partner-track:not(.partner-ready){animation-play-state:paused}
 
+
+/* Slashcure FAQs on HospitalPro homepage: progressive, accessible accordion */
+.hp-faq{padding:63px 20px 69px;background:linear-gradient(180deg,#f6faff,#edf5ff);border-top:1px solid #e1ebf8;position:relative;scroll-margin-top:88px}
+.hp-faq-inner{max-width:1160px;margin:auto}
+.hp-faq-head{text-align:center;margin-bottom:29px}
+.hp-faq-eyebrow{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1.9px;text-transform:uppercase;color:#0f6aa3;background:#e1f0fb;border:1px solid #c7e1f3;padding:7px 14px;border-radius:999px}
+.hp-faq-head h2{font-size:clamp(28px,4.2vw,40px);line-height:1.12;letter-spacing:-1.2px;color:#071f55;margin:15px 0 10px;font-weight:850}
+.hp-faq-head h2 span{color:#117da2}
+.hp-faq-head p{font-size:15px;line-height:1.65;color:#536b85;max-width:710px;margin:0 auto}
+.hp-faq-grid{display:grid;grid-template-columns:1fr;gap:12px;align-items:start}
+.hp-faq-grid details{background:#fff;border:1px solid #dbe6f4;border-radius:16px;overflow:hidden;transition:box-shadow .2s,border-color .2s}
+.hp-faq-grid details:hover,.hp-faq-grid details[open]{border-color:#9acbe6;box-shadow:0 12px 25px -18px rgba(6,56,117,.40)}
+.hp-faq-grid summary{display:flex;align-items:center;gap:12px;list-style:none;padding:18px 20px;cursor:pointer;color:#13385c;font-size:14px;font-weight:750;line-height:1.45}
+.hp-faq-grid summary::-webkit-details-marker{display:none}
+.hp-faq-grid summary::after{content:"+";margin-left:auto;display:grid;place-items:center;width:28px;height:28px;flex:0 0 28px;border-radius:9px;background:#e8f2fb;color:#1767b8;font-size:19px;line-height:1;font-weight:500}
+.hp-faq-grid details[open] summary::after{content:"−";background:#0a5f96;color:#fff}
+.hp-faq-grid details p{color:#566d82;font-size:13.5px;line-height:1.75;padding:0 20px 20px;margin:0}
+.hp-faq-grid details p a{font-weight:800;color:#0769b2;text-decoration:underline;text-underline-offset:2px}
+.hp-faq-grid summary:focus-visible{outline:3px solid #2a86d8;outline-offset:-4px}
+.hp-faq-cta{display:flex;justify-content:center;align-items:center;gap:15px;flex-wrap:wrap;margin-top:28px}
+.hp-faq-cta a{display:inline-flex;gap:9px;align-items:center;justify-content:center;background:#1458b2;color:#fff;padding:13px 21px;border-radius:999px;font-size:14px;font-weight:800;transition:transform .2s,background .2s}
+.hp-faq-cta a:hover{transform:translateY(-2px);background:#0d408c}
+.hp-faq-cta p{font-size:12px;color:#607894;max-width:460px}
+@media(min-width:780px){.hp-faq-grid{grid-template-columns:1fr 1fr;gap:13px 16px}.hp-faq{padding:75px 24px 82px}}
+@media(prefers-reduced-motion:reduce){.hp-faq-grid details,.hp-faq-cta a{transition:none}}
+
 </style>
 </head>
 <body>
@@ -588,6 +614,22 @@ section{padding:44px 0 6px}
     </a></div></div></div>
 <div class="partner-bottom"><p>10 featured healthcare organizations · Original logos · Links to Slashcure profiles</p><button class="motion-btn" type="button" id="motion-btn" aria-pressed="false"><span id="motion-icon" aria-hidden="true">⏸</span><span id="motion-label">Pause animation</span></button></div>
 </section>
+
+<!-- HospitalPro / Slashcure: ten frequently asked questions -->
+<section id="hp-slashcure-faq" class="hp-faq" aria-labelledby="hp-faq-title"><div class="hp-faq-inner">
+ <div class="hp-faq-head"><span class="hp-faq-eyebrow">Useful Information for Patients &amp; Doctors</span><h2 id="hp-faq-title">Frequently Asked <span>Questions</span></h2><p>Learn how Slashcure helps patients find doctors and hospitals, and how healthcare professionals can manage their online profiles.</p></div>
+ <div class="hp-faq-grid"><details name="hospitalpro-faq"><summary>How can I find the best doctor in my city?</summary><p>Visit <a href="https://slashcure.com/" target="_blank" rel="noopener noreferrer">Slashcure.com</a> to explore doctors by city, medical specialty and hospital. Review qualifications, experience, clinic addresses and consultation schedules to choose a suitable doctor for your needs.</p></details>
+<details name="hospitalpro-faq"><summary>How do I check a doctor's OPD schedule and availability?</summary><p>Open the doctor's Slashcure profile to view their weekly clinic schedule and any available live updates. Where provided, status information can include availability at the clinic, delays, leave and closures. Confirm details with the clinic before travelling.</p></details>
+<details name="hospitalpro-faq"><summary>Can I explore hospitals and doctors in different cities of Pakistan?</summary><p>Yes. Slashcure features participating doctors, hospitals, medical centers and clinics across Pakistan. Search by city, specialty or healthcare organization to explore available profiles.</p></details>
+<details name="hospitalpro-faq"><summary>What professional information can doctors display on Slashcure?</summary><p>Doctors can maintain a professional profile with their specialty, qualifications, experience, designations, practice information, services and other relevant details. They can update the information supported by their account.</p></details>
+<details name="hospitalpro-faq"><summary>Can a doctor list multiple hospitals or clinics on one profile?</summary><p>Yes. Doctors who practise at more than one location can display multiple clinics or hospitals, with separate OPD days, consultation timings, clinic addresses and contact information.</p></details>
+<details name="hospitalpro-faq"><summary>Can doctors add phone numbers, WhatsApp and clinic locations?</summary><p>Yes. Slashcure profiles can show available telephone and WhatsApp contacts along with clinic addresses and location links, helping patients find the correct practice and contact the provider.</p></details>
+<details name="hospitalpro-faq"><summary>Can doctors publish OPD announcements and notifications?</summary><p>Doctors can use supported status and announcement features to share changes such as updated OPD schedules, leave, delayed arrival or clinic closure. Notification availability depends on the account and feature settings.</p></details>
+<details name="hospitalpro-faq"><summary>Does a doctor receive a unique QR code and digital visiting card?</summary><p>Each participating doctor can share a unique Slashcure profile QR code. The link or QR code can be placed on digital or printed visiting cards, posters and clinic displays so patients can open the doctor's profile quickly.</p></details>
+<details name="hospitalpro-faq"><summary>Can doctors share medical articles and educational videos?</summary><p>Where enabled, doctors can add medical articles, educational information and videos to their Slashcure profiles to help patients learn about their services and healthcare topics.</p></details>
+<details name="hospitalpro-faq"><summary>What is the difference between HospitalPro and Slashcure?</summary><p><strong>HospitalPro.online</strong> is a healthcare advertising and discovery website featuring promotional doctor and hospital listings. <strong>Slashcure.com</strong> is the linked healthcare platform where visitors can explore fuller profiles, clinic schedules, availability information and supported digital healthcare services.</p></details></div>
+ <div class="hp-faq-cta"><a href="https://slashcure.com/" target="_blank" rel="noopener noreferrer">Explore Slashcure.com <span aria-hidden="true">↗</span></a><p>Find doctors and hospitals, check participating providers' clinic details and access available profile information.</p></div>
+ </div></section>
 
 <div class="bar">
   <div class="wrap bar-in">
