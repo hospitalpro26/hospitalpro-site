@@ -771,6 +771,14 @@ var DOCTORS = [
    extra:{role:"Expert in lung and respiratory diseases", phone:"0335-2648572 (WhatsApp)", address:"Indus Hospital, near Shelton Bypass Road, Ghotki"},
    col:"#d6455d", ic:"🫁", photo:"images/dr-imran.jpg", url:"https://slashcure.com/consultant-pulmonologists/ghotki/dr-imran-ali"},
 
+  {n:"Dr. Naveed Ahmed Mahar", sp:"Consultant Urologist, Robotic & Kidney Transplant Surgeon", cat:"Urology",
+   deg:"MBBS, FCPS (Urology), FACS, MRCS, CHPE", loc:"Dr. Ziauddin Hospital, Sukkur",
+   tm:"Mon to Fri 10:00 AM to 4:00 PM · Sat & Sun Closed",
+   extra:{role:"Associate Professor & Section Head, Urology and Robotics", phone:"+92 315 3072169", experience:"9+ years", pmdc:"54827-S",
+     treats:"Urology, Urologist, Kidney Transplantation, Kidney Stones, RIRS, PCNL, Robot-assisted surgery, Reconstructive Urology, Prostate, Urinary Bladder, Mitrofanoff, Augmentation Cystoplasty, Varicocele, Male Infertility, Dialysis Access, AVF"},
+   col:"#087a91", ic:"🫘", photo:"https://d2ol7oe51mr4n9.cloudfront.net/user_3JaW7DlIJsrst0WwFMqIPBqWjtC/879a36ac-cb8d-49f2-bc32-dca020ac204d.png", url:"https://slashcure.com/urologists/sukkur/dr-naveed-ahmed-mahar",
+   hospitalpro:"https://hospitalpro.online/dr-naveed-ahmed-mahar.html"},
+
   {n:"Dr. Murk Channa", sp:"Gastroenterologist, Hepatologist & Consultant Physician", cat:"Gastroenterology",
    deg:"MBBS, FCPS", loc:"River City Hospital, Sukkur",
    tm:"Mon to Thu and Sat 2:00 PM to 5:00 PM",
@@ -787,7 +795,7 @@ var DOCTORS = [
 var SPECIALTIES = [
   ["General Medicine","🧑‍⚕️","#e1ecff"],["Cardiology","❤️","#ffe3e7"],["Pediatrics","🧒","#dff3ff"],
   ["Gynecology","🌸","#f3e5ff"],["Orthopedics","🦴","#e1ecff"],["Pulmonology","🫁","#dcf5ef"],
-  ["Dermatology","🧴","#ffeedb"],["Gastroenterology","🍽️","#ffe6dc"],["Physiotherapy","🏃","#dcf5ef"],
+  ["Dermatology","🧴","#ffeedb"],["Gastroenterology","🍽️","#ffe6dc"],["Urology","🫘","#dbf6f2"],["Physiotherapy","🏃","#dcf5ef"],
   ["Neurology","🧠","#ece4ff"],["More Specialties","⋯","#e8eef8"]
 ];
 
@@ -865,7 +873,7 @@ function dCard3(d){
     '<div class="od-stats">'+stats+'</div>'+
     '<div class="od-box"><div class="t"><i>📍</i>'+esc(d.loc)+'</div>'+times+'</div>'+
     '<div class="od-btns">'+(phone?'<a href="tel:'+phone+'">📞 Call Clinic</a>':'')+
-    '<a class="p" href="'+esc(d.url)+'">View Profile</a></div></article>';
+    (d.hospitalpro?'<a class="p" href="'+esc(d.hospitalpro)+'">HospitalPro Page</a>':'<a class="p" href="'+esc(d.url)+'">View Profile</a>')+'</div></article>';
 }
 
 function dCard2(d){
