@@ -71,6 +71,79 @@ footer{background:#082346;color:#d3e1eb;padding:38px 0;font-size:13px}.footer-in
 @media(max-width:950px){.links a:not(.btn){display:none}.hero-inner{padding:48px 35px}.portrait-wrap{min-height:390px}.portrait-oval{width:280px;height:350px}.portrait{width:250px;height:320px}.services{grid-template-columns:repeat(2,1fr)}.clinic-grid{grid-template-columns:repeat(2,1fr)}.clinic:last-child{grid-column:span 2}.banner{align-items:flex-start;flex-direction:column}}
 @media(max-width:700px){.wrap{padding:0 16px}.nav{min-height:67px}.brand{font-size:21px}.nav .btn{font-size:11px;padding:10px 13px}.crumb{font-size:11px}.hero{border-radius:20px}.hero-inner{grid-template-columns:1fr;gap:0;padding:33px 24px 27px}.hero h1{font-size:45px;letter-spacing:-1.8px}.hero .summary{font-size:14px}.portrait-wrap{min-height:325px;margin-top:25px}.portrait-oval{width:245px;height:290px}.portrait{width:225px;height:285px}.photo-caption{bottom:1px;font-size:11px;padding:8px 11px}.decoration{right:3px;top:9px;font-size:11px;padding:9px 12px}.metrics{grid-template-columns:1fr;gap:8px;margin:0 0 38px}.metric{padding:13px 18px}.metric b{font-size:18px}.two,.faq{grid-template-columns:1fr}.paper{padding:22px}.section{padding:17px 0 45px}.services{gap:10px}.service{padding:17px 14px}.clinic-grid{grid-template-columns:1fr}.clinic:last-child{grid-column:auto}.banner{padding:28px 23px;margin-bottom:45px}.banner .btn{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+
+/* --- HospitalPro medical motion: floating capsules, health orbits, scroll reveals --- */
+.hero{background-size:180% 180%;animation:murkGradient 16s ease-in-out infinite}
+.hero:before{animation:murkHalo 12s ease-in-out infinite alternate}
+.hero:after{animation:murkHalo 15s ease-in-out infinite alternate-reverse}
+.hero-inner>div:first-child{position:relative;z-index:3}
+.portrait-wrap{isolation:isolate}
+.portrait-oval{z-index:-1;animation:murkBlob 13s ease-in-out infinite alternate}
+.portrait{z-index:2;animation:murkPortrait 7s ease-in-out infinite;will-change:transform}
+.decoration{z-index:6;animation:murkFloatBadge 6s ease-in-out infinite}
+.photo-caption{z-index:6;animation:murkFloatBadge 6.7s ease-in-out -2s infinite}
+.medical-orbit{position:absolute;left:50%;top:50%;width:390px;height:390px;transform:translate(-50%,-50%);border:1px dashed #ffffff52;border-radius:50%;z-index:0;pointer-events:none}
+.medical-orbit:before{content:"";position:absolute;left:50%;top:50%;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 50% 0%,#aeffef 0 5px,transparent 6px);animation:murkOrbitSpin 20s linear infinite}
+.medical-orbit:after{content:"";position:absolute;inset:25px;border:1px solid #ffffff24;border-radius:50%}
+.med-capsule{--pill-angle:-24deg;position:absolute;width:109px;height:45px;display:flex;z-index:5;filter:drop-shadow(0 13px 16px #021c416b);transform:rotate(var(--pill-angle));animation:murkCapsule 6.5s ease-in-out infinite;pointer-events:none}
+.med-capsule .half{position:relative;width:50%;height:100%;overflow:hidden}
+.med-capsule .half:first-child{border-radius:45px 0 0 45px;background:linear-gradient(120deg,#ffccac,#ff976b 80%);border:1px solid #ffe5cf}
+.med-capsule .half:last-child{border-radius:0 45px 45px 0;background:linear-gradient(140deg,#fffef8,#dceff8);border:1px solid #fff}
+.med-capsule .half:first-child:after,.med-capsule .half:last-child:after{content:"";position:absolute;left:10%;right:12%;top:5px;height:10px;border-radius:100%;background:#ffffff77;filter:blur(2px)}
+.med-capsule.capsule-one{top:13%;left:0}
+.med-capsule.capsule-two{--pill-angle:28deg;bottom:16%;right:-5%;width:82px;height:35px;animation-delay:-3.2s;animation-duration:8s}
+.med-capsule.capsule-two .half:first-child{background:linear-gradient(120deg,#c1fff2,#51cdbf 85%);border-color:#e3fff8}
+.med-capsule.capsule-two .half:last-child{background:linear-gradient(150deg,#fffdfb,#dbeeff)}
+.medical-float{position:absolute;z-index:5;display:flex;gap:7px;align-items:center;background:#fffefaeb;border:1px solid #ffffffdd;backdrop-filter:blur(10px);color:#0c576f;padding:9px 12px;border-radius:13px;box-shadow:0 13px 30px #08294730;font-size:11px;font-weight:850;letter-spacing:.1px;white-space:nowrap;animation:murkFloatBadge 7.5s ease-in-out infinite;pointer-events:none}
+.medical-float .symbol{font-size:20px}
+.medical-float.float-gut{bottom:21%;left:-3%;animation-delay:-1.6s}
+.medical-float.float-liver{top:41%;right:-9%;animation-delay:-4s}
+.kicker:before{content:"";width:7px;height:7px;border-radius:50%;background:#a5ffdb;box-shadow:0 0 0 0 #a5ffdb85;animation:murkPulse 2.9s ease-out infinite}
+.facts .fact{transition:transform .25s ease,background .25s ease}
+.facts .fact:hover{transform:translateY(-3px);background:#ffffff2a}
+.service,.clinic,.metric{transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}
+.service:hover,.clinic:hover,.metric:hover{transform:translateY(-5px);border-color:#9fdcd5;box-shadow:0 20px 40px #0d3f5c17}
+.service i{animation:murkIconBob 5s ease-in-out infinite}
+.service:nth-child(2n) i{animation-delay:-2s}
+.service:nth-child(3n) i{animation-delay:-3.7s}
+.murk-motion-strip{margin:-11px 0 40px;padding:12px 0;background:#ebf6f7;border:1px solid #d8eaed;border-radius:100px;overflow:hidden;position:relative;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.murk-motion-track{display:flex;gap:22px;align-items:center;width:max-content;animation:murkMarquee 31s linear infinite}
+.murk-motion-strip:hover .murk-motion-track{animation-play-state:paused}
+.murk-motion-item{display:flex;align-items:center;gap:9px;color:#0d5970;font-size:12px;font-weight:850;white-space:nowrap}
+.murk-motion-item .m-dot{width:6px;height:6px;border-radius:50%;background:#f2a879}
+html.murk-js .murk-reveal{opacity:0;transform:translateY(21px);transition:opacity .75s ease,transform .75s cubic-bezier(.22,1,.36,1)}
+html.murk-js .murk-reveal.murk-shown{opacity:1;transform:translateY(0)}
+@keyframes murkGradient{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes murkHalo{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-38px,35px,0) scale(1.15)}}
+@keyframes murkBlob{from{transform:rotate(-7deg) scale(1);border-radius:48% 52% 32% 32%}to{transform:rotate(5deg) scale(1.045);border-radius:57% 43% 40% 32%}}
+@keyframes murkPortrait{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes murkCapsule{0%,100%{transform:translateY(0) rotate(var(--pill-angle))}50%{transform:translateY(-19px) rotate(calc(var(--pill-angle) + 7deg))}}
+@keyframes murkFloatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes murkOrbitSpin{to{transform:rotate(360deg)}}
+@keyframes murkIconBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes murkPulse{50%{box-shadow:0 0 0 8px #a5ffdb00}100%{box-shadow:0 0 0 0 #a5ffdb00}}
+@keyframes murkMarquee{to{transform:translateX(-50%)}}
+@media(max-width:950px){.medical-orbit{width:340px;height:340px}.medical-float.float-liver{right:0}.medical-float.float-gut{left:-2%}.med-capsule.capsule-two{right:0}}
+@media(max-width:700px){
+ .medical-orbit{width:295px;height:295px}
+ .med-capsule.capsule-one{width:78px;height:33px;left:0;top:12%}
+ .med-capsule.capsule-two{width:66px;height:28px;right:0;bottom:16%}
+ .medical-float{font-size:10px;padding:7px 9px;gap:4px}
+ .medical-float .symbol{font-size:16px}
+ .medical-float.float-gut{bottom:20%;left:0}
+ .medical-float.float-liver{right:0;top:43%}
+ .murk-motion-strip{border-radius:15px;margin:3px 0 27px;padding:11px 0}
+ .murk-motion-track{gap:18px}
+ .murk-motion-item{font-size:11px}
+}
+@media(max-width:400px){.medical-float.float-liver{top:43%;right:0}.medical-float.float-gut{bottom:11%;left:0}.decoration{max-width:158px;font-size:10px;line-height:1.3}.med-capsule.capsule-two{bottom:20%}}
+@media(prefers-reduced-motion:reduce){
+ .hero,.hero:before,.hero:after,.portrait,.portrait-oval,.decoration,.photo-caption,.med-capsule,.medical-orbit:before,.medical-float,.kicker:before,.service i,.murk-motion-track{animation:none!important}
+ .murk-motion-track{transform:none}
+ html.murk-js .murk-reveal{opacity:1!important;transform:none!important;transition:none!important}
+ .service,.clinic,.metric,.facts .fact{transition:none}
+}
+
 </style>
 </head>
 <body>
@@ -92,7 +165,13 @@ footer{background:#082346;color:#d3e1eb;padding:38px 0;font-size:13px}.footer-in
       </div>
       <div class="portrait-wrap" aria-label="Dr. Murk Channa portrait">
         <div class="portrait-oval" aria-hidden="true"></div>
+        <!-- HospitalPro medical motion elements v1 -->
+        <div class="medical-orbit" aria-hidden="true"></div>
         <div class="portrait"><span class="initials" aria-hidden="true">MC</span><img src="https://slashcure.com/doctors/hVjyqlKWQ7ORiFF39VIJ6cJkHKr1/photo?v=1789490021469" alt="Portrait of Dr. Murk Channa, consultant gastroenterologist in Sukkur" loading="eager" decoding="async" onerror="this.remove()"></div>
+        <div class="med-capsule capsule-one" aria-hidden="true"><span class="half"></span><span class="half"></span></div>
+        <div class="med-capsule capsule-two" aria-hidden="true"><span class="half"></span><span class="half"></span></div>
+        <div class="medical-float float-gut" aria-hidden="true"><span class="symbol">✚</span><span>Digestive Health</span></div>
+        <div class="medical-float float-liver" aria-hidden="true"><span class="symbol">✦</span><span>Liver Care</span></div>
         <div class="decoration">✦ Gastroenterology &amp; Liver Care</div>
         <div class="photo-caption">Sukkur, Sindh · Gastroenterology</div>
       </div>
@@ -103,6 +182,7 @@ footer{background:#082346;color:#d3e1eb;padding:38px 0;font-size:13px}.footer-in
     <div class="metric"><b>7+ years</b><small>Clinical experience listed on Slashcure</small></div>
     <div class="metric"><b><span class="mark">✦</span> JPMC Karachi</b><small>Previous clinical experience</small></div>
   </div>
+  <div class="murk-motion-strip" aria-label="Clinical focus: Digestive Health, Liver Care, Gastroenterology, Endoscopy and Hepatology"><div class="murk-motion-track" aria-hidden="true"><span class="murk-motion-item"><span class="m-dot"></span>✚ Digestive Health</span><span class="murk-motion-item"><span class="m-dot"></span>✦ Liver Care</span><span class="murk-motion-item"><span class="m-dot"></span>◈ Gastroenterology</span><span class="murk-motion-item"><span class="m-dot"></span>✚ Endoscopy</span><span class="murk-motion-item"><span class="m-dot"></span>✦ Hepatology</span><span class="murk-motion-item"><span class="m-dot"></span>◈ Sukkur, Sindh</span><span class="murk-motion-item"><span class="m-dot"></span>✚ Digestive Health</span><span class="murk-motion-item"><span class="m-dot"></span>✦ Liver Care</span><span class="murk-motion-item"><span class="m-dot"></span>◈ Gastroenterology</span><span class="murk-motion-item"><span class="m-dot"></span>✚ Endoscopy</span><span class="murk-motion-item"><span class="m-dot"></span>✦ Hepatology</span><span class="murk-motion-item"><span class="m-dot"></span>◈ Sukkur, Sindh</span></div></div>
   <section class="section" id="about" aria-labelledby="about-heading">
     <span class="eyebrow">About the Specialist</span>
     <h2 class="heading" id="about-heading">Experience focused on digestive and liver health</h2>
@@ -171,5 +251,20 @@ footer{background:#082346;color:#d3e1eb;padding:38px 0;font-size:13px}.footer-in
 </div>
 </main>
 <footer><div class="wrap footer-inner"><div><b>HospitalPro</b><span class="footer-sub">Healthcare profiles and promotions · Powered by <a href="https://slashcure.com" rel="noopener">Slashcure</a></span></div><div class="footer-links"><a href="/">Home</a><a href="/doctors-in-sukkur/">Doctors in Sukkur</a><a href="https://slashcure.com/gastroenterologists/sukkur/dr-murk-channa" rel="noopener">Dr. Murk on Slashcure</a></div><div>© 2026 HospitalPro</div></div></footer>
+<script>
+/* Progressive enhancement: reveal as sections enter the viewport. The page remains readable without JavaScript. */
+(function(){
+ if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+ var elements=document.querySelectorAll('.metric,.paper,.service,.clinic,.qa');
+ if(!elements.length) return;
+ document.documentElement.classList.add('murk-js');
+ var io=new IntersectionObserver(function(entries){
+   entries.forEach(function(entry){
+     if(entry.isIntersecting){entry.target.classList.add('murk-shown');io.unobserve(entry.target);}
+   });
+ },{threshold:0.06,rootMargin:'0px 0px -20px 0px'});
+ elements.forEach(function(el){el.classList.add('murk-reveal');io.observe(el);});
+})();
+</script>
 </body>
 </html>
