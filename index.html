@@ -862,9 +862,16 @@ var SPECIALTIES = [
 ];
 
 var CITIES = [
-  ["Karachi","#1f6fe0,#0b3d91"],["Lahore","#c2542f,#7a2a12"],["Sukkur","#2a8aa6,#145068"],["Khairpur","#b6842c,#6e4a10"],
-  ["Hyderabad","#c97a2c,#7f4310"],["Quetta","#7a6a52,#463a28"],["Peshawar","#b5532f,#6e2a14"],["Shikarpur","#a8812f,#6b4d12"],
-  ["Ghotki","#3c8c78,#1d5546"]
+  ["Karachi","#1f6fe0,#0b3d91","https://slashcure.com/doctors?type=all&loc=Karachi&q=" ],
+  ["Sukkur","#2a8aa6,#145068","https://slashcure.com/doctors?type=all&loc=Sukkur&q=" ],
+  ["Khairpur","#b6842c,#6e4a10","https://slashcure.com/doctors?type=all&loc=Khairpur&q=" ],
+  ["Ghotki","#3c8c78,#1d5546","https://slashcure.com/doctors?type=all&loc=Ghotki&q=" ],
+  ["Lahore","#c2542f,#7a2a12","https://slashcure.com/doctors?type=all&loc=Lahore&q=" ],
+  ["Shikarpur","#a8812f,#6b4d12","https://slashcure.com/doctors?type=all&loc=Shikarpur&q=" ],
+  ["Hyderabad","#c97a2c,#7f4310","https://slashcure.com/doctors?type=all&loc=Hyderabad&q=" ],
+  ["Larkana","#367da9,#153c72","https://slashcure.com/doctors?type=all&loc=Larkana&q=" ],
+  ["Quetta","#7a6a52,#463a28" ],
+  ["Peshawar","#b5532f,#6e2a14" ]
 ];
 
 var HOSPITALS = [
@@ -990,13 +997,15 @@ var hpSpecialtyCards=SPECIALTIES.map(function(s){
 sgrid.classList.add('hp-moving-specialties');
 sgrid.innerHTML='<div class="hp-specialty-track">'+hpSpecialtyCards+hpSpecialtyCards+'</div>';
 
-/* cities */
+/* cities: direct city-wise Slashcure directory links; keep local filter fallback for unlinked cities */
 document.getElementById('cgrid').innerHTML=CITIES.map(function(c){
-  return '<div class="ct" data-city="'+esc(c[0])+'" style="--g:linear-gradient(135deg,'+c[1]+')"><span>'+esc(c[0])+'</span></div>';
-}).join('')+'<div class="ct more-c"><span>📍</span><span>More Cities</span></div>';
+  var title='Find doctors in '+esc(c[0])+' on Slashcure';
+  if(c[2])return '<a class="ct" href="'+esc(c[2])+'" aria-label="'+title+'" style="--g:linear-gradient(135deg,'+c[1]+')"><span>'+esc(c[0])+'</span></a>';
+  return '<button type="button" class="ct" data-city="'+esc(c[0])+'" style="--g:linear-gradient(135deg,'+c[1]+');border:0;font:inherit"><span>'+esc(c[0])+'</span></button>';
+}).join('')+'<a class="ct more-c" href="https://slashcure.com/doctors?type=all" aria-label="Browse more cities on Slashcure"><span>📍</span><span>More Cities</span></a>';
 document.getElementById('cgrid').addEventListener('click',function(e){
-  var c=e.target.closest('.ct'); if(!c||!c.dataset.city) return;
-  q.value=c.dataset.city; term=q.value.toLowerCase(); cat=''; render();
+  var c=e.target.closest('.ct[data-city]');if(!c)return;
+  q.value=c.dataset.city;term=q.value.toLowerCase();cat='';render();
   document.getElementById('doctors').scrollIntoView({behavior:'smooth'});
 });
 
