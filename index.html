@@ -3,8 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HospitalPro | Discover Trusted Hospitals and Doctors Across Pakistan</title>
-<meta name="description" content="HospitalPro is a promotional platform by Slashcure connecting you to quality healthcare across Pakistan.">
+<title>Specialist Doctors in Sukkur &amp; Khairpur, Sindh | HospitalPro</title>
+<meta name="description" content="Explore featured specialist doctors in Sukkur and Khairpur, Sindh: urologists, cardiologists, gastroenterologists, paediatric surgeons, neurophysicians and more. View clinic details and visit official Slashcure doctor profiles.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Find Specialist Doctors in Sukkur &amp; Khairpur | HospitalPro">
+<meta property="og:description" content="Discover doctors in Sukkur and Khairpur, Sindh, including urology, neurology and paediatric surgery specialists, with links to their Slashcure profiles.">
+<meta property="og:url" content="https://hospitalpro.online/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://hospitalpro.online/">
 <style>
 :root{
   --blue:#1558d6; --blue-d:#0b2f7a; --blue-dd:#071f55; --sky:#e8f1fe; --sky2:#d7e7fd;
@@ -569,7 +575,7 @@ section{padding:44px 0 6px}
 
   <section id="doctors">
     <div class="sh">
-      <div><h2>Featured Doctors</h2><p>Meet experienced doctors from trusted hospitals. Click to view full profile on Slashcure.</p></div>
+      <div><h2>Featured Specialist Doctors in Sukkur &amp; Khairpur, Sindh</h2><p>Explore urologists, cardiologists, gastroenterologists, paediatric surgeons, neurologists and other medical specialists serving Sukkur and nearby Khairpur. View doctor profiles, OPD clinic information and contact details on Slashcure.</p></div>
       <a class="more" href="https://slashcure.com">View All Doctors →</a>
     </div>
     <!-- Featured HospitalPro page: Dr. Murk Channa -->
@@ -761,6 +767,17 @@ var SLASHCURE = "https://slashcure.com";
 /* Each doctor: n=name, sp=title, cat=specialty filter, deg=degrees, loc=main place (shown on card),
    tm=timings (shown on card), extra=more details kept for the profile pages, url=Slashcure profile link */
 var DOCTORS = [
+  {n:"Dr. Habibullah Maitlo", sp:"Consultant Paediatric Surgeon", cat:"Paediatric Surgery",
+   deg:"MBBS, FCPS (Paediatric Surgery)", loc:"Dr. Ziauddin Hospital, Sukkur",
+   tm:"Monday to Saturday 10:00 AM to 4:00 PM",
+   extra:{phone:"03183526429",treats:"Paediatric surgery, surgical conditions in children and infants"},
+   col:"#e89c65", ic:"🧸", photo:"", url:"https://slashcure.com/paediatric-surgeons/sukkur/dr-habibullah-maitlo"},
+  {n:"Dr. Kanwal Aijaz", sp:"Consultant Neurophysician & Neurologist", cat:"Neurology",
+   deg:"MBBS, FCPS (Neurology)", loc:"Health Care Clinic, Khairpur",
+   tm:"Monday to Saturday 4:00 PM to 8:00 PM",
+   extra:{phone:"03003265127",experience:"5+ years",treats:"Headache, migraine, epilepsy, stroke, neuropathy and other neurological disorders"},
+   col:"#5172cb", ic:"🧠", photo:"", url:"https://slashcure.com/neurophysicians/khairpur/dr-kanwal-aijaz"},
+
   {n:"Dr. Aneel Ahmed Ghanghro", sp:"Cardiologist & Advanced Cardiac Imaging Specialist", cat:"Cardiology",
    deg:"MBBS, FCPS Cardiology, FESC (UK), FACC (USA)", loc:"Hira Medical Centre, Sukkur",
    tm:"Mon to Sat 3:30 PM to 8:00 PM · Sun 11:00 AM to 3:00 PM",
@@ -915,7 +932,7 @@ function dCard2(d){
   var phone=d.extra&&d.extra.phone?d.extra.phone.replace(/[^\d+]/g,''):'';
   return '<article class="dr" style="--c1:'+d.col+'">'+
     '<div class="dr-top" data-ic="'+d.ic+'"><span class="dr-tag">'+esc(d.cat)+'</span></div>'+
-    '<div class="dr-av">'+initials(d.n)+'<img src="'+esc(d.photo)+'" alt="'+esc(d.n)+'" loading="lazy" onerror="this.remove()"></div>'+
+    '<div class="dr-av">'+initials(d.n)+(d.photo?'<img src="'+esc(d.photo)+'" alt="'+esc(d.n)+'" loading="lazy" onerror="this.remove()">':'')+'</div>'+
     '<div class="dr-body"><h3>'+esc(d.n)+'</h3><div class="dr-sp">'+esc(d.sp)+'</div><div class="dr-deg">'+esc(d.deg)+'</div>'+
     '<div class="dr-info">'+
       '<div class="dr-row"><i>📍</i><div><b>'+esc(d.loc)+'</b></div></div>'+
@@ -938,7 +955,7 @@ function render(){
   var hs=HOSPITALS.filter(function(h){return !cat&&match([h.n,h.loc,h.tags.join(' ')].join(' '))||(cat&&match(h.n+' '+h.loc)&&false)});
   if(!cat && !term && ds.length){
     var featured=ds.slice().sort(function(a,b){
-      var order=['Dr. Naveed Ahmed Mahar','Dr. Murk Channa','Dr. Aneel Ahmed Ghanghro','Dr. Imran Ali Kalwar','Dr. Komal Kandhir'];
+      var order=['Dr. Naveed Ahmed Mahar','Dr. Murk Channa','Dr. Aneel Ahmed Ghanghro','Dr. Habibullah Maitlo','Dr. Kanwal Aijaz','Dr. Imran Ali Kalwar','Dr. Komal Kandhir'];
       var ai=order.indexOf(a.n),bi=order.indexOf(b.n);
       return (ai<0?99:ai)-(bi<0?99:bi);
     });
