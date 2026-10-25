@@ -503,6 +503,14 @@ section{padding:44px 0 6px}
 .dr-av-specialty{font-size:0;background:radial-gradient(circle at 28% 25%,rgba(255,255,255,.52),transparent 45%),linear-gradient(145deg,color-mix(in srgb,var(--c1) 35%,white),var(--c1));}
 .dr-specialty-icon{font-size:43px;line-height:1;display:grid;place-items:center;width:100%;height:100%;filter:drop-shadow(0 3px 4px rgba(0,0,0,.18));}
 .dr-av-specialty img{z-index:1;}
+
+/* City guide navigation supporting local healthcare searches */
+.hp-city-guides{margin-top:20px;padding:24px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(120deg,#f6f9fe,#eaf2ff)}
+.hp-city-guides h3{font-size:19px;color:var(--blue-dd);margin-bottom:5px}
+.hp-city-guides p{font-size:14px;color:var(--muted);margin:0 0 15px}
+.hp-city-links{display:flex;gap:9px;flex-wrap:wrap}
+.hp-city-links a{display:inline-block;padding:10px 14px;background:#fff;color:var(--blue-d);font-size:13px;font-weight:700;border:1px solid var(--sky2);border-radius:11px;transition:transform .15s}
+.hp-city-links a:hover{transform:translateY(-2px);border-color:var(--blue)}
 </style>
 <!-- Publication refresh: HospitalPro homepage and Sukkur City FAQ updates, 2026-10-18. -->
 </head>
@@ -638,6 +646,17 @@ section{padding:44px 0 6px}
   <section id="cities">
     <div class="sh"><div><h2>Popular Cities</h2><p>Explore hospitals and doctors in major cities.</p></div></div>
     <div class="cgrid" id="cgrid"></div>
+    <nav class="hp-city-guides" aria-label="HospitalPro city doctor directories">
+      <h3>Explore HospitalPro Doctor Guides by City</h3>
+      <p>Browse city-specific doctor profiles and clinic information in Sindh.</p>
+      <div class="hp-city-links">
+        <a href="/doctors-in-sukkur/">Doctors in Sukkur</a>
+        <a href="/doctors-in-khairpur/">Doctors in Khairpur</a>
+        <a href="/doctors-in-ghotki/">Doctors in Ghotki</a>
+        <a href="/doctors-in-larkana/">Doctors in Larkana</a>
+        <a href="/doctors-in-hyderabad/">Doctors in Hyderabad</a>
+      </div>
+    </nav>
   </section>
 
   <section id="hospitals">
@@ -796,7 +815,7 @@ var DOCTORS = [
    deg:"MBBS, FCPS Cardiology, FESC (UK), FACC (USA)", loc:"Hira Medical Centre, Sukkur",
    tm:"Mon to Sat 3:30 PM to 8:00 PM · Sun 11:00 AM to 3:00 PM",
    extra:{role:"Assistant Professor of Cardiology", phone:"+92 315 8593769"},
-   col:"#e8435a", ic:"❤️", photo:"images/dr-aneel.jpg", url:"https://slashcure.com/consultant-cardiologists/sukkur/dr-aneel-ahmed-ghanghro", hospitalpro:"https://hospitalpro.online/dr-aneel-ahmed-ghanghro.html"},
+   col:"#e8435a", ic:"❤️", photo:"", url:"https://slashcure.com/consultant-cardiologists/sukkur/dr-aneel-ahmed-ghanghro", hospitalpro:"https://hospitalpro.online/dr-aneel-ahmed-ghanghro.html"},
 
   {n:"Dr. Ashfaque Ali Baloch", sp:"Consultant Physician", cat:"General Medicine",
    deg:"MBBS, RMP, MD (Internal Medicine)", loc:"Ali Medical Center & Bismillah Clinic, Khairpur Mirs",
@@ -806,19 +825,19 @@ var DOCTORS = [
        {name:"Ali Medical Center", address:"Chandia Mor, opposite Chandia petrol pump, Khairpur Mirs", timings:"Everyday 4:00 PM to 8:00 PM"},
        {name:"Bismillah Clinic", address:"Technical College Road, Janwari Village, Khairpur", timings:"Everyday 3:00 PM to 5:00 PM"}],
      treats:"Stomach and acid disorders, liver diseases, bowel and digestive problems, kidney and electrolyte disorders, diabetes and metabolic issues, hypertension and heart risk management, general medical care"},
-   col:"#12a38a", ic:"🩺", photo:"images/dr-ashfaque.jpg", url:"https://slashcure.com/general-physicians/khairpur/dr-ashfaque-ali-baloch", hospitalpro:"https://hospitalpro.online/dr-ashfaque-ali-baloch.html"},
+   col:"#12a38a", ic:"🩺", photo:"", url:"https://slashcure.com/general-physicians/khairpur/dr-ashfaque-ali-baloch", hospitalpro:"https://hospitalpro.online/dr-ashfaque-ali-baloch.html"},
 
   {n:"Dr. Komal Kandhir", sp:"Consultant Physiotherapist (DPT)", cat:"Physiotherapy",
    deg:"DPT · PPA S-8197", loc:"Mustafai Trust Hospital, Sukkur",
    tm:"Everyday 3:00 PM to 7:00 PM",
    extra:{address:"Mustafai Trust Hospital, near DHO Office, opposite Civil Hospital, Sukkur", treats:"Pain relief, improved mobility, stronger function, better quality of life. Manual therapy, rehabilitation, therapeutic exercises"},
-   col:"#12a38a", ic:"🏃", photo:"images/dr-komal.jpg", url:"https://slashcure.com/consultant-physiotherapists/sukkur/dr-komal-kandhir-pt", hospitalpro:"https://hospitalpro.online/dr-komal-kandhir.html"},
+   col:"#12a38a", ic:"🏃", photo:"", url:"https://slashcure.com/consultant-physiotherapists/sukkur/dr-komal-kandhir-pt", hospitalpro:"https://hospitalpro.online/dr-komal-kandhir.html"},
 
   {n:"Dr. Imran Ali Kalwar", sp:"Consultant Pulmonologist", cat:"Pulmonology",
    deg:"MBBS, FCPS", loc:"Indus Hospital, Ghotki",
    tm:"Mon to Sat 3:00 PM to 9:00 PM",
    extra:{role:"Expert in lung and respiratory diseases", phone:"0335-2648572 (WhatsApp)", address:"Indus Hospital, near Shelton Bypass Road, Ghotki"},
-   col:"#d6455d", ic:"🫁", photo:"images/dr-imran.jpg", url:"https://slashcure.com/consultant-pulmonologists/ghotki/dr-imran-ali", hospitalpro:"https://hospitalpro.online/dr-imran-ali-kalwar.html"},
+   col:"#d6455d", ic:"🫁", photo:"", url:"https://slashcure.com/consultant-pulmonologists/ghotki/dr-imran-ali", hospitalpro:"https://hospitalpro.online/dr-imran-ali-kalwar.html"},
 
   {n:"Dr. Naveed Ahmed Mahar", sp:"Consultant Urologist, Robotic & Kidney Transplant Surgeon", cat:"Urology",
    deg:"MBBS, FCPS (Urology), FACS, MRCS, CHPE", loc:"Dr. Ziauddin Hospital, Sukkur",
@@ -832,13 +851,13 @@ var DOCTORS = [
    deg:"MBBS, FCPS", loc:"River City Hospital, Sukkur",
    tm:"Mon to Thu and Sat 2:00 PM to 5:00 PM",
    extra:{phone:"03140081235", treats:"Stomach and digestive disorders, liver diseases and hepatitis, endoscopy (diagnostic and therapeutic), general medical consultation"},
-   col:"#e48a26", ic:"🍽️", photo:"images/dr-murk.jpg", url:"https://slashcure.com/gastroenterologists/sukkur/dr-murk-channa", hospitalpro:"https://hospitalpro.online/dr-murk-channa.html"},
+   col:"#e48a26", ic:"🍽️", photo:"", url:"https://slashcure.com/gastroenterologists/sukkur/dr-murk-channa", hospitalpro:"https://hospitalpro.online/dr-murk-channa.html"},
 
   {n:"Dr. Tofique Ahmed Kamboh", sp:"Consultant Physician", cat:"General Medicine",
    deg:"MBBS, FCPS", loc:"Red Crescent Hospital, Sukkur",
    tm:"Every Sat 4:00 PM to 8:00 PM · Every Sun 12:00 PM to 7:00 PM",
    extra:{role:"Expert care for adult medicine", treats:"Digestive diseases, respiratory diseases, hypertension and cardio-metabolic care, liver diseases, general adult medicine"},
-   col:"#1f7fe0", ic:"🩺", photo:"images/dr-tofique.jpg", url:"https://slashcure.com/consultant-physicians/sukkur/dr-tofique-ahmed-kamboh", hospitalpro:"https://hospitalpro.online/dr-tofique-ahmed-kamboh.html"}
+   col:"#1f7fe0", ic:"🩺", photo:"", url:"https://slashcure.com/consultant-physicians/sukkur/dr-tofique-ahmed-kamboh", hospitalpro:"https://hospitalpro.online/dr-tofique-ahmed-kamboh.html"}
 ];
 
 var SPECIALTIES = [
