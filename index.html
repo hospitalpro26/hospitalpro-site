@@ -495,6 +495,11 @@ section{padding:44px 0 6px}
 .hp-doctor-track .dr{transition:box-shadow .2s,transform .2s}
 @media(max-width:600px){.hp-doctor-track>.dr{width:265px;flex-basis:265px}.hp-specialty-track>.sc{min-width:130px;flex-basis:130px}}
 @media(prefers-reduced-motion:reduce){.hp-doctor-track,.hp-specialty-track{animation:none;max-width:100%;overflow-x:auto}.hp-moving-doctors,.hp-moving-specialties{overflow-x:auto}}
+
+/* Specialty-specific profile placeholders, retaining photographs where available */
+.dr-av-specialty{font-size:0;background:radial-gradient(circle at 28% 25%,rgba(255,255,255,.52),transparent 45%),linear-gradient(145deg,color-mix(in srgb,var(--c1) 35%,white),var(--c1));}
+.dr-specialty-icon{font-size:43px;line-height:1;display:grid;place-items:center;width:100%;height:100%;filter:drop-shadow(0 3px 4px rgba(0,0,0,.18));}
+.dr-av-specialty img{z-index:1;}
 </style>
 <!-- Publication refresh: HospitalPro homepage and Sukkur City FAQ updates, 2026-10-18. -->
 </head>
@@ -932,7 +937,7 @@ function dCard2(d){
   var phone=d.extra&&d.extra.phone?d.extra.phone.replace(/[^\d+]/g,''):'';
   return '<article class="dr" style="--c1:'+d.col+'">'+
     '<div class="dr-top" data-ic="'+d.ic+'"><span class="dr-tag">'+esc(d.cat)+'</span></div>'+
-    '<div class="dr-av">'+initials(d.n)+(d.photo?'<img src="'+esc(d.photo)+'" alt="'+esc(d.n)+'" loading="lazy" onerror="this.remove()">':'')+'</div>'+
+    '<div class="dr-av dr-av-specialty" role="img" aria-label="'+esc(d.cat)+' specialty profile icon"><span class="dr-specialty-icon" aria-hidden="true">'+d.ic+'</span>'+(d.photo?'<img src="'+esc(d.photo)+'" alt="'+esc(d.n)+'" loading="lazy" onerror="this.remove()">':'')+'</div>'+
     '<div class="dr-body"><h3>'+esc(d.n)+'</h3><div class="dr-sp">'+esc(d.sp)+'</div><div class="dr-deg">'+esc(d.deg)+'</div>'+
     '<div class="dr-info">'+
       '<div class="dr-row"><i>📍</i><div><b>'+esc(d.loc)+'</b></div></div>'+
