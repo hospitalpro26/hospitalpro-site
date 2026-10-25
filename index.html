@@ -544,6 +544,19 @@ section{padding:44px 0 6px}
 @keyframes scDrawS{to{stroke-dashoffset:0}}@keyframes scHeartIn{to{opacity:1}}@keyframes scLevitate{50%{transform:translateY(-12px) rotate(1deg)}}@keyframes scRim{to{transform:rotate(360deg)}}@keyframes scOrbitBg{to{transform:rotate(342deg)}}@keyframes scBGFloat{50%{transform:translate(30px,-13px) rotate(-10deg)}}@keyframes scEkg{to{background-position:200% 0}}
 @media(max-width:850px){.sc-showcase-inner{grid-template-columns:1fr;text-align:center}.sc-copy{order:2}.sc-art{order:1;min-height:320px}.sc-logo-wrap{width:min(72%,310px)}.sc-description{margin-left:auto;margin-right:auto}.sc-actions,.sc-values{justify-content:center}.sc-line{letter-spacing:3px}.sc-showcase{padding:60px 20px 70px}.sc-neon-s{left:15%;top:7%}}
 @media(prefers-reduced-motion:reduce){.sc-showcase *, .sc-showcase:before,.sc-showcase:after{animation:none!important;transition:none!important}.sc-s-stroke{stroke-dashoffset:0!important}.sc-heart,.sc-head{opacity:1!important}}
+
+/* Original Slashcure identity: static logo, only the ring rotates */
+.sc-simple{padding:72px 20px;background:radial-gradient(circle at center,#143b71 0%,#081d41 70%,#06152e 100%);color:#fff;text-align:center;scroll-margin-top:85px}
+.sc-simple-inner{max-width:720px;margin:auto;display:flex;align-items:center;flex-direction:column;gap:16px}
+.sc-simple-kicker{margin:0;font-size:12px;text-transform:uppercase;letter-spacing:2.5px;color:#c0d9ff;font-weight:800}
+.sc-simple-logo{display:block;width:220px;height:220px;position:relative;border-radius:50%;margin:13px 0 10px}
+.sc-simple-logo img{position:absolute;inset:10px;width:200px;height:200px;object-fit:cover;border-radius:50%;z-index:1;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.sc-simple-ring{position:absolute;inset:0;border-radius:50%;border:5px solid transparent;border-top-color:#ef3153;border-right-color:#286de2;border-bottom-color:#ef3153;border-left-color:#286de2;box-shadow:0 0 20px rgba(42,117,225,.25);animation:scSimpleSpin 6s linear infinite}
+.sc-simple h2{margin:0;font-size:clamp(29px,5vw,43px);letter-spacing:-1px;color:#fff}
+.sc-simple p:not(.sc-simple-kicker){margin:0;color:#c7dbf4;letter-spacing:1px}
+.sc-simple-link{color:#fff;background:#1965d8;padding:12px 22px;border-radius:999px;font-weight:750;margin-top:5px}
+@keyframes scSimpleSpin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.sc-simple-ring{animation:none}}
 </style>
 <!-- Publication refresh: HospitalPro homepage and Sukkur City FAQ updates, 2026-10-18. -->
 </head>
@@ -726,46 +739,19 @@ section{padding:44px 0 6px}
   </section>
 </main>
 
-<!-- Slashcure animated brand showcase, asset-free and mobile responsive -->
-<section class="sc-showcase" id="slashcure-finale" aria-labelledby="sc-showcase-title">
- <div class="sc-showcase-bg" aria-hidden="true"></div>
- <div class="sc-neon-s" aria-hidden="true">S</div>
- <div class="sc-showcase-inner">
-  <div class="sc-copy">
-   <span class="sc-eyebrow">HospitalPro presents · Powered by Slashcure</span>
-   <h2 id="sc-showcase-title"><span class="sc-word-white">Slash</span><span class="sc-word-red">cure</span><span class="sc-word-dot">.com</span></h2>
-   <p class="sc-line">Health Care, Connected</p>
-   <p class="sc-description">Connecting patients with doctors and hospitals across Pakistan. Discover professionals, explore clinic details, and visit their Slashcure profiles.</p>
-   <div class="sc-actions"><a href="https://slashcure.com/" class="sc-primary">Explore Slashcure <span aria-hidden="true">↗</span></a><a href="/#doctors" class="sc-secondary">Explore Doctors</a></div>
-   <div class="sc-values" aria-label="Slashcure highlights"><span>✦ Find Doctors</span><span>✚ Hospitals</span><span>♡ Connected Care</span></div>
-  </div>
-  <div class="sc-art">
-    <div class="sc-orbit sc-orbit-one" aria-hidden="true"></div><div class="sc-orbit sc-orbit-two" aria-hidden="true"></div>
-    <div class="sc-logo-wrap"><a href="https://slashcure.com/" aria-label="Visit Slashcure.com — Health Care, Connected"><svg class="sc-identity" viewBox="0 0 520 520" role="img" aria-label="Animated Slashcure heart and S identity" xmlns="http://www.w3.org/2000/svg">
-<defs>
- <linearGradient id="scRed" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff354e"/><stop offset="1" stop-color="#df0026"/></linearGradient>
- <linearGradient id="scBlue" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#104592"/><stop offset="1" stop-color="#031e51"/></linearGradient>
- <linearGradient id="scS" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#ff1f49"/><stop offset=".52" stop-color="#fff"/><stop offset="1" stop-color="#1261ca"/></linearGradient>
- <filter id="scGlow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-</defs>
-<circle class="sc-logo-disc" cx="260" cy="260" r="222" fill="#fff"/>
-<circle class="sc-rim sc-rim-blue" cx="260" cy="260" r="232" fill="none" stroke="url(#scBlue)" stroke-width="15" stroke-dasharray="720 760"/>
-<circle class="sc-rim sc-rim-red" cx="260" cy="260" r="232" fill="none" stroke="url(#scRed)" stroke-width="15" stroke-dasharray="720 760" stroke-dashoffset="-720"/>
-<g class="sc-heart">
-  <path d="M253 403C210 367 120 294 112 220c-7-64 43-113 102-108 33 3 53 18 72 44-40-30-73-25-95-7-36 28-32 78-8 112 17 24 44 50 72 72" fill="none" stroke="url(#scRed)" stroke-width="25" stroke-linecap="round"/>
-  <path d="M285 403c40-27 116-85 141-146 25-61-2-123-52-140-38-13-74 1-101 35 54-18 92 3 105 39 18 51-25 108-99 167" fill="none" stroke="url(#scBlue)" stroke-width="25" stroke-linecap="round"/>
-  <path d="M172 263h54l14-31 17 70 20-43h24l14 25 13-25h35" fill="none" stroke="#0b346e" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-<path class="sc-s-stroke sc-s-halo" d="M349 106C299 129 241 174 227 222s78 53 42 107c-15 23-52 47-104 81" fill="none" stroke="#6ed0ff" stroke-width="27" stroke-linecap="round" filter="url(#scGlow)" opacity=".68"/>
-<path class="sc-s-stroke sc-s-core" d="M349 106C299 129 241 174 227 222s78 53 42 107c-15 23-52 47-104 81" fill="none" stroke="url(#scS)" stroke-width="17" stroke-linecap="round"/>
-<circle class="sc-head" cx="298" cy="132" r="25" fill="url(#scBlue)"/>
-</svg></a></div>
-    <div class="sc-logo-caption">SLASHCURE <span>·</span> HEALTH CARE, CONNECTED</div>
-  </div>
+<!-- Original Slashcure logo with single rotating ring -->
+<section class="sc-simple" id="slashcure-finale" aria-labelledby="sc-simple-title">
+ <div class="sc-simple-inner">
+  <p class="sc-simple-kicker">Powered by Slashcure</p>
+  <a class="sc-simple-logo" href="https://slashcure.com/" aria-label="Visit Slashcure.com">
+    <span class="sc-simple-ring" aria-hidden="true"></span>
+    <img width="200" height="200" src="data:image/webp;base64,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" alt="Original Slashcure logo" loading="lazy" decoding="async">
+  </a>
+  <h2 id="sc-simple-title">Slashcure.com</h2>
+  <p>Health Care, Connected</p>
+  <a class="sc-simple-link" href="https://slashcure.com/">Visit Slashcure.com ↗</a>
  </div>
- <div class="sc-pulse" aria-hidden="true"></div>
 </section>
-
 <!-- Featured Healthcare Partners: approved moving logo showcase -->
 <section class="partners-section" id="featured-healthcare-partners" aria-labelledby="partners-title">
 <div class="partner-heading"><span class="section-eyebrow">Our Healthcare Network</span><h2 id="partners-title">Featured <span>Healthcare Partners</span></h2><p>Explore healthcare organizations featured on HospitalPro. Select a logo to visit its hospital or healthcare profile on Slashcure.</p><div class="partner-rule"></div></div>
