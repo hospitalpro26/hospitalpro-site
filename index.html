@@ -473,6 +473,22 @@ section{padding:44px 0 6px}
 .murk-actions a:hover{filter:brightness(.94)}
 @media(max-width:680px){.murk-feature{grid-template-columns:1fr;justify-items:start;gap:12px;padding:23px 21px}.murk-portrait{width:118px;height:125px;border-width:4px}.murk-portrait span{font-size:30px}.murk-feature h3{font-size:27px}.murk-actions a{flex:1;min-width:185px}.murk-feature p{font-size:12px}}
 
+
+/* HospitalPro 2026: featured doctors and specialties moving right to left. Footer and lower page remain untouched. */
+@keyframes hpScrollLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.hp-moving-doctors,.hp-moving-specialties{display:block!important;overflow:hidden;position:relative;max-width:100%}
+.hp-doctor-track,.hp-specialty-track{display:flex;width:max-content;animation:hpScrollLeft 48s linear infinite;align-items:stretch}
+.hp-doctor-track{gap:0;padding:12px 0 20px}
+.hp-doctor-track>.dr{width:290px;flex:0 0 290px;margin-right:16px;min-width:0}
+.hp-doctor-track .dr-info{margin-top:auto}
+.hp-specialty-track{gap:0;padding:8px 0 14px;animation-duration:32s}
+.hp-specialty-track>.sc{flex:0 0 150px;min-width:150px;margin-right:12px}
+.hp-moving-doctors:hover .hp-doctor-track,.hp-moving-doctors:focus-within .hp-doctor-track,
+.hp-moving-specialties:hover .hp-specialty-track,.hp-moving-specialties:focus-within .hp-specialty-track{animation-play-state:paused}
+.hp-doctor-actions{padding:12px 0 6px;text-align:center}
+.hp-doctor-track .dr{transition:box-shadow .2s,transform .2s}
+@media(max-width:600px){.hp-doctor-track>.dr{width:265px;flex-basis:265px}.hp-specialty-track>.sc{min-width:130px;flex-basis:130px}}
+@media(prefers-reduced-motion:reduce){.hp-doctor-track,.hp-specialty-track{animation:none;max-width:100%;overflow-x:auto}.hp-moving-doctors,.hp-moving-specialties{overflow-x:auto}}
 </style>
 <!-- Publication refresh: HospitalPro homepage and Sukkur City FAQ updates, 2026-10-18. -->
 </head>
@@ -546,6 +562,11 @@ section{padding:44px 0 6px}
   </section>
 
 
+  <section id="specialties">
+    <div class="sh"><div><h2>Browse by Specialty</h2><p>Find doctors in your required specialty.</p></div></div>
+    <div class="sgrid" id="sgrid"></div>
+  </section>
+
   <section id="doctors">
     <div class="sh">
       <div><h2>Featured Doctors</h2><p>Meet experienced doctors from trusted hospitals. Click to view full profile on Slashcure.</p></div>
@@ -598,10 +619,7 @@ section{padding:44px 0 6px}
     <div class="dlist" id="dgrid"></div>
   </section>
 
-  <section id="specialties">
-    <div class="sh"><div><h2>Browse by Specialty</h2><p>Find doctors in your required specialty.</p></div></div>
-    <div class="sgrid" id="sgrid"></div>
-  </section>
+
 
   <section id="cities">
     <div class="sh"><div><h2>Popular Cities</h2><p>Explore hospitals and doctors in major cities.</p></div></div>
@@ -902,14 +920,28 @@ function match(text){return !term || text.toLowerCase().indexOf(term)>-1}
 function render(){
   var ds=DOCTORS.filter(function(d){return (!cat||d.cat===cat)&&match([d.n,d.sp,d.cat,d.loc,d.deg,(d.extra&&d.extra.treats)||''].join(' '))});
   var hs=HOSPITALS.filter(function(h){return !cat&&match([h.n,h.loc,h.tags.join(' ')].join(' '))||(cat&&match(h.n+' '+h.loc)&&false)});
-  dgrid.innerHTML=ds.length?withAds(ds)+SL_AD:'<div class="empty" style="display:block">No doctors match that search yet. Try another word or clear the filter.</div>';
+  if(!cat && !term && ds.length){
+    var featured=ds.slice().sort(function(a,b){
+      var order=['Dr. Naveed Ahmed Mahar','Dr. Murk Channa','Dr. Aneel Ahmed Ghanghro','Dr. Imran Ali Kalwar','Dr. Komal Kandhir'];
+      var ai=order.indexOf(a.n),bi=order.indexOf(b.n);
+      return (ai<0?99:ai)-(bi<0?99:bi);
+    });
+    var cards=featured.map(dCard2).join('');
+    dgrid.classList.add('hp-moving-doctors');
+    dgrid.innerHTML='<div class="hp-doctor-track">'+cards+cards+'</div><div class="hp-doctor-actions"><a class="btn" href="https://slashcure.com/doctors">Explore more doctors on Slashcure →</a></div>';
+  }else{
+    dgrid.classList.remove('hp-moving-doctors');
+    dgrid.innerHTML=ds.length?withAds(ds)+SL_AD:'<div class="empty" style="display:block">No doctors match that search yet. Try another word or clear the filter.</div>';
+  }
   hgrid.innerHTML=(cat?HOSPITALS.filter(function(){return false}):hs).length?hs.map(hCard).join(''):
     (cat?HOSPITALS.map(hCard).join(''):'<div class="empty" style="display:block">No hospitals match that search.</div>');
 }
 
 /* specialties */
 var sgrid=document.getElementById('sgrid');
-sgrid.innerHTML=SPECIALTIES.map(function(s){return '<button class="sc" data-c="'+esc(s[0])+'" style="--bgc:'+s[2]+'"><i>'+s[1]+'</i>'+esc(s[0])+'</button>'}).join('');
+var hpSpecialtyCards=SPECIALTIES.map(function(s){return '<button class="sc" data-c="'+esc(s[0])+'" style="--bgc:'+s[2]+'"><i>'+s[1]+'</i>'+esc(s[0])+'</button>'}).join('');
+sgrid.classList.add('hp-moving-specialties');
+sgrid.innerHTML='<div class="hp-specialty-track">'+hpSpecialtyCards+hpSpecialtyCards+'</div>';
 sgrid.addEventListener('click',function(e){
   var b=e.target.closest('.sc'); if(!b) return;
   var c=b.dataset.c; var was=b.classList.contains('on');
