@@ -511,6 +511,39 @@ section{padding:44px 0 6px}
 .hp-city-links{display:flex;gap:9px;flex-wrap:wrap}
 .hp-city-links a{display:inline-block;padding:10px 14px;background:#fff;color:var(--blue-d);font-size:13px;font-weight:700;border:1px solid var(--sky2);border-radius:11px;transition:transform .15s}
 .hp-city-links a:hover{transform:translateY(-2px);border-color:var(--blue)}
+
+/* Slashcure premium kinetic brand showcase: drawn S and rotating healthcare emblem */
+.sc-showcase{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 73% 43%,#124b86 0%,#092850 32%,#061936 69%,#041127 100%);color:white;padding:clamp(66px,8vw,112px) 24px;scroll-margin-top:85px}
+.sc-showcase-bg{position:absolute;inset:0;z-index:-2;background:radial-gradient(circle at 77% 55%,rgba(58,146,255,.22),transparent 37%),repeating-linear-gradient(110deg,transparent 0 97px,rgba(255,255,255,.025) 98px 99px)}
+.sc-showcase:before,.sc-showcase:after{content:"";position:absolute;z-index:-1;pointer-events:none;border:2px solid transparent;width:65vw;height:65vw;min-width:620px;min-height:620px;border-radius:50%;right:-24%;top:-65%;transform:rotate(-18deg)}
+.sc-showcase:before{border-top-color:rgba(31,134,252,.85);box-shadow:0 -7px 32px -13px #359bff;animation:scOrbitBg 15s linear infinite}
+.sc-showcase:after{border-bottom-color:rgba(255,36,75,.78);box-shadow:0 7px 38px -12px #ff2854;animation:scOrbitBg 20s linear infinite reverse}
+.sc-showcase-inner{position:relative;max-width:1230px;margin:auto;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(310px,.9fr);gap:clamp(24px,5vw,90px);align-items:center}
+.sc-copy{position:relative;z-index:2}
+.sc-eyebrow{display:block;color:#bbdbff;font-size:11px;letter-spacing:3px;font-weight:800;text-transform:uppercase;margin-bottom:18px}
+.sc-copy h2{font-size:clamp(47px,6.5vw,91px);line-height:1;letter-spacing:-.065em;font-weight:850;margin:0 0 12px;text-shadow:0 5px 30px #02153266}
+.sc-word-white{color:#fff}.sc-word-red{color:#ff2c4c}.sc-word-dot{color:#d7e9ff;font-size:.52em;letter-spacing:-.035em}
+.sc-line{font-size:clamp(15px,2.1vw,22px);letter-spacing:5px;text-transform:uppercase;font-weight:700;color:#bcd9ff;margin:18px 0 25px}
+.sc-description{font-size:16px;line-height:1.8;color:#c5d9f3;max-width:550px;margin-bottom:27px}
+.sc-actions{display:flex;gap:13px;flex-wrap:wrap}.sc-actions a{padding:14px 21px;border-radius:14px;font-size:14px;font-weight:800;transition:transform .2s,box-shadow .2s}
+.sc-actions a:hover{transform:translateY(-3px)}.sc-primary{background:linear-gradient(110deg,#126dff,#0050d1);box-shadow:0 12px 35px -13px #1682ff;color:#fff}.sc-secondary{border:1px solid #a6c9f080;background:#ffffff14;color:#fff}
+.sc-values{display:flex;gap:20px;flex-wrap:wrap;margin-top:32px;font-size:13px;color:#cde0f7}
+.sc-art{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:440px}
+.sc-logo-wrap{position:relative;z-index:2;max-width:420px;width:min(90%,420px);filter:drop-shadow(0 20px 65px rgba(25,98,255,.28));animation:scLevitate 6s ease-in-out infinite}
+.sc-logo-wrap a{display:block;position:relative;border-radius:50%;outline-offset:10px}
+.sc-identity{width:100%;height:auto;display:block;overflow:visible}
+.sc-logo-disc{filter:drop-shadow(0 5px 15px rgba(255,255,255,.25))}
+.sc-rim{transform-origin:260px 260px;animation:scRim 18s linear infinite}.sc-rim-red{animation-direction:reverse;animation-duration:23s}
+.sc-s-stroke{stroke-dasharray:560;stroke-dashoffset:560;animation:scDrawS 2.8s cubic-bezier(.38,.02,.1,1) .5s forwards}
+.sc-heart{opacity:0;animation:scHeartIn 1.3s ease 2.2s forwards}.sc-head{opacity:0;animation:scHeartIn .65s ease 1.7s forwards}
+.sc-neon-s{position:absolute;z-index:-1;pointer-events:none;top:2%;left:36%;font-size:clamp(260px,45vw,690px);line-height:.9;font-weight:900;font-style:italic;letter-spacing:-.22em;color:transparent;-webkit-text-stroke:2px rgba(107,180,255,.12);text-shadow:0 0 65px rgba(37,128,255,.1);transform:rotate(-17deg);animation:scBGFloat 12s ease-in-out infinite}
+.sc-orbit{position:absolute;width:min(116%,520px);aspect-ratio:1;border-radius:50%;border:2px dashed rgba(127,195,255,.30);animation:scRim 35s linear infinite}
+.sc-orbit-two{width:min(130%,595px);border:1px solid rgba(255,65,100,.26);animation-direction:reverse;animation-duration:22s}
+.sc-logo-caption{font-size:11px;letter-spacing:2.2px;font-weight:800;color:#b9dcff;text-align:center;margin-top:20px}
+.sc-logo-caption span{color:#ff526b}.sc-pulse{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#1c79e8,#fa2c4e,#1c79e8,transparent);background-size:200% 100%;animation:scEkg 5s linear infinite}
+@keyframes scDrawS{to{stroke-dashoffset:0}}@keyframes scHeartIn{to{opacity:1}}@keyframes scLevitate{50%{transform:translateY(-12px) rotate(1deg)}}@keyframes scRim{to{transform:rotate(360deg)}}@keyframes scOrbitBg{to{transform:rotate(342deg)}}@keyframes scBGFloat{50%{transform:translate(30px,-13px) rotate(-10deg)}}@keyframes scEkg{to{background-position:200% 0}}
+@media(max-width:850px){.sc-showcase-inner{grid-template-columns:1fr;text-align:center}.sc-copy{order:2}.sc-art{order:1;min-height:320px}.sc-logo-wrap{width:min(72%,310px)}.sc-description{margin-left:auto;margin-right:auto}.sc-actions,.sc-values{justify-content:center}.sc-line{letter-spacing:3px}.sc-showcase{padding:60px 20px 70px}.sc-neon-s{left:15%;top:7%}}
+@media(prefers-reduced-motion:reduce){.sc-showcase *, .sc-showcase:before,.sc-showcase:after{animation:none!important;transition:none!important}.sc-s-stroke{stroke-dashoffset:0!important}.sc-heart,.sc-head{opacity:1!important}}
 </style>
 <!-- Publication refresh: HospitalPro homepage and Sukkur City FAQ updates, 2026-10-18. -->
 </head>
@@ -693,24 +726,45 @@ section{padding:44px 0 6px}
   </section>
 </main>
 
-<!-- Cinematic Slashcure finale -->
-<section class="cine" id="slashcure-finale" aria-label="Slashcure advertisement">
-  <div class="cine-stars" aria-hidden="true"></div>
-  <div class="cine-beam" aria-hidden="true"></div>
-  <div class="cine-in">
-    <div class="cine-k">Advertisement · Presented by</div>
-    <a class="cine-logo" href="https://slashcure.com" aria-label="Slashcure.com">
-      <span class="cine-ring" aria-hidden="true"></span>
-      <img src="slashcure-logo.png" alt="Slashcure.com logo" width="720" height="720">
-      <span class="cine-shine" aria-hidden="true"></span>
-    </a>
-    <h2>Slash<b>cure</b>.com</h2>
-    <div class="cine-tag">Health Care, Connected</div>
-    <a class="cine-btn" href="https://slashcure.com">Visit Slashcure.com →</a>
-    <div class="cine-credit">Smarter health. Simpler life.</div>
+<!-- Slashcure animated brand showcase, asset-free and mobile responsive -->
+<section class="sc-showcase" id="slashcure-finale" aria-labelledby="sc-showcase-title">
+ <div class="sc-showcase-bg" aria-hidden="true"></div>
+ <div class="sc-neon-s" aria-hidden="true">S</div>
+ <div class="sc-showcase-inner">
+  <div class="sc-copy">
+   <span class="sc-eyebrow">HospitalPro presents · Powered by Slashcure</span>
+   <h2 id="sc-showcase-title"><span class="sc-word-white">Slash</span><span class="sc-word-red">cure</span><span class="sc-word-dot">.com</span></h2>
+   <p class="sc-line">Health Care, Connected</p>
+   <p class="sc-description">Connecting patients with doctors and hospitals across Pakistan. Discover professionals, explore clinic details, and visit their Slashcure profiles.</p>
+   <div class="sc-actions"><a href="https://slashcure.com/" class="sc-primary">Explore Slashcure <span aria-hidden="true">↗</span></a><a href="/#doctors" class="sc-secondary">Explore Doctors</a></div>
+   <div class="sc-values" aria-label="Slashcure highlights"><span>✦ Find Doctors</span><span>✚ Hospitals</span><span>♡ Connected Care</span></div>
   </div>
+  <div class="sc-art">
+    <div class="sc-orbit sc-orbit-one" aria-hidden="true"></div><div class="sc-orbit sc-orbit-two" aria-hidden="true"></div>
+    <div class="sc-logo-wrap"><a href="https://slashcure.com/" aria-label="Visit Slashcure.com — Health Care, Connected"><svg class="sc-identity" viewBox="0 0 520 520" role="img" aria-label="Animated Slashcure heart and S identity" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <linearGradient id="scRed" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff354e"/><stop offset="1" stop-color="#df0026"/></linearGradient>
+ <linearGradient id="scBlue" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#104592"/><stop offset="1" stop-color="#031e51"/></linearGradient>
+ <linearGradient id="scS" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#ff1f49"/><stop offset=".52" stop-color="#fff"/><stop offset="1" stop-color="#1261ca"/></linearGradient>
+ <filter id="scGlow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<circle class="sc-logo-disc" cx="260" cy="260" r="222" fill="#fff"/>
+<circle class="sc-rim sc-rim-blue" cx="260" cy="260" r="232" fill="none" stroke="url(#scBlue)" stroke-width="15" stroke-dasharray="720 760"/>
+<circle class="sc-rim sc-rim-red" cx="260" cy="260" r="232" fill="none" stroke="url(#scRed)" stroke-width="15" stroke-dasharray="720 760" stroke-dashoffset="-720"/>
+<g class="sc-heart">
+  <path d="M253 403C210 367 120 294 112 220c-7-64 43-113 102-108 33 3 53 18 72 44-40-30-73-25-95-7-36 28-32 78-8 112 17 24 44 50 72 72" fill="none" stroke="url(#scRed)" stroke-width="25" stroke-linecap="round"/>
+  <path d="M285 403c40-27 116-85 141-146 25-61-2-123-52-140-38-13-74 1-101 35 54-18 92 3 105 39 18 51-25 108-99 167" fill="none" stroke="url(#scBlue)" stroke-width="25" stroke-linecap="round"/>
+  <path d="M172 263h54l14-31 17 70 20-43h24l14 25 13-25h35" fill="none" stroke="#0b346e" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path class="sc-s-stroke sc-s-halo" d="M349 106C299 129 241 174 227 222s78 53 42 107c-15 23-52 47-104 81" fill="none" stroke="#6ed0ff" stroke-width="27" stroke-linecap="round" filter="url(#scGlow)" opacity=".68"/>
+<path class="sc-s-stroke sc-s-core" d="M349 106C299 129 241 174 227 222s78 53 42 107c-15 23-52 47-104 81" fill="none" stroke="url(#scS)" stroke-width="17" stroke-linecap="round"/>
+<circle class="sc-head" cx="298" cy="132" r="25" fill="url(#scBlue)"/>
+</svg></a></div>
+    <div class="sc-logo-caption">SLASHCURE <span>·</span> HEALTH CARE, CONNECTED</div>
+  </div>
+ </div>
+ <div class="sc-pulse" aria-hidden="true"></div>
 </section>
-
 
 <!-- Featured Healthcare Partners: approved moving logo showcase -->
 <section class="partners-section" id="featured-healthcare-partners" aria-labelledby="partners-title">
