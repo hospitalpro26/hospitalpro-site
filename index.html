@@ -811,10 +811,26 @@ var DOCTORS = [
 ];
 
 var SPECIALTIES = [
-  ["General Medicine","🧑‍⚕️","#e1ecff"],["Cardiology","❤️","#ffe3e7"],["Pediatrics","🧒","#dff3ff"],
-  ["Gynecology","🌸","#f3e5ff"],["Orthopedics","🦴","#e1ecff"],["Pulmonology","🫁","#dcf5ef"],
-  ["Dermatology","🧴","#ffeedb"],["Gastroenterology","🍽️","#ffe6dc"],["Urology","🫘","#dbf6f2"],["Physiotherapy","🏃","#dcf5ef"],
-  ["Neurology","🧠","#ece4ff"],["More Specialties","⋯","#e8eef8"]
+  ["General Physician","🩺","#e1ecff","https://slashcure.com/doctors?specialty=General+Physician&city=&sort="],
+  ["Consultant Physiotherapist","🏃","#dcf5ef","https://slashcure.com/doctors?specialty=Consultant+Physiotherapist&city=&sort="],
+  ["Consultant Physician","👨‍⚕️","#e1ecff","https://slashcure.com/doctors?specialty=Consultant+Physician&city=&sort="],
+  ["Pediatrician","🧒","#dff3ff","https://slashcure.com/doctors?specialty=Pediatrician&city=&sort="],
+  ["Gynecologist / Obstetrician","🌸","#f3e5ff","https://slashcure.com/doctors?specialty=Gynecologist+%2F+Obstetrician&city=&sort="],
+  ["Neurophysician","🧠","#ece4ff","https://slashcure.com/doctors?specialty=Neurophysician&city=&sort="],
+  ["Orthopedic Surgeon","🦴","#e1ecff","https://slashcure.com/doctors?specialty=Orthopedic+Surgeon&city=&sort="],
+  ["Paediatric Surgeon","🧸","#dff3ff","https://slashcure.com/doctors?specialty=Paediatric+Surgeon&city=&sort="],
+  ["Pulmonologist","🫁","#dcf5ef","https://slashcure.com/doctors?specialty=Pulmonologist&city=&sort="],
+  ["Urologist","🫘","#dbf6f2","https://slashcure.com/doctors?specialty=Urologist&city=&sort="],
+  ["Dentist","🦷","#e1ecff","https://slashcure.com/doctors?specialty=Dentist&city=&sort="],
+  ["Family Physician","🏠","#e1ecff","https://slashcure.com/doctors?specialty=Family+Physician&city=&sort="],
+  ["Gastroenterologist","🫃","#ffe6dc","https://slashcure.com/doctors?specialty=Gastroenterologist&city=&sort="],
+  ["General Surgeon & Laparoscopic Surgeon","⚕️","#e1ecff","https://slashcure.com/doctors?specialty=General+Surgeon+%26+Laproscopic+Surgeon&city=&sort="],
+  ["Neurosurgeon","🧠","#ece4ff","https://slashcure.com/doctors?specialty=Neurosurgeon&city=&sort="],
+  ["Thoracic Surgeon","🫁","#dcf5ef","https://slashcure.com/doctors?specialty=Thoracic+Surgeon&city=&sort="],
+  ["Gastroenterologist and Hepatologist","🩺","#ffe6dc","https://slashcure.com/doctors?specialty=Gastroenterologist+and+Hepatologist&city=&sort="],
+  ["Spine & Orthopedic Surgeon","🦴","#e1ecff","https://slashcure.com/doctors?specialty=Spine+%26+Orthopedic+Surgeon&city=&sort="],
+  ["Psychiatrist","💬","#f3e5ff","https://slashcure.com/doctors?specialty=Psychiatrist&city=&sort="],
+  ["ENT Specialist","👂","#dff3ff","https://slashcure.com/doctors?specialty=ENT+Specialist&city=&sort="]
 ];
 
 var CITIES = [
@@ -937,18 +953,13 @@ function render(){
     (cat?HOSPITALS.map(hCard).join(''):'<div class="empty" style="display:block">No hospitals match that search.</div>');
 }
 
-/* specialties */
+/* specialties: all 20 tiles link directly to the supplied Slashcure directory filters */
 var sgrid=document.getElementById('sgrid');
-var hpSpecialtyCards=SPECIALTIES.map(function(s){return '<button class="sc" data-c="'+esc(s[0])+'" style="--bgc:'+s[2]+'"><i>'+s[1]+'</i>'+esc(s[0])+'</button>'}).join('');
+var hpSpecialtyCards=SPECIALTIES.map(function(s){
+  return '<a class="sc" href="'+esc(s[3])+'" aria-label="Find '+esc(s[0])+' doctors on Slashcure" style="--bgc:'+s[2]+'"><i aria-hidden="true">'+s[1]+'</i><span>'+esc(s[0])+'</span></a>';
+}).join('');
 sgrid.classList.add('hp-moving-specialties');
 sgrid.innerHTML='<div class="hp-specialty-track">'+hpSpecialtyCards+hpSpecialtyCards+'</div>';
-sgrid.addEventListener('click',function(e){
-  var b=e.target.closest('.sc'); if(!b) return;
-  var c=b.dataset.c; var was=b.classList.contains('on');
-  sgrid.querySelectorAll('.sc').forEach(function(x){x.classList.remove('on')});
-  if(c==='More Specialties'||was){cat=''} else {cat=c;b.classList.add('on')}
-  render(); document.getElementById('doctors').scrollIntoView({behavior:'smooth'});
-});
 
 /* cities */
 document.getElementById('cgrid').innerHTML=CITIES.map(function(c){
