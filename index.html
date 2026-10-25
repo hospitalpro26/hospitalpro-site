@@ -772,6 +772,12 @@ var SLASHCURE = "https://slashcure.com";
 /* Each doctor: n=name, sp=title, cat=specialty filter, deg=degrees, loc=main place (shown on card),
    tm=timings (shown on card), extra=more details kept for the profile pages, url=Slashcure profile link */
 var DOCTORS = [
+  {n:"Dr. Ahmed Raza Laghari", sp:"Consultant Orthopedic Surgeon & Ilizarov Surgery Specialist", cat:"Orthopedics",
+   deg:"MBBS, FCPS · Fellowship in Ilizarov Surgery (Lecco, Italy)", loc:"Hira Medical Center, Sukkur",
+   tm:"Monday to Saturday 3:30 PM to 6:00 PM",
+   extra:{role:"Assistant Professor, GMC Teaching Hospital, Sukkur", phone:"03158103095", whatsapp:"03331555911", treats:"Fracture and trauma surgery, non-union fractures, Ilizarov surgery, limb reconstruction, deformity correction, failed orthopedic surgery assessment"},
+   col:"#164a95", ic:"🦴", photo:"", url:"https://slashcure.com/orthopedic-surgeons/sukkur/dr-ahmed-raza-laghari", hospitalpro:"https://hospitalpro.online/dr-ahmed-raza-laghari.html"},
+
   {n:"Dr. Habibullah Maitlo", sp:"Consultant Paediatric Surgeon", cat:"Paediatric Surgery",
    deg:"MBBS, FCPS (Paediatric Surgery)", loc:"Dr. Ziauddin Hospital, Sukkur",
    tm:"Monday to Saturday 10:00 AM to 4:00 PM",
@@ -961,7 +967,7 @@ function render(){
   var hs=HOSPITALS.filter(function(h){return !cat&&match([h.n,h.loc,h.tags.join(' ')].join(' '))||(cat&&match(h.n+' '+h.loc)&&false)});
   if(!cat && !term && ds.length){
     var featured=ds.slice().sort(function(a,b){
-      var order=['Dr. Naveed Ahmed Mahar','Dr. Murk Channa','Dr. Aneel Ahmed Ghanghro','Dr. Habibullah Maitlo','Dr. Kanwal Aijaz','Dr. Imran Ali Kalwar','Dr. Komal Kandhir'];
+      var order=['Dr. Naveed Ahmed Mahar','Dr. Murk Channa','Dr. Aneel Ahmed Ghanghro','Dr. Ahmed Raza Laghari','Dr. Habibullah Maitlo','Dr. Kanwal Aijaz','Dr. Imran Ali Kalwar','Dr. Komal Kandhir'];
       var ai=order.indexOf(a.n),bi=order.indexOf(b.n);
       return (ai<0?99:ai)-(bi<0?99:bi);
     });
