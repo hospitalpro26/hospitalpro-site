@@ -599,6 +599,52 @@ section{padding:44px 0 6px}
 .hp-featured-gyne.sc i{width:45px;height:45px;font-size:23px}}
 @media(prefers-reduced-motion:reduce){.hp-specialty-viewport{overflow:auto}.hp-featured-gyne.sc{transform:none}}
 
+
+/* Home SEO / GEO: visible city and Slashcure discovery content */
+.hp-inline-link,.hp-hero-help a{color:inherit;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.hp-hero-fastlinks{display:flex;flex-wrap:wrap;gap:11px;margin:15px 0 0}
+.hp-hero-fastlinks a{display:inline-flex;align-items:center;justify-content:center;padding:12px 19px;border-radius:999px;font-weight:800;font-size:13px;transition:transform .2s,filter .2s}
+.hp-hero-fastlinks a:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.hp-hero-primary{color:#102e61!important;background:#fff}
+.hp-hero-secondary{color:#fff!important;background:#ffffff20;border:1px solid #ffffffaa}
+.hp-hero-help{margin-top:12px;max-width:660px;font-size:12px;line-height:1.65;color:#eef6ff}
+.hp-discover,.hp-local-guide,.hp-faq-guide{margin:35px 0 42px}
+.hp-discover-intro,.hp-local-guide-head{max-width:900px;margin-bottom:21px}
+.hp-discover-kicker{text-transform:uppercase;letter-spacing:1.5px;font-size:11px;font-weight:850;color:#087d91}
+.hp-discover h2,.hp-local-guide h2,.hp-faq-guide h2{margin:8px 0 10px;font-size:clamp(24px,3.2vw,34px);line-height:1.22;color:#0b2f67}
+.hp-discover-intro p,.hp-local-guide-head p{font-size:15px;color:#52657c;line-height:1.65}
+.hp-discover-intro a,.hp-local-guide a,.hp-faq-guide a{color:#0d60b4;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.hp-discover-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.hp-discover-card{display:flex;flex-direction:column;align-items:flex-start;gap:10px;border:1px solid #dbe6f5;border-radius:21px;background:linear-gradient(135deg,#fff,#f5f9ff);padding:24px;box-shadow:0 12px 35px -29px #0d3579}
+.hp-discover-icon{display:grid;place-items:center;height:52px;width:52px;border-radius:15px;background:#e7f4ff;font-size:25px}
+.hp-discover-card h3{font-size:19px;line-height:1.3;color:#0c356e;margin:0}
+.hp-discover-card p{font-size:14px;line-height:1.62;color:#52657a;margin:0 0 13px}
+.hp-discover-card a{display:inline-flex;margin-top:auto;background:#1459ad;color:#fff!important;border-radius:99px;padding:11px 17px;font-size:12px;font-weight:850}
+.hp-discover-card a:hover{background:#0c387f}
+.hp-city-quicklinks{display:flex;gap:9px;flex-wrap:wrap;margin:19px 0}
+.hp-city-quicklinks a{border:1px solid #c5dff6;padding:10px 13px;border-radius:99px;background:#ecf5ff;text-decoration:none!important;color:#0f4e87!important;font-size:12px;font-weight:750}
+.hp-city-quicklinks a:hover{background:#d4e9fa}
+.hp-local-copy{padding:21px 25px;background:#f8fbff;border-left:4px solid #1693a9;border-radius:14px}
+.hp-local-copy p{font-size:14px;color:#465c75;line-height:1.75}.hp-local-copy p+p{margin-top:12px}
+.hp-faq-guide{padding:26px 26px 30px;border:1px solid #dce9f5;border-radius:24px;background:#f6faff}
+.hp-faq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:19px}
+.hp-faq-grid details{border:1px solid #dce6f3;border-radius:15px;padding:15px 17px;background:#fff}
+.hp-faq-grid summary{cursor:pointer;font-weight:800;color:#173b68;line-height:1.5}
+.hp-faq-grid p{color:#4c6078;font-size:13px;line-height:1.75;margin-top:10px}
+.hp-about-links{display:flex;flex-wrap:wrap;gap:8px}
+.hp-about-hospital{background:#eaf4ff!important;color:#114780!important}
+@media(max-width:820px){.hp-discover-grid{grid-template-columns:1fr 1fr}.hp-faq-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.hp-discover,.hp-local-guide,.hp-faq-guide{margin:26px 0 35px}
+.hp-hero-fastlinks a{flex:1 1 100%;width:100%}
+.hp-discover-grid{grid-template-columns:1fr}
+.hp-discover-card{padding:20px}
+.hp-discover-card a{width:100%;justify-content:center}
+.hp-local-copy{padding:18px}
+.hp-faq-guide{padding:18px}
+.hp-nav-slashcure{font-size:12px!important;padding:10px 12px!important}
+.hp-about-links a{width:100%;justify-content:center}}
+@media(prefers-reduced-motion:reduce){.hp-hero-fastlinks a{transition:none}}
+
 </style>
 <!-- Publication refresh: HospitalPro homepage and Sukkur City FAQ updates, 2026-10-18. -->
 </head>
@@ -653,6 +699,32 @@ section{padding:44px 0 6px}
 </div>
 
 <main class="wrap">
+
+<section class="hp-discover" id="slashcure-services" aria-labelledby="hp-discover-heading">
+  <div class="hp-discover-intro">
+    <span class="hp-discover-kicker">HospitalPro × Slashcure</span>
+    <h2 id="hp-discover-heading">Looking for a doctor or hospital near you?</h2>
+    <p>HospitalPro helps you discover specialist profiles and city guides. <a href="https://slashcure.com/" target="_blank" rel="noopener noreferrer">Slashcure.com</a> provides the main doctor and hospital directories, OPD schedules and available contact options.</p>
+  </div>
+  <div class="hp-discover-grid">
+    <article class="hp-discover-card"><span class="hp-discover-icon" aria-hidden="true">🩺</span>
+      <h3>Find a Specialist Doctor</h3>
+      <p>Search by doctor, specialty or city. Discover gynecologists, urologists, gastroenterologists, cardiologists, physicians and other specialists.</p>
+      <a href="https://slashcure.com/doctors" target="_blank" rel="noopener noreferrer">Find Doctors on Slashcure ↗</a>
+    </article>
+    <article class="hp-discover-card"><span class="hp-discover-icon" aria-hidden="true">🏥</span>
+      <h3>Browse Hospitals &amp; Clinics</h3>
+      <p>Explore hospitals and clinics by city, then see available information about doctors and facilities on Slashcure.</p>
+      <a href="https://slashcure.com/hospitals" target="_blank" rel="noopener noreferrer">Browse Hospitals on Slashcure ↗</a>
+    </article>
+    <article class="hp-discover-card"><span class="hp-discover-icon" aria-hidden="true">📋</span>
+      <h3>Are You a Doctor?</h3>
+      <p>Create a doctor account on Slashcure, submit credentials for review, and manage your professional profile and clinic information.</p>
+      <a href="https://slashcure.com/register/doctor" target="_blank" rel="noopener noreferrer">Register as a Doctor ↗</a>
+    </article>
+  </div>
+</section>
+
 
   <!-- Sukkur City Doctors Directory: crawlable, featured homepage advertisement -->
   <section class="sukkur-section" id="sukkur-doctors" aria-labelledby="sukkur-doctors-heading">
@@ -810,6 +882,36 @@ section{padding:44px 0 6px}
   </div>
 
   <!-- Slashcure's guiding commitment, shown beneath the About section -->
+  <section class="hp-local-guide" id="doctor-directory-guide" aria-labelledby="hp-local-guide-heading">
+    <div class="hp-local-guide-head">
+      <span class="hp-discover-kicker">Find Healthcare by City &amp; Specialty</span>
+      <h2 id="hp-local-guide-heading">Find specialist doctors in Sukkur, Sindh and across Pakistan</h2>
+      <p>Explore HospitalPro's doctor guides or continue to Slashcure for the broader directory. These links are for discovery, not a ranking of clinical quality.</p>
+    </div>
+    <nav class="hp-city-quicklinks" aria-label="Browse doctors by city">
+      <a href="/doctors-in-sukkur/">Doctors in Sukkur</a>
+      <a href="/doctors-in-khairpur/">Doctors in Khairpur</a>
+      <a href="/doctors-in-ghotki/">Doctors in Ghotki</a>
+      <a href="/doctors-in-larkana/">Doctors in Larkana</a>
+      <a href="/doctors-in-hyderabad/">Doctors in Hyderabad</a>
+      <a href="https://slashcure.com/doctors?type=all&amp;loc=Karachi&amp;q=">Doctors in Karachi on Slashcure</a>
+      <a href="https://slashcure.com/doctors?type=all&amp;loc=Lahore&amp;q=">Doctors in Lahore on Slashcure</a>
+    </nav>
+    <div class="hp-local-copy">
+      <p><strong>Looking for a gynecologist, urologist, cardiologist or gastroenterologist in Sukkur?</strong> Start with the <a href="/doctors-in-sukkur/">Sukkur specialist directory</a>. Featured professionals include <a href="/dr-aaisha-aman.html">Dr. Aaisha Aman (gynecology and obstetrics)</a>, <a href="/dr-naveed-ahmed-mahar.html">Dr. Naveed Ahmed Mahar (urology)</a> and <a href="/dr-murk-channa.html">Dr. Murk Channa (gastroenterology)</a>.</p>
+      <p><strong>Looking outside Sukkur?</strong> HospitalPro has selected city doctor guides for Khairpur, Ghotki, Larkana and Hyderabad. For other cities and a wider range of doctors or hospitals, browse the <a href="https://slashcure.com/doctors">Slashcure doctor directory</a> and <a href="https://slashcure.com/hospitals">Slashcure hospital directory</a>.</p>
+    </div>
+  </section>
+  <section class="hp-faq-guide" id="questions" aria-labelledby="hp-faq-heading">
+    <h2 id="hp-faq-heading">Frequently asked questions about HospitalPro and Slashcure</h2>
+    <div class="hp-faq-grid">
+      <details><summary>What is HospitalPro, and how is it connected to Slashcure?</summary><p>HospitalPro is a promotional website by Slashcure. It highlights selected doctor profiles, specialties and city guides; <a href="https://slashcure.com/">Slashcure.com</a> hosts its broader doctor and hospital directories and patient services.</p></details>
+      <details><summary>Where can I find doctors in Sukkur and Khairpur?</summary><p>Browse <a href="/doctors-in-sukkur/">doctors in Sukkur</a> or <a href="/doctors-in-khairpur/">doctors in Khairpur</a> on HospitalPro. You can also search the <a href="https://slashcure.com/doctors">Slashcure directory</a> by city, specialty or doctor name.</p></details>
+      <details><summary>How can I check a doctor's OPD schedule or clinic availability?</summary><p>Open the doctor's <a href="https://slashcure.com/doctors">official Slashcure profile</a> for the currently published schedule and contact options. Timings can change; verify with the clinic before travelling.</p></details>
+      <details><summary>Can doctors register on Slashcure?</summary><p>Yes. Doctors can <a href="https://slashcure.com/register/doctor">create a Slashcure doctor account</a> and submit credentials for review. HospitalPro links to the registration page but does not process registrations itself.</p></details>
+    </div>
+  </section>
+
   <section class="hp-vision" id="slashcure-vision" aria-labelledby="hp-vision-heading">
     <div class="hp-vision-card">
       <span class="hp-vision-label">Our Belief · Slashcure</span>
