@@ -5,12 +5,14 @@ Source: `doctors-in-sukkur/index.html`
 Homepage: `index.html` (featured doctors and city links)
 
 ## Current baseline (30 October 2026)
-- 15 selected Sukkur doctor entries across 12 specialties.
+- 16 selected Sukkur doctor entries across 12 specialties (including Dr. Riaz Hussain Hakro under Pulmonology).
 - Doctor cards are **static HTML**, so Google/Bing can read names and profile links without executing JavaScript.
 - Browser search and specialty filters work on the static cards using `data-specialty` and `data-search`.
 - Structured data describes a `CollectionPage`, `BreadcrumbList` and `ItemList`.
 - This directory is **not a rating, ranking or complete staff register**. Do not invent star ratings or use "No. 1" claims.
 - **Do not list Ghotki/Gambat-only OPDs as Sukkur clinics**. Use the correct city guide instead.
+
+- **Dr. Riaz Hussain Hakro — Pulmonology:** dedicated page `dr-riaz-hussain-hakro.html`, Hira Medical Center Sukkur; original Slashcure source: https://slashcure.com/pulmonologists/sukkur/dr-riaz-hussain-hakro
 
 ## Workflow to add a Sukkur doctor
 1. Confirm the doctor's full name, qualifications, designation, specialty, hospital / clinic, city, OPD schedule and reliable contact/profile URL using an approved source. If the current schedule or clinic cannot be confirmed, explicitly say "Confirm current OPD schedule" instead of guessing.
