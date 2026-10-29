@@ -5,7 +5,7 @@ Source: `doctors-in-sukkur/index.html`
 Homepage: `index.html` (featured doctors and city links)
 
 ## Current baseline (30 October 2026)
-- 16 selected Sukkur doctor entries across 12 specialties (including Dr. Riaz Hussain Hakro under Pulmonology).
+- 17 selected Sukkur doctor entries across 12 specialties (including Dr. Riaz Hussain Hakro under Pulmonology and Dr. Sajid Khadim under Pediatrics).
 - Doctor cards are **static HTML**, so Google/Bing can read names and profile links without executing JavaScript.
 - Browser search and specialty filters work on the static cards using `data-specialty` and `data-search`.
 - Structured data describes a `CollectionPage`, `BreadcrumbList` and `ItemList`.
@@ -13,6 +13,8 @@ Homepage: `index.html` (featured doctors and city links)
 - **Do not list Ghotki/Gambat-only OPDs as Sukkur clinics**. Use the correct city guide instead.
 
 - **Dr. Riaz Hussain Hakro — Pulmonology:** dedicated page `dr-riaz-hussain-hakro.html`, Hira Medical Center Sukkur; original Slashcure source: https://slashcure.com/pulmonologists/sukkur/dr-riaz-hussain-hakro
+
+- **Dr. Sajid Khadim — Pediatrics:** dedicated page `dr-sajid-khadim.html`, Dr. Ziauddin Hospital Sukkur, with canonical Slashcure source: https://slashcure.com/pediatricians/sukkur/dr-sajid-khadim . His Pano Aqil OPD is outside Sukkur and should not be conflated with the Sukkur schedule.
 
 ## Workflow to add a Sukkur doctor
 1. Confirm the doctor's full name, qualifications, designation, specialty, hospital / clinic, city, OPD schedule and reliable contact/profile URL using an approved source. If the current schedule or clinic cannot be confirmed, explicitly say "Confirm current OPD schedule" instead of guessing.
