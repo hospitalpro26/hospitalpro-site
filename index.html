@@ -573,6 +573,24 @@ section{padding:44px 0 6px}
 @media(max-width:600px){.hp-gynae-specialty{grid-template-columns:1fr;padding:20px 18px;gap:12px}.hp-gynae-specialty-icon{height:49px;width:49px;font-size:24px;border-radius:13px}.hp-gynae-specialty-links a{width:100%}.hp-sukkur-aaisha-note{padding:12px}}
 @media(prefers-reduced-motion:reduce){.hp-gynae-specialty-links a{transition:none}}
 
+
+/* Gynecology & Obstetrics remains in the first visible specialty card on mobile. */
+.hp-moving-specialties{display:flex!important;align-items:stretch;gap:10px;overflow:hidden}
+.hp-featured-gyne.sc{flex:0 0 172px;width:172px;min-width:0;position:relative;z-index:2;
+  border:2px solid #dc89b0;background:linear-gradient(145deg,#fff8fb,#ffe8f0);
+  box-shadow:0 9px 25px #aa406c1a;gap:8px;align-content:center;
+  padding:16px 12px;color:#76274c}
+.hp-featured-gyne.sc i{background:#ffcedf;font-size:26px}
+.hp-featured-gyne.sc span{font-size:14px;font-weight:800;line-height:1.35;overflow-wrap:normal}
+.hp-featured-gyne.sc small{display:block;font-size:10px;line-height:1.4;font-weight:750;color:#922e5b}
+.hp-featured-gyne.sc:hover,.hp-featured-gyne.sc:focus-visible{background:#ffe1ed;border-color:#c4467c}
+.hp-specialty-viewport{min-width:0;flex:1 1 auto;overflow:hidden}
+.hp-specialty-viewport .hp-specialty-track{height:100%;align-items:stretch}
+@media(max-width:600px){.hp-moving-specialties{gap:8px}.hp-featured-gyne.sc{flex-basis:142px;width:142px;padding:12px 8px}
+.hp-featured-gyne.sc span{font-size:12px}.hp-featured-gyne.sc small{font-size:9px}
+.hp-featured-gyne.sc i{width:45px;height:45px;font-size:23px}}
+@media(prefers-reduced-motion:reduce){.hp-specialty-viewport{overflow:auto}.hp-featured-gyne.sc{transform:none}}
+
 </style>
 <!-- Publication refresh: HospitalPro homepage and Sukkur City FAQ updates, 2026-10-18. -->
 </head>
@@ -959,11 +977,11 @@ var DOCTORS = [
 ];
 
 var SPECIALTIES = [
+  ["Gynecology & Obstetrics","🌸","#ffe3ef","/doctors-in-sukkur/?specialty=Gynecology%20%26%20Obstetrics"],
   ["General Physician","🩺","#e1ecff","https://slashcure.com/doctors?specialty=General+Physician&city=&sort="],
   ["Consultant Physiotherapist","🏃","#dcf5ef","https://slashcure.com/doctors?specialty=Consultant+Physiotherapist&city=&sort="],
   ["Consultant Physician","👨‍⚕️","#e1ecff","https://slashcure.com/doctors?specialty=Consultant+Physician&city=&sort="],
   ["Pediatrician","🧒","#dff3ff","https://slashcure.com/doctors?specialty=Pediatrician&city=&sort="],
-  ["Gynecologist / Obstetrician","🌸","#f3e5ff","https://slashcure.com/doctors?specialty=Gynecologist+%2F+Obstetrician&city=&sort="],
   ["Neurophysician","🧠","#ece4ff","https://slashcure.com/doctors?specialty=Neurophysician&city=&sort="],
   ["Orthopedic Surgeon","🦴","#e1ecff","https://slashcure.com/doctors?specialty=Orthopedic+Surgeon&city=&sort="],
   ["Paediatric Surgeon","🧸","#dff3ff","https://slashcure.com/doctors?specialty=Paediatric+Surgeon&city=&sort="],
@@ -1109,13 +1127,16 @@ function render(){
     (cat?HOSPITALS.map(hCard).join(''):'<div class="empty" style="display:block">No hospitals match that search.</div>');
 }
 
-/* specialties: all 20 tiles link directly to the supplied Slashcure directory filters */
+/* Keep Gynecology & Obstetrics visible as the first, stationary specialty.
+   Other specialty tiles continue their existing moving carousel. */
 var sgrid=document.getElementById('sgrid');
-var hpSpecialtyCards=SPECIALTIES.map(function(s){
+var hpGyneSpecialty=SPECIALTIES[0];
+var hpGyneTile='<a class="sc hp-featured-gyne" href="'+esc(hpGyneSpecialty[3])+'" aria-label="Find Gynecology and Obstetrics specialists in Sukkur" style="--bgc:'+hpGyneSpecialty[2]+'"><i aria-hidden="true">'+hpGyneSpecialty[1]+'</i><span>'+esc(hpGyneSpecialty[0])+'</span><small>Find in Sukkur ↗</small></a>';
+var hpSpecialtyCards=SPECIALTIES.slice(1).map(function(s){
   return '<a class="sc" href="'+esc(s[3])+'" aria-label="Find '+esc(s[0])+' doctors on Slashcure" style="--bgc:'+s[2]+'"><i aria-hidden="true">'+s[1]+'</i><span>'+esc(s[0])+'</span></a>';
 }).join('');
 sgrid.classList.add('hp-moving-specialties');
-sgrid.innerHTML='<div class="hp-specialty-track">'+hpSpecialtyCards+hpSpecialtyCards+'</div>';
+sgrid.innerHTML=hpGyneTile+'<div class="hp-specialty-viewport"><div class="hp-specialty-track">'+hpSpecialtyCards+hpSpecialtyCards+'</div></div>';
 
 /* cities: direct city-wise Slashcure directory links; keep local filter fallback for unlinked cities */
 document.getElementById('cgrid').innerHTML=CITIES.map(function(c){
