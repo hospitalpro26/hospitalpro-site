@@ -1,0 +1,33 @@
+name: Sync HospitalPro discovery pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/doctors-registry.json'
+      - 'assets/hospitals-registry.json'
+      - 'scripts/sync-discovery.mjs'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Regenerate pages from registries
+        run: node scripts/sync-discovery.mjs
+      - name: Commit updated discovery pages
+        run: |
+          if ! git diff --quiet -- find-doctors/index.html hospitals/index.html; then
+            git config user.name "hospitalpro-site-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add find-doctors/index.html hospitals/index.html
+            git commit -m "Sync HospitalPro discovery pages from registries"
+            git push origin HEAD:main
+          fi
