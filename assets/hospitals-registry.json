@@ -7,7 +7,8 @@
       "category": "Hospital",
       "description": "Featured doctors in urology, gynecology, paediatrics, paediatric surgery and orthopaedics.",
       "url": "https://slashcure.com/hospitals",
-      "directory": "/doctors-in-sukkur/"
+      "directory": "/doctors-in-sukkur/",
+      "local": "/hospitals/dr-ziauddin-hospital-sukkur/"
     },
     {
       "name": "Hira Medical Centre",
@@ -15,7 +16,8 @@
       "category": "Medical centre",
       "description": "Featured specialists in internal medicine, gastroenterology, cardiology, pulmonology and orthopaedics.",
       "url": "https://slashcure.com/hospitals",
-      "directory": "/doctors-in-sukkur/"
+      "directory": "/doctors-in-sukkur/",
+      "local": "/hospitals/hira-medical-centre-sukkur/"
     },
     {
       "name": "River City Hospital",
@@ -23,7 +25,8 @@
       "category": "Hospital",
       "description": "Featured consultations in gastroenterology and women's health.",
       "url": "https://slashcure.com/hospitals",
-      "directory": "/doctors-in-sukkur/"
+      "directory": "/doctors-in-sukkur/",
+      "local": "/hospitals/river-city-hospital-sukkur/"
     },
     {
       "name": "Sukkur Diagnostic Centre",
@@ -31,7 +34,8 @@
       "category": "Diagnostic centre",
       "description": "Healthcare centre featured in the Sukkur directory.",
       "url": "https://slashcure.com/hospitals/sukkur/sukkur-diagnostic-centre",
-      "directory": "/doctors-in-sukkur/"
+      "directory": "/doctors-in-sukkur/",
+      "local": "/hospitals/sukkur-diagnostic-centre/"
     },
     {
       "name": "Alkhidmat Mother & Child Health Care Center",
@@ -39,7 +43,8 @@
       "category": "Mother and child care",
       "description": "Healthcare centre highlighted in the Sukkur directory.",
       "url": "https://slashcure.com/hospitals/sukkur/alkhidmatmchcc",
-      "directory": "/doctors-in-sukkur/"
+      "directory": "/doctors-in-sukkur/",
+      "local": "/hospitals/alkhidmat-mother-child-health-care-center/"
     },
     {
       "name": "NEO Medical Center",
@@ -47,7 +52,8 @@
       "category": "Medical centre",
       "description": "Lahore medical centre with featured doctors.",
       "url": "https://slashcure.com/hospitals/lahore/neo-medical-center",
-      "directory": "/doctors-in-lahore/"
+      "directory": "/doctors-in-lahore/",
+      "local": "/hospitals/neo-medical-center-lahore/"
     },
     {
       "name": "Geo Pak International Hospital",
@@ -55,7 +61,8 @@
       "category": "Hospital",
       "description": "Hospital featured in the Lahore directory.",
       "url": "https://slashcure.com/hospitals/lahore/geo-pak-international-hospital",
-      "directory": "/doctors-in-lahore/"
+      "directory": "/doctors-in-lahore/",
+      "local": "/hospitals/geo-pak-international-hospital-lahore/"
     },
     {
       "name": "Jeejal Ammar Welfare Hospital",
@@ -63,7 +70,8 @@
       "category": "Welfare hospital",
       "description": "Listed departments include neurology, dermatology, psychiatry, internal medicine, rheumatology, pulmonology and paediatrics.",
       "url": "/hospitals/jeejal-ammar-welfare-hospital-larkana/",
-      "directory": "/doctors-in-larkana/"
+      "directory": "/doctors-in-larkana/",
+      "local": "/hospitals/jeejal-ammar-welfare-hospital-larkana/"
     }
   ]
 }
