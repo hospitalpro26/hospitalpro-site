@@ -56,6 +56,14 @@
       "description": "Hospital featured in the Lahore directory.",
       "url": "https://slashcure.com/hospitals/lahore/geo-pak-international-hospital",
       "directory": "/doctors-in-lahore/"
+    },
+    {
+      "name": "Jeejal Ammar Welfare Hospital",
+      "city": "Larkana",
+      "category": "Welfare hospital",
+      "description": "Listed departments include neurology, dermatology, psychiatry, internal medicine, rheumatology, pulmonology and paediatrics.",
+      "url": "/hospitals/jeejal-ammar-welfare-hospital-larkana/",
+      "directory": "/doctors-in-larkana/"
     }
   ]
 }
