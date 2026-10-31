@@ -36,3 +36,42 @@ function installPromo(){
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",installPromo,{once:true});else installPromo();
 })();
+
+/* Slashcure advert CTA: approved sequential letter wave. */
+(function(){
+"use strict";
+function animateSlashcureButtons(){
+ var ads=document.querySelectorAll(".hp-static-slashcure-promo, .hcc-slashcure-promo, #hp-global-slashcure-promo");
+ if(!ads.length)return;
+ if(!document.getElementById("hp-slashcure-wave-style")){
+  var style=document.createElement("style");
+  style.id="hp-slashcure-wave-style";
+  style.textContent=".hp-slashcure-wave-letter{display:inline-block;animation:hp-slashcure-letter-wave 2.65s ease-in-out infinite;animation-delay:calc(var(--hp-wave-index)*.065s);will-change:transform}.hp-slashcure-wave-arrow{display:inline-block;margin-left:7px}@keyframes hp-slashcure-letter-wave{0%,12%,45%,100%{transform:translateY(0)}24%{transform:translateY(-6px)}36%{transform:translateY(3px)}}@media(prefers-reduced-motion:reduce){.hp-slashcure-wave-letter{animation:none}}";
+  document.head.appendChild(style);
+ }
+ ads.forEach(function(ad){
+  var links=ad.querySelectorAll("a[href]");
+  links.forEach(function(link){
+   if(link.dataset.hpWaveReady==="true"||!/Visit\s+Slashcure\.com/i.test(link.textContent))return;
+   link.dataset.hpWaveReady="true";
+   link.setAttribute("aria-label","Visit Slashcure.com");
+   var letters=document.createElement("span");
+   letters.setAttribute("aria-hidden","true");
+   "Visit Slashcure.com".split("").forEach(function(char,i){
+    var span=document.createElement("span");
+    span.className="hp-slashcure-wave-letter";
+    span.style.setProperty("--hp-wave-index",String(i));
+    span.textContent=char===" "?"\u00a0":char;
+    letters.appendChild(span);
+   });
+   var arrow=document.createElement("span");
+   arrow.className="hp-slashcure-wave-arrow";
+   arrow.setAttribute("aria-hidden","true");
+   arrow.textContent="↗";
+   link.replaceChildren(letters,arrow);
+  });
+ });
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",animateSlashcureButtons,{once:true});
+else animateSlashcureButtons();
+})();
