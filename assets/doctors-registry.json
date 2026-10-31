@@ -6,16 +6,16 @@
     {
       "name": "Dr. Imran Ali Kalwar",
       "city": "Ghotki",
-      "specialty": "Medical Specialists",
+      "specialty": "Pulmonology",
       "hospital": "",
       "degree": "",
       "hospitalpro": "/dr-imran-ali-kalwar.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Ghotki&q=Dr.%20Imran%20Ali%20Kalwar"
+      "slashcure": "https://slashcure.com/consultant-pulmonologists/ghotki/dr-imran-ali"
     },
     {
       "name": "Dr. Ali Haseeb Qazi",
       "city": "Hyderabad",
-      "specialty": "Neurosurgeons",
+      "specialty": "Neurosurgery",
       "hospital": "",
       "degree": "",
       "hospitalpro": "",
@@ -24,29 +24,29 @@
     {
       "name": "Dr. Ashfaque Ali Baloch",
       "city": "Khairpur",
-      "specialty": "Medical Specialists",
+      "specialty": "Consultant Physician",
       "hospital": "",
       "degree": "",
       "hospitalpro": "/dr-ashfaque-ali-baloch.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Khairpur&q=Dr.%20Ashfaque%20Ali%20Baloch"
+      "slashcure": "https://slashcure.com/general-physicians/khairpur/dr-ashfaque-ali-baloch"
     },
     {
       "name": "Dr. Habibullah Maitlo",
       "city": "Khairpur",
-      "specialty": "Medical Specialists",
+      "specialty": "Paediatric Surgery",
       "hospital": "",
       "degree": "",
       "hospitalpro": "/dr-habibullah-maitlo.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Khairpur&q=Dr.%20Habibullah%20Maitlo"
+      "slashcure": "https://slashcure.com/paediatric-surgeons/sukkur/dr-habibullah-maitlo"
     },
     {
       "name": "Dr. Kanwal Aijaz",
       "city": "Khairpur",
-      "specialty": "Medical Specialists",
+      "specialty": "Neurology",
       "hospital": "",
       "degree": "",
       "hospitalpro": "/dr-kanwal-aijaz.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Khairpur&q=Dr.%20Kanwal%20Aijaz"
+      "slashcure": "https://slashcure.com/neurophysicians/khairpur/dr-kanwal-aijaz"
     },
     {
       "name": "Dr Aftab Ansar Lodhi (PT)",
@@ -222,7 +222,7 @@
     {
       "name": "Dr. Sajid Abbasi",
       "city": "Larkana",
-      "specialty": "Urologists",
+      "specialty": "Urology",
       "hospital": "",
       "degree": "",
       "hospitalpro": "",
@@ -231,11 +231,11 @@
     {
       "name": "Dr. Aaisha Aman",
       "city": "Sukkur",
-      "specialty": "Consultant Gynecologist, Obstetrician, Laparoscopic Surgeon & Infertility Specialist",
+      "specialty": "Gynecology & Obstetrics",
       "hospital": "Dr. Ziauddin Hospital, Sukkur",
       "degree": "MBBS, MS, CHPE · Associate Member RCOG (UK)",
       "hospitalpro": "/dr-aaisha-aman.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Aaisha%20Aman"
+      "slashcure": "https://slashcure.com/gynecologists-obstetricians/sukkur/dr-aisha-aman"
     },
     {
       "name": "Dr. Abdul Ahad Solangi",
@@ -258,25 +258,25 @@
     {
       "name": "Dr. Ahmed Raza Laghari",
       "city": "Sukkur",
-      "specialty": "Consultant Orthopedic Surgeon & Ilizarov Surgery Specialist",
+      "specialty": "Orthopedics",
       "hospital": "Hira Medical Centre, Sukkur",
       "degree": "MBBS, FCPS",
       "hospitalpro": "/dr-ahmed-raza-laghari.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Ahmed%20Raza%20Laghari"
+      "slashcure": "https://slashcure.com/orthopedic-surgeons/sukkur/dr-ahmed-raza-laghari"
     },
     {
       "name": "Dr. Aneel Ahmed Ghanghro",
       "city": "Sukkur",
-      "specialty": "Consultant Cardiologist & Advanced Cardiac Imaging Specialist",
+      "specialty": "Cardiology",
       "hospital": "Hira Medical Centre, Sukkur",
       "degree": "MBBS, FCPS (Cardiology)",
       "hospitalpro": "/dr-aneel-ahmed-ghanghro.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Aneel%20Ahmed%20Ghanghro"
+      "slashcure": "https://slashcure.com/consultant-cardiologists/sukkur/dr-aneel-ahmed-ghanghro"
     },
     {
       "name": "Dr. Dost Muhammad",
       "city": "Sukkur",
-      "specialty": "Consultant Orthopaedic, Spine, Paediatric Orthopaedic & Trauma Surgeon",
+      "specialty": "Orthopedics",
       "hospital": "Dr. Ziauddin Hospital, Sukkur",
       "degree": "MBBS, FCPS",
       "hospitalpro": "",
@@ -285,11 +285,11 @@
     {
       "name": "Dr. Habibullah Maitlo",
       "city": "Sukkur",
-      "specialty": "Consultant Paediatric Surgeon",
+      "specialty": "Paediatric Surgery",
       "hospital": "Dr. Ziauddin Hospital, Sukkur",
       "degree": "MBBS, FCPS · 5+ years of experience listed",
       "hospitalpro": "/dr-habibullah-maitlo.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Habibullah%20Maitlo"
+      "slashcure": "https://slashcure.com/paediatric-surgeons/sukkur/dr-habibullah-maitlo"
     },
     {
       "name": "Dr. Halar Dahar",
@@ -303,11 +303,11 @@
     {
       "name": "Dr. Komal Kandhir",
       "city": "Sukkur",
-      "specialty": "Consultant Physiotherapist",
+      "specialty": "Physiotherapy",
       "hospital": "Mustafai Trust Hospital, Sukkur",
       "degree": "DPT",
       "hospitalpro": "/dr-komal-kandhir.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Komal%20Kandhir"
+      "slashcure": "https://slashcure.com/consultant-physiotherapists/sukkur/dr-komal-kandhir-pt"
     },
     {
       "name": "Dr. Muhammad Nasir Soomro",
@@ -321,34 +321,34 @@
     {
       "name": "Dr. Murk Channa",
       "city": "Sukkur",
-      "specialty": "Consultant Gastroenterologist & Hepatologist",
+      "specialty": "Gastroenterology",
       "hospital": "River City Hospital, Sukkur",
       "degree": "MBBS, FCPS",
       "hospitalpro": "/dr-murk-channa.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Murk%20Channa"
+      "slashcure": "https://slashcure.com/gastroenterologists/sukkur/dr-murk-channa"
     },
     {
       "name": "Dr. Naveed Ahmed Mahar",
       "city": "Sukkur",
-      "specialty": "Consultant Urologist, Robotic & Kidney Transplant Surgeon",
+      "specialty": "Urology",
       "hospital": "Dr. Ziauddin Hospital, Sukkur",
       "degree": "MBBS, FCPS (Urology), FACS, MRCS, CHPE",
       "hospitalpro": "/dr-naveed-ahmed-mahar.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Naveed%20Ahmed%20Mahar"
+      "slashcure": "https://slashcure.com/urologists/sukkur/dr-naveed-ahmed-mahar"
     },
     {
       "name": "Dr. Riaz Hussain Hakro",
       "city": "Sukkur",
-      "specialty": "Consultant Pulmonologist and Assistant Professor of Pulmonology",
+      "specialty": "Pulmonology",
       "hospital": "",
       "degree": "MBBS, FCPS · 20+ years of experience",
       "hospitalpro": "/dr-riaz-hussain-hakro.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Riaz%20Hussain%20Hakro"
+      "slashcure": "https://slashcure.com/pulmonologists/sukkur/dr-riaz-hussain-hakro"
     },
     {
       "name": "Dr. Saima Shaikh",
       "city": "Sukkur",
-      "specialty": "Consultant Gynecologist & Obstetrician",
+      "specialty": "Gynecology & Obstetrics",
       "hospital": "River City Hospital, Sukkur",
       "degree": "MBBS, FCPS",
       "hospitalpro": "",
@@ -357,11 +357,11 @@
     {
       "name": "Dr. Sajid Khadim",
       "city": "Sukkur",
-      "specialty": "Pediatrician and Paediatrics Registrar",
+      "specialty": "Pediatrics",
       "hospital": "",
       "degree": "MBBS · FCPS (Paediatrics) · PGPN Pro · 9+ years' experience",
       "hospitalpro": "/dr-sajid-khadim.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Sajid%20Khadim"
+      "slashcure": "https://slashcure.com/pediatricians/sukkur/dr-sajid-khadim"
     },
     {
       "name": "Dr. Tahir Mumtaz Memon",
@@ -379,16 +379,16 @@
       "hospital": "Red Crescent Hospital, Sukkur",
       "degree": "MBBS, FCPS",
       "hospitalpro": "/dr-tofique-ahmed-kamboh.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Tofique%20Ahmed%20Kamboh"
+      "slashcure": "https://slashcure.com/consultant-physicians/sukkur/dr-tofique-ahmed-kamboh"
     },
     {
       "name": "Prof. Dr. Kirpal Das Makheja",
       "city": "Sukkur",
-      "specialty": "Professor of Medicine and Senior Consultant Physician, Gastroenterologist and Hepatologist",
+      "specialty": "Gastroenterology & Hepatology",
       "hospital": "Hira Medical Centre",
       "degree": "MBBS, MD (USA), FCPS (Pakistan), FACP (USA), MRCP (Ireland), MRCP (UK), FRCP (Ireland), FRCP (Glasgow), FRCP (London)",
       "hospitalpro": "/dr-kirpal-das-makheja.html",
-      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Prof.%20Dr.%20Kirpal%20Das%20Makheja"
+      "slashcure": "https://slashcure.com/consultant-physicians/sukkur/dr-kirpal-das-makheja"
     }
   ]
 }
