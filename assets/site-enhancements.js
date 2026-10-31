@@ -23,9 +23,14 @@ function installPromo(){
  banner.id="hp-global-slashcure-promo";
  banner.setAttribute("aria-label","Explore healthcare with Slashcure");
  banner.innerHTML='<div class="hp-promo-copy"><div class="hp-promo-name">Slash<strong>cure</strong><small>.com</small></div><div class="hp-promo-title">Explore Doctors, Hospitals &amp; Live Schedules in Your City</div><p class="hp-promo-subtitle">Health Care, Connected.</p></div><a class="hp-promo-cta" href="https://slashcure.com/" target="_blank" rel="noopener noreferrer">Visit Slashcure.com ↗</a>';
+ // Place the promotion where visitors see it, not at the bottom of long profiles.
+ var main=document.querySelector("main");
+ var hero=document.querySelector("main > section:first-child, main > .hero:first-child, main > .hp-page-hero:first-child");
+ var header=document.querySelector("body > header");
  var footer=document.querySelector("footer");
- var target=document.querySelector("main");
- if(target){target.appendChild(banner)}
+ if(hero&&hero.parentNode){hero.insertAdjacentElement("afterend",banner)}
+ else if(main){main.insertBefore(banner,main.firstChild)}
+ else if(header&&header.parentNode){header.insertAdjacentElement("afterend",banner)}
  else if(footer&&footer.parentNode){footer.parentNode.insertBefore(banner,footer)}
  else document.body.appendChild(banner);
 }
