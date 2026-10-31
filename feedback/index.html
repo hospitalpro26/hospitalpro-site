@@ -29,7 +29,7 @@ form.addEventListener('submit',function(e){
   const message=String(data.message||'').trim();
   if(message.length<10){status.className='status error';status.textContent='Please include at least 10 characters.';return;}
   const subject='HospitalPro feedback: '+(data.category||'Website feedback');
-  const body=['Feedback for HospitalPro','Category: '+(data.category||''),'Rating: '+(data.rating||''),'Name: '+(data.name||'Not provided'),'Reply email: '+(data.email||'Not provided'),'','Message:',message,'','Please do not include personal health details or patient records.'].join('\\n');
+  const body=['Feedback for HospitalPro','Category: '+(data.category||''),'Rating: '+(data.rating||''),'Name: '+(data.name||'Not provided'),'Reply email: '+(data.email||'Not provided'),'','Message:',message,'','Please do not include personal health details or patient records.'].join('\n');
   const mail='mailto:slashcureofficial@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
   status.className='status ok';status.innerHTML='Your email application should open. <strong>Feedback is not sent until you press Send in your email app.</strong> If it does not open, <a href="'+mail.replace(/&/g,'&amp;')+'">open the email draft</a>.';
   window.location.href=mail;
