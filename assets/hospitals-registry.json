@@ -1,0 +1,61 @@
+{
+  "reviewed": "2026-10-31",
+  "hospitals": [
+    {
+      "name": "Dr. Ziauddin Hospital Sukkur",
+      "city": "Sukkur",
+      "category": "Hospital",
+      "description": "Featured doctors in urology, gynecology, paediatrics, paediatric surgery and orthopaedics.",
+      "url": "https://slashcure.com/hospitals",
+      "directory": "/doctors-in-sukkur/"
+    },
+    {
+      "name": "Hira Medical Centre",
+      "city": "Sukkur",
+      "category": "Medical centre",
+      "description": "Featured specialists in internal medicine, gastroenterology, cardiology, pulmonology and orthopaedics.",
+      "url": "https://slashcure.com/hospitals",
+      "directory": "/doctors-in-sukkur/"
+    },
+    {
+      "name": "River City Hospital",
+      "city": "Sukkur",
+      "category": "Hospital",
+      "description": "Featured consultations in gastroenterology and women's health.",
+      "url": "https://slashcure.com/hospitals",
+      "directory": "/doctors-in-sukkur/"
+    },
+    {
+      "name": "Sukkur Diagnostic Centre",
+      "city": "Sukkur",
+      "category": "Diagnostic centre",
+      "description": "Healthcare centre featured in the Sukkur directory.",
+      "url": "https://slashcure.com/hospitals/sukkur/sukkur-diagnostic-centre",
+      "directory": "/doctors-in-sukkur/"
+    },
+    {
+      "name": "Alkhidmat Mother & Child Health Care Center",
+      "city": "Sukkur",
+      "category": "Mother and child care",
+      "description": "Healthcare centre highlighted in the Sukkur directory.",
+      "url": "https://slashcure.com/hospitals/sukkur/alkhidmatmchcc",
+      "directory": "/doctors-in-sukkur/"
+    },
+    {
+      "name": "NEO Medical Center",
+      "city": "Lahore",
+      "category": "Medical centre",
+      "description": "Lahore medical centre with featured doctors.",
+      "url": "https://slashcure.com/hospitals/lahore/neo-medical-center",
+      "directory": "/doctors-in-lahore/"
+    },
+    {
+      "name": "Geo Pak International Hospital",
+      "city": "Lahore",
+      "category": "Hospital",
+      "description": "Hospital featured in the Lahore directory.",
+      "url": "https://slashcure.com/hospitals/lahore/geo-pak-international-hospital",
+      "directory": "/doctors-in-lahore/"
+    }
+  ]
+}
