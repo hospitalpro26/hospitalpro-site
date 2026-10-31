@@ -1,0 +1,394 @@
+{
+  "lastReviewed": "2026-10-31",
+  "source": "Published HospitalPro city-directory structured data",
+  "notice": "Doctor details and availability require confirmation on Slashcure.",
+  "doctors": [
+    {
+      "name": "Dr. Imran Ali Kalwar",
+      "city": "Ghotki",
+      "specialty": "Medical Specialists",
+      "hospital": "",
+      "degree": "",
+      "hospitalpro": "/dr-imran-ali-kalwar.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Ghotki&q=Dr.%20Imran%20Ali%20Kalwar"
+    },
+    {
+      "name": "Dr. Ali Haseeb Qazi",
+      "city": "Hyderabad",
+      "specialty": "Neurosurgeons",
+      "hospital": "",
+      "degree": "",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/neurosurgeons/hyderabad/dr-ali-haseeb-qazi"
+    },
+    {
+      "name": "Dr. Ashfaque Ali Baloch",
+      "city": "Khairpur",
+      "specialty": "Medical Specialists",
+      "hospital": "",
+      "degree": "",
+      "hospitalpro": "/dr-ashfaque-ali-baloch.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Khairpur&q=Dr.%20Ashfaque%20Ali%20Baloch"
+    },
+    {
+      "name": "Dr. Habibullah Maitlo",
+      "city": "Khairpur",
+      "specialty": "Medical Specialists",
+      "hospital": "",
+      "degree": "",
+      "hospitalpro": "/dr-habibullah-maitlo.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Khairpur&q=Dr.%20Habibullah%20Maitlo"
+    },
+    {
+      "name": "Dr. Kanwal Aijaz",
+      "city": "Khairpur",
+      "specialty": "Medical Specialists",
+      "hospital": "",
+      "degree": "",
+      "hospitalpro": "/dr-kanwal-aijaz.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Khairpur&q=Dr.%20Kanwal%20Aijaz"
+    },
+    {
+      "name": "Dr Aftab Ansar Lodhi (PT)",
+      "city": "Lahore",
+      "specialty": "Consultant Physiotherapist",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "DPT",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/consultant-physiotherapists/lahore/dr-aftab-ansar-lodhi-pt"
+    },
+    {
+      "name": "Dr Tallal Ejaz",
+      "city": "Lahore",
+      "specialty": "Dentist",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "BDS, RDS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/hospitals/lahore/neo-medical-center"
+    },
+    {
+      "name": "Dr. Ammara Gill",
+      "city": "Lahore",
+      "specialty": "Gynecologist & Obstetrician",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "MBBS, MCPS, FCPS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/hospitals/lahore/neo-medical-center"
+    },
+    {
+      "name": "Dr. Aurangzaib Muhyuddin",
+      "city": "Lahore",
+      "specialty": "Pediatrician",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "MBBS, MCPS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/pediatricians/lahore/dr-aurangzaib-muhyuddin"
+    },
+    {
+      "name": "Dr. Awais Malik",
+      "city": "Lahore",
+      "specialty": "Advanced Laparoscopic & Bariatric Surgeon",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "MBBS, FCPS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/hospitals/lahore/neo-medical-center"
+    },
+    {
+      "name": "Dr. Ayman",
+      "city": "Lahore",
+      "specialty": "Gynecologist & Obstetrician",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "MBBS, FCPS, CHPE",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/hospitals/lahore/neo-medical-center"
+    },
+    {
+      "name": "Dr. Aymen Javed",
+      "city": "Lahore",
+      "specialty": "Gynecologist & Obstetrician",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "MBBS, FCPS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/hospitals/lahore/neo-medical-center"
+    },
+    {
+      "name": "Dr. Kareem Nawaz",
+      "city": "Lahore",
+      "specialty": "Consultant Physiotherapist",
+      "hospital": "Rehab Expert Physiotherapy and Rehabilitation · Canal View, near Thokar Niaz Baig",
+      "degree": "DPT",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/consultant-physiotherapists/lahore/dr-kareem-nawaz"
+    },
+    {
+      "name": "Dr. M. Amir Ishaq",
+      "city": "Lahore",
+      "specialty": "Neonatal & Pediatric Laparoscopic Surgeon",
+      "hospital": "Lahore clinics",
+      "degree": "MBBS, FCPS (Pediatric Surgery)",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/paediatric-surgeons/lahore/dr-muhammad-amir-ishaq"
+    },
+    {
+      "name": "Dr. Muhammad Haris Burki",
+      "city": "Lahore",
+      "specialty": "Psychiatrist & Sexual Medicine Specialist",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "MBBS, PhD (Sexology), FECSM",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/hospitals/lahore/neo-medical-center"
+    },
+    {
+      "name": "Dr. Muhammad Irfan Shakir",
+      "city": "Lahore",
+      "specialty": "Family Medicine",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "MBBS, MCPS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/family-physicians/lahore/dr-muhammad-irfan-shakir"
+    },
+    {
+      "name": "Dr. Muhammad Umair Arshad",
+      "city": "Lahore",
+      "specialty": "Paediatric Surgeon & Urologist",
+      "hospital": "Hamayon Hospital, Wapda Town · Iqa Medical Complex",
+      "degree": "MBBS, MS (Paediatric Surgery)",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/paediatric-surgeons/lahore/dr-muhammad-umair-arshad"
+    },
+    {
+      "name": "Dr. Osman Mohsin",
+      "city": "Lahore",
+      "specialty": "Dermatologist",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "MBBS, Diploma in Dermatology",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/hospitals/lahore/neo-medical-center"
+    },
+    {
+      "name": "Dr. Rafia Shah",
+      "city": "Lahore",
+      "specialty": "Dentist",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "BDS, RDS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/hospitals/lahore/neo-medical-center"
+    },
+    {
+      "name": "Dr. Sadiya Binish",
+      "city": "Lahore",
+      "specialty": "Gynecologist & Obstetrician",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "MBBS, FCPS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/hospitals/lahore/neo-medical-center"
+    },
+    {
+      "name": "Dr. Sara Tariq",
+      "city": "Lahore",
+      "specialty": "Endocrinologist (Diabetes)",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "MBBS, FCPS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/hospitals/lahore/neo-medical-center"
+    },
+    {
+      "name": "Dr. Tayyaba Tariq",
+      "city": "Lahore",
+      "specialty": "Neurosurgeon",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "MBBS, FCPS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/hospitals/lahore/neo-medical-center"
+    },
+    {
+      "name": "Dr. Tehreem Rauf",
+      "city": "Lahore",
+      "specialty": "Family Medicine",
+      "hospital": "NEO Medical Center · Johar Town",
+      "degree": "MBBS, MCPS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/hospitals/lahore/neo-medical-center"
+    },
+    {
+      "name": "Dr. Usman Ahmad Kamboh",
+      "city": "Lahore",
+      "specialty": "Consultant Neurosurgeon & Brain and Spine Surgeon",
+      "hospital": "Iqra Medical Complex · Johar Town, Lahore",
+      "degree": "MBBS, FCPS (Neurosurgery)",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/neurosurgeons/lahore/dr-usman-ahmad-kamboh"
+    },
+    {
+      "name": "Dr. Sajid Abbasi",
+      "city": "Larkana",
+      "specialty": "Urologists",
+      "hospital": "",
+      "degree": "",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/urologists/larkana/dr-sajid-abbasi"
+    },
+    {
+      "name": "Dr. Aaisha Aman",
+      "city": "Sukkur",
+      "specialty": "Consultant Gynecologist, Obstetrician, Laparoscopic Surgeon & Infertility Specialist",
+      "hospital": "Dr. Ziauddin Hospital, Sukkur",
+      "degree": "MBBS, MS, CHPE · Associate Member RCOG (UK)",
+      "hospitalpro": "/dr-aaisha-aman.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Aaisha%20Aman"
+    },
+    {
+      "name": "Dr. Abdul Ahad Solangi",
+      "city": "Sukkur",
+      "specialty": "General Physician & Paediatrician",
+      "hospital": "",
+      "degree": "Medical practitioner",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Abdul%20Ahad%20Solangi"
+    },
+    {
+      "name": "Dr. Agha Wasif",
+      "city": "Sukkur",
+      "specialty": "Consultant Psychiatrist",
+      "hospital": "Bhatti Children Hospital, Sukkur",
+      "degree": "Psychiatry specialist",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Agha%20Wasif"
+    },
+    {
+      "name": "Dr. Ahmed Raza Laghari",
+      "city": "Sukkur",
+      "specialty": "Consultant Orthopedic Surgeon & Ilizarov Surgery Specialist",
+      "hospital": "Hira Medical Centre, Sukkur",
+      "degree": "MBBS, FCPS",
+      "hospitalpro": "/dr-ahmed-raza-laghari.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Ahmed%20Raza%20Laghari"
+    },
+    {
+      "name": "Dr. Aneel Ahmed Ghanghro",
+      "city": "Sukkur",
+      "specialty": "Consultant Cardiologist & Advanced Cardiac Imaging Specialist",
+      "hospital": "Hira Medical Centre, Sukkur",
+      "degree": "MBBS, FCPS (Cardiology)",
+      "hospitalpro": "/dr-aneel-ahmed-ghanghro.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Aneel%20Ahmed%20Ghanghro"
+    },
+    {
+      "name": "Dr. Dost Muhammad",
+      "city": "Sukkur",
+      "specialty": "Consultant Orthopaedic, Spine, Paediatric Orthopaedic & Trauma Surgeon",
+      "hospital": "Dr. Ziauddin Hospital, Sukkur",
+      "degree": "MBBS, FCPS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/orthopedic-surgeons/sukkur/dr-dost-muhammad"
+    },
+    {
+      "name": "Dr. Habibullah Maitlo",
+      "city": "Sukkur",
+      "specialty": "Consultant Paediatric Surgeon",
+      "hospital": "Dr. Ziauddin Hospital, Sukkur",
+      "degree": "MBBS, FCPS · 5+ years of experience listed",
+      "hospitalpro": "/dr-habibullah-maitlo.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Habibullah%20Maitlo"
+    },
+    {
+      "name": "Dr. Halar Dahar",
+      "city": "Sukkur",
+      "specialty": "Consultant General & Laparoscopic Surgeon",
+      "hospital": "",
+      "degree": "Consultant General Surgeon",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/general-surgeons-laproscopic-surgeons/sukkur/dr-halar-dahar"
+    },
+    {
+      "name": "Dr. Komal Kandhir",
+      "city": "Sukkur",
+      "specialty": "Consultant Physiotherapist",
+      "hospital": "Mustafai Trust Hospital, Sukkur",
+      "degree": "DPT",
+      "hospitalpro": "/dr-komal-kandhir.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Komal%20Kandhir"
+    },
+    {
+      "name": "Dr. Muhammad Nasir Soomro",
+      "city": "Sukkur",
+      "specialty": "Chest Specialist",
+      "hospital": "Dr. Shahid Mirani Hospital, Sukkur",
+      "degree": "Chest specialist",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Muhammad%20Nasir%20Soomro"
+    },
+    {
+      "name": "Dr. Murk Channa",
+      "city": "Sukkur",
+      "specialty": "Consultant Gastroenterologist & Hepatologist",
+      "hospital": "River City Hospital, Sukkur",
+      "degree": "MBBS, FCPS",
+      "hospitalpro": "/dr-murk-channa.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Murk%20Channa"
+    },
+    {
+      "name": "Dr. Naveed Ahmed Mahar",
+      "city": "Sukkur",
+      "specialty": "Consultant Urologist, Robotic & Kidney Transplant Surgeon",
+      "hospital": "Dr. Ziauddin Hospital, Sukkur",
+      "degree": "MBBS, FCPS (Urology), FACS, MRCS, CHPE",
+      "hospitalpro": "/dr-naveed-ahmed-mahar.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Naveed%20Ahmed%20Mahar"
+    },
+    {
+      "name": "Dr. Riaz Hussain Hakro",
+      "city": "Sukkur",
+      "specialty": "Consultant Pulmonologist and Assistant Professor of Pulmonology",
+      "hospital": "",
+      "degree": "MBBS, FCPS · 20+ years of experience",
+      "hospitalpro": "/dr-riaz-hussain-hakro.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Riaz%20Hussain%20Hakro"
+    },
+    {
+      "name": "Dr. Saima Shaikh",
+      "city": "Sukkur",
+      "specialty": "Consultant Gynecologist & Obstetrician",
+      "hospital": "River City Hospital, Sukkur",
+      "degree": "MBBS, FCPS",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Saima%20Shaikh"
+    },
+    {
+      "name": "Dr. Sajid Khadim",
+      "city": "Sukkur",
+      "specialty": "Pediatrician and Paediatrics Registrar",
+      "hospital": "",
+      "degree": "MBBS · FCPS (Paediatrics) · PGPN Pro · 9+ years' experience",
+      "hospitalpro": "/dr-sajid-khadim.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Sajid%20Khadim"
+    },
+    {
+      "name": "Dr. Tahir Mumtaz Memon",
+      "city": "Sukkur",
+      "specialty": "Consultant Cardiologist",
+      "hospital": "SICVD, Sukkur",
+      "degree": "Cardiology specialist",
+      "hospitalpro": "",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Tahir%20Mumtaz%20Memon"
+    },
+    {
+      "name": "Dr. Tofique Ahmed Kamboh",
+      "city": "Sukkur",
+      "specialty": "Consultant Physician",
+      "hospital": "Red Crescent Hospital, Sukkur",
+      "degree": "MBBS, FCPS",
+      "hospitalpro": "/dr-tofique-ahmed-kamboh.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Dr.%20Tofique%20Ahmed%20Kamboh"
+    },
+    {
+      "name": "Prof. Dr. Kirpal Das Makheja",
+      "city": "Sukkur",
+      "specialty": "Professor of Medicine and Senior Consultant Physician, Gastroenterologist and Hepatologist",
+      "hospital": "Hira Medical Centre",
+      "degree": "MBBS, MD (USA), FCPS (Pakistan), FACP (USA), MRCP (Ireland), MRCP (UK), FRCP (Ireland), FRCP (Glasgow), FRCP (London)",
+      "hospitalpro": "/dr-kirpal-das-makheja.html",
+      "slashcure": "https://slashcure.com/doctors?type=all&loc=Sukkur&q=Prof.%20Dr.%20Kirpal%20Das%20Makheja"
+    }
+  ]
+}
