@@ -42,17 +42,26 @@
     const headingId = "hp-hj-heading-"+ordinal;
     root.innerHTML = `<section class="hp-hj" aria-labelledby="${headingId}">
       <div class="hp-hj-intro">
-        <span class="hp-hj-kicker">📍 Discover Sukkur • Animated hospital journey</span>
-        <h2 id="${headingId}">Hop through Sukkur's hospitals</h2>
-        <p>Follow our little explorer as he jumps from hospital to hospital. Discover ${hospitals.length} Sukkur hospitals and healthcare centers.</p>
+        <div class="hp-hj-identity"><span class="hp-hj-identity-mark" aria-hidden="true">✚</span><span>HospitalPro<em>.online</em></span></div>
+        <span class="hp-hj-kicker">FIND <b>•</b> EXPLORE <b>•</b> COMPARE HOSPITALS</span>
+        <div class="hp-hj-title-wrap">
+          <span class="hp-hj-ecg" aria-hidden="true">♡ ━╱╲━</span>
+          <h2 id="${headingId}">Discover <span>Sukkur City Hospitals</span></h2>
+          <span class="hp-hj-ecg" aria-hidden="true">━╱╲━ ♡</span>
+        </div>
+        <p>Join our little healthcare explorer as he jumps across <strong>${hospitals.length} hospitals and healthcare centers in Sukkur.</strong> Select a rooftop or follow the glowing trail.</p>
       </div>
       <div class="hp-hj-scene" aria-label="Illustrated jumping journey past ${hospitals.length} Sukkur hospitals">
         <span class="hp-hj-cloud"></span><span class="hp-hj-cloud"></span><span class="hp-hj-cloud"></span>
+        <div class="hp-hj-river" aria-hidden="true"></div>
+        <div class="hp-hj-skyline" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         ${bridge}
+        <div class="hp-hj-garden" aria-hidden="true"></div>
         <div class="hp-hj-rail" tabindex="0" role="group" aria-label="Hospital stops. Swipe or use previous and next buttons.">
           ${hospitals.map((h,i)=>`<button type="button" class="hp-hj-stop" data-hj-stop="${i}" aria-label="Stop ${i+1}: ${escapeHtml(h.name)}" aria-current="${i===0?"step":"false"}">
             <span class="hp-hj-building${h.photo?" hp-hj-building--sicvd":""}" data-kind="${h.type}" aria-hidden="true">${h.photo?`<img class="hp-hj-building-photo" src="${h.photo}" alt="" loading="lazy" decoding="async"><span class="hp-hj-cardiac" aria-hidden="true">♥</span>`:windowGrid}<span class="hp-hj-sign">${escapeHtml(h.sign)}</span></span>
             <span class="hp-hj-station">${escapeHtml(h.name)}</span>
+            ${i<hospitals.length-1?'<span class="hp-hj-hop-arc" aria-hidden="true"></span>':""}
           </button>`).join("")}
         </div>
         <div class="hp-hj-traveler" aria-hidden="true">${character}</div>
@@ -69,6 +78,7 @@
           <a class="hp-hj-action hp-hj-action--link" data-hj-open href="${hospitals[0].url}">View hospital →</a>
         </div>
       </div>
+      <div class="hp-hj-guide" aria-label="Explore HospitalPro"><span>📍 Explore hospitals</span><span>🏥 View hospital profiles</span><span>🩺 Find specialist care</span></div>
       <p class="hp-hj-footnote">A playful rooftop-jumping discovery trail, not a geographic route or hospital ranking. For stops without a dedicated page, the link opens Sukkur's doctors directory. <a href="/sukkur-hospital-journey/">Open full journey ↗</a></p>
     </section>`;
 
