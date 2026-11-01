@@ -684,6 +684,15 @@ section{padding:44px 0 6px}
 .hp-city-picker small{display:block;font-size:11px;color:#5b6c83;margin-top:9px}
 .hp-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 </style>
+<style id="hp-city-results-styles">
+.hp-city-results{background:linear-gradient(135deg,#f1f7ff,#fff);padding:20px;border:1px solid #cddff8;border-radius:20px;margin:8px 0 22px;overflow:hidden}
+.hp-city-results h3{font-size:23px;color:#0b397d;margin:0 0 6px}
+.hp-city-results p{color:#53677e;font-size:14px;margin:0 0 16px}
+.hp-city-results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px;align-items:stretch;margin-bottom:14px}
+.hp-city-results-grid .dr{width:100%;min-width:0;margin:0}
+.hp-city-results-link{display:inline-block;color:#1159b7;font-weight:700;text-decoration:underline;text-underline-offset:3px;margin-top:6px}
+.hp-other-doctors-label{font-weight:700;color:#0b397d;font-size:17px;padding:9px 4px}
+</style>
 </head>
 <body>
 
@@ -1322,9 +1331,18 @@ function render(){
       var ai=order.indexOf(a.n),bi=order.indexOf(b.n);
       return hpCityFirst(a,b) || ((ai<0?99:ai)-(bi<0?99:bi));
     });
-    var cards=featured.map(dCard2).join('');
-    dgrid.classList.add('hp-moving-doctors');
-    dgrid.innerHTML='<div class="hp-doctor-track">'+cards+cards+'</div><div class="hp-doctor-actions"><a class="btn" href="https://slashcure.com/doctors">Explore more doctors on Slashcure →</a></div>';
+    var local=hpSelectedCity?featured.filter(function(d){return hpCityMatch(d.loc,hpSelectedCity);}):[];
+    var others=hpSelectedCity?featured.filter(function(d){return !hpCityMatch(d.loc,hpSelectedCity);}):featured;
+    var cityDirectory={'Sukkur':'/doctors-in-sukkur/','Khairpur':'/doctors-in-khairpur/','Ghotki':'/doctors-in-ghotki/','Larkana':'/doctors-in-larkana/','Hyderabad':'/doctors-in-hyderabad/','Lahore':'/doctors-in-lahore/'};
+    var cityLink=cityDirectory[hpSelectedCity]||('https://slashcure.com/doctors?type=all&loc='+encodeURIComponent(hpSelectedCity)+'&q=');
+    var localSection=hpSelectedCity?'<div class="hp-city-results" aria-label="Doctors in '+esc(hpSelectedCity)+'"><h3>📍 Doctors in '+esc(hpSelectedCity)+'</h3>'+
+      (local.length?'<p>Showing '+local.length+' featured doctor'+(local.length===1?'':'s')+' in your selected city.</p><div class="hp-city-results-grid">'+local.map(dCard2).join('')+'</div>':
+      '<p>We do not currently have featured doctors listed for '+esc(hpSelectedCity)+' on this homepage. Explore the full city directory below.</p>')+
+      '<a class="hp-city-results-link" href="'+esc(cityLink)+'">Explore more doctors in '+esc(hpSelectedCity)+' →</a></div>':'';
+    var cards=others.map(dCard2).join('');
+    dgrid.classList.toggle('hp-moving-doctors',!!others.length);
+    dgrid.innerHTML=localSection+(others.length?'<div class="hp-other-doctors-label">'+(hpSelectedCity?'Explore doctors from other cities':'Explore featured doctors')+'</div><div class="hp-doctor-track">'+cards+cards+'</div>':'')+
+      '<div class="hp-doctor-actions"><a class="btn" href="https://slashcure.com/doctors">Explore more doctors on Slashcure →</a></div>';
   }else{
     dgrid.classList.remove('hp-moving-doctors');
     dgrid.innerHTML=ds.length?withAds(ds)+SL_AD:'<div class="empty" style="display:block">No doctors match that search yet. Try another word or clear the filter.</div>';
