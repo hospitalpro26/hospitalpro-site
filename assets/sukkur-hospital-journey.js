@@ -67,7 +67,7 @@
           <a class="hp-hj-action hp-hj-action--link" data-hj-open href="${hospitals[0].url}">View hospital →</a>
         </div>
       </div>
-      <p class="hp-hj-footnote">A playful discovery trail, not a geographic route or hospital ranking. For stops without a dedicated page, the link opens Sukkur's doctors directory.</p>
+      <p class="hp-hj-footnote">A playful discovery trail, not a geographic route or hospital ranking. For stops without a dedicated page, the link opens Sukkur's doctors directory. <a href="/sukkur-hospital-journey/">Open full journey ↗</a></p>
     </section>`;
     const section=root.querySelector(".hp-hj"), rail=root.querySelector(".hp-hj-rail"), stops=[...root.querySelectorAll("[data-hj-stop]")];
     const count=root.querySelector(".hp-hj-count"),selected=root.querySelector(".hp-hj-selected"), open=root.querySelector("[data-hj-open]"), toggle=root.querySelector("[data-hj-pause]");
@@ -91,7 +91,7 @@
       open.setAttribute("aria-label",h.url?"View "+h.name:"Browse doctors in Sukkur");
       if(move) {
         const left=stops[current].offsetLeft-rail.clientWidth*.2;
-        rail.scrollTo({left:Math.max(0,left),behavior:reduce?"instant":"smooth"});
+        rail.scrollTo({left:Math.max(0,left),behavior:reduce?"auto":"smooth"});
       }
     }
     root.querySelector("[data-hj-prev]").addEventListener("click",()=>activate(current-1,true));
