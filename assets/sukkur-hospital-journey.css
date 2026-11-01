@@ -1,0 +1,76 @@
+
+/* Sukkur Hospital Discovery Journey — isolated, responsive component */
+.hp-hj{--hj-ink:#153354;--hj-blue:#0f64aa;--hj-mint:#dff8ed;position:relative;max-width:1250px;margin:32px auto 42px;border:1px solid #b6d9ed;border-radius:26px;overflow:hidden;background:linear-gradient(145deg,#f9fdff 0%,#e8f6ff 52%,#e7f8ed 100%);box-shadow:0 14px 38px rgba(12,66,109,.11);color:var(--hj-ink);font-family:inherit;text-align:left;isolation:isolate}
+.hp-hj *{box-sizing:border-box}
+.hp-hj-intro{position:relative;z-index:3;padding:24px clamp(18px,4vw,42px) 8px}
+.hp-hj-kicker{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:850;color:#116da9}
+.hp-hj-intro h2{font-weight:900;font-size:clamp(24px,3vw,36px);line-height:1.15;margin:7px 0 8px;color:#102f51}
+.hp-hj-intro p{max-width:780px;color:#416580;line-height:1.6;font-size:15px;margin:0}
+.hp-hj-scene{height:340px;position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(192,235,255,.35),rgba(236,254,246,.1) 76%,#b9e6a7 76%,#a9d993 100%)}
+.hp-hj-scene:before{content:"";position:absolute;width:95px;height:95px;border-radius:50%;background:#ffe28a;top:22px;right:13%;opacity:.8;box-shadow:0 0 0 15px rgba(255,230,155,.19)}
+.hp-hj-cloud{position:absolute;display:block;border-radius:50px;width:78px;height:24px;background:rgba(255,255,255,.84);top:42px;left:12%;filter:drop-shadow(18px -9px 0 rgba(255,255,255,.85));animation:hp-hj-cloud 22s ease-in-out infinite alternate;pointer-events:none}
+.hp-hj-cloud:nth-child(2){top:90px;left:56%;transform:scale(.65);animation-duration:29s}
+.hp-hj-cloud:nth-child(3){top:25px;left:77%;transform:scale(.75);animation-duration:25s}
+.hp-hj-bridge{position:absolute;right:0;bottom:92px;width:195px;height:85px;opacity:.28;pointer-events:none}
+.hp-hj-rail{position:relative;z-index:2;display:flex;align-items:flex-end;gap:18px;width:100%;height:100%;overflow-x:auto;overflow-y:hidden;padding:17px max(45px,12%) 75px;scroll-snap-type:x mandatory;scroll-padding-left:max(45px,12%);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.hp-hj-rail::-webkit-scrollbar{display:none}
+.hp-hj-stop{position:relative;appearance:none;border:0;background:transparent;color:inherit;flex:0 0 210px;height:245px;display:flex;align-items:center;flex-direction:column;justify-content:end;padding:0 7px 12px;scroll-snap-align:start;cursor:pointer;font:inherit;border-radius:16px;transition:transform .3s,filter .3s}
+.hp-hj-stop:hover,.hp-hj-stop:focus-visible{transform:translateY(-4px);outline:2px solid #268cd0;outline-offset:-2px;background:rgba(255,255,255,.3)}
+.hp-hj-stop[aria-current="step"] .hp-hj-building{filter:drop-shadow(0 9px 12px rgba(21,92,144,.24));transform:translateY(-6px)}
+.hp-hj-building{position:relative;display:block;width:158px;height:144px;margin:0 auto 12px;background:linear-gradient(90deg,#f0f9ff,#fff,#e3f3ff);border:3px solid #90b8d3;border-bottom:6px solid #598bab;border-radius:11px 11px 4px 4px;box-shadow:inset -10px 0 0 rgba(44,127,182,.10),0 8px 0 rgba(54,103,109,.13);transition:transform .3s,filter .3s}
+.hp-hj-building:before{content:"✚";position:absolute;left:50%;top:-24px;transform:translateX(-50%);display:grid;place-items:center;width:41px;height:34px;border-radius:10px 10px 5px 5px;background:#fff;color:#dc4f5b;border:3px solid #9ac6df;font-size:23px;font-weight:900}
+.hp-hj-building:after{content:"";position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);width:35px;height:48px;border:3px solid #7bb7d7;border-bottom:0;background:linear-gradient(90deg,#bceaff 49%,#7bb9d8 49%,#7bb9d8 53%,#bceaff 53%);border-radius:5px 5px 0 0}
+.hp-hj-window-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;position:absolute;left:12px;right:12px;top:54px}
+.hp-hj-window-grid i{display:block;height:19px;background:linear-gradient(135deg,#7fc8ed,#d7f7ff);border:2px solid #468dbd;border-radius:3px;box-shadow:inset -2px 0 0 rgba(255,255,255,.5)}
+.hp-hj-sign{position:absolute;top:13px;left:-12px;right:-12px;min-height:36px;padding:4px 6px;background:#fff;border:2px solid #7db7d6;border-radius:7px;display:grid;place-items:center;line-height:1.14;font-size:11px;text-align:center;color:#153c66;font-weight:850;box-shadow:0 3px 0 rgba(47,108,143,.11)}
+.hp-hj-building[data-kind="red"]{background:linear-gradient(90deg,#ffe5e7,#fff,#ffebed);border-color:#e69ba5;border-bottom-color:#b85e70}
+.hp-hj-building[data-kind="red"] .hp-hj-sign{border-color:#e98d9a}
+.hp-hj-building[data-kind="heart"]:before{content:"♥";color:#db4859}
+.hp-hj-building[data-kind="pink"]{background:linear-gradient(90deg,#faeaff,#fff,#f4e1fc);border-color:#caa6de;border-bottom-color:#9262ae}
+.hp-hj-building[data-kind="pink"]:before{content:"♥";color:#da69aa}
+.hp-hj-building[data-kind="pink"] .hp-hj-sign{border-color:#bf94d9}
+.hp-hj-building[data-kind="green"]{background:linear-gradient(90deg,#e3faf0,#fff,#e1f6e7);border-color:#8acdb2;border-bottom-color:#3e9e77}
+.hp-hj-building[data-kind="green"] .hp-hj-sign{border-color:#7bc8a4}
+.hp-hj-building[data-kind="gold"]{background:linear-gradient(90deg,#fff1d4,#fff,#ffecca);border-color:#e4bf76;border-bottom-color:#b79046}
+.hp-hj-building[data-kind="gold"] .hp-hj-sign{border-color:#e1ba63}
+.hp-hj-station{position:relative;display:flex;align-items:center;justify-content:center;min-height:46px;max-width:205px;color:#103a61;font-size:13px;line-height:1.2;font-weight:850;text-align:center;text-wrap:balance}
+.hp-hj-station::before{content:"";width:11px;height:11px;background:#f47069;border:3px solid white;box-shadow:0 0 0 3px #ef6a67;border-radius:50%;position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);z-index:3}
+.hp-hj-road{position:absolute;z-index:3;bottom:0;left:0;right:0;height:74px;background:linear-gradient(#768caa,#647b98);border-top:9px solid #fff6cf;pointer-events:none;box-shadow:0 -4px 0 rgba(38,134,88,.18)}
+.hp-hj-road:before{content:"";position:absolute;top:31px;left:0;width:200%;border-top:4px dashed rgba(255,255,255,.88);animation:hp-hj-stripes 5s linear infinite}
+.hp-hj-traveler{position:absolute;bottom:43px;left:clamp(30px,13%,157px);height:119px;width:72px;z-index:5;pointer-events:none;filter:drop-shadow(0 5px 4px rgba(25,47,74,.25));animation:hp-hj-bob .5s ease-in-out infinite alternate}
+.hp-hj-traveler svg{height:100%;width:100%;overflow:visible}
+.hp-hj-traveler .hp-hj-leg1,.hp-hj-traveler .hp-hj-leg2,.hp-hj-traveler .hp-hj-arm1,.hp-hj-traveler .hp-hj-arm2{transform-box:fill-box;transform-origin:top center;animation:hp-hj-step .63s ease-in-out infinite alternate}
+.hp-hj-traveler .hp-hj-leg2,.hp-hj-traveler .hp-hj-arm1{animation-direction:alternate-reverse}
+.hp-hj-traveler .hp-hj-arm1,.hp-hj-traveler .hp-hj-arm2{animation-duration:.63s}
+.hp-hj-bottom{padding:15px clamp(18px,4vw,42px) 19px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;background:rgba(255,255,255,.77)}
+.hp-hj-current{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.hp-hj-count{display:inline-block;border-radius:20px;background:#e7f3fd;color:#115f9b;padding:6px 10px;font-size:12px;font-weight:850;white-space:nowrap}
+.hp-hj-selected{font-size:15px;line-height:1.35;font-weight:850;color:#133d62}
+.hp-hj-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.hp-hj-action{font:inherit;appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:37px;padding:7px 11px;background:white;border:1px solid #9ec5de;color:#135b91;border-radius:10px;font-weight:750;font-size:13px;text-decoration:none;cursor:pointer}
+.hp-hj-action:hover,.hp-hj-action:focus-visible{background:#e9f5fc;outline:2px solid #57a4d0;outline-offset:1px}
+.hp-hj-action--link{background:#0969ad;color:white;border-color:#0969ad}
+.hp-hj-action--link:hover,.hp-hj-action--link:focus-visible{background:#09538c;color:#fff}
+.hp-hj-footnote{padding:0 clamp(18px,4vw,42px) 16px;font-size:12px;line-height:1.5;color:#50718b;background:rgba(255,255,255,.77)}
+.hp-hj[aria-busy="true"]{opacity:.92}
+.hp-hj.is-paused .hp-hj-traveler,.hp-hj.is-paused .hp-hj-traveler *, .hp-hj.is-paused .hp-hj-cloud,.hp-hj.is-paused .hp-hj-road:before{animation-play-state:paused!important}
+@keyframes hp-hj-cloud{from{translate:0 0}to{translate:36px 0}}
+@keyframes hp-hj-stripes{to{transform:translateX(-54px)}}
+@keyframes hp-hj-step{from{transform:rotate(-23deg)}to{transform:rotate(23deg)}}
+@keyframes hp-hj-bob{to{transform:translateY(-3px)}}
+@media(max-width:700px){
+.hp-hj{margin:22px auto 30px;border-radius:19px}
+.hp-hj-intro{padding-top:21px}
+.hp-hj-intro p{font-size:13px}
+.hp-hj-scene{height:310px}
+.hp-hj-rail{padding-left:75px;padding-right:40px;scroll-padding-left:75px;gap:10px}
+.hp-hj-stop{flex-basis:205px}
+.hp-hj-traveler{left:11px;transform:scale(.83);transform-origin:bottom left}
+.hp-hj-bottom{grid-template-columns:1fr}
+.hp-hj-actions{justify-content:space-between}
+.hp-hj-action--link{flex:1}
+.hp-hj-bridge{width:125px;right:3%}
+}
+@media(prefers-reduced-motion:reduce){
+.hp-hj *, .hp-hj *:before,.hp-hj *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
