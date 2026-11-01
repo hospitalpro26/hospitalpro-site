@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en-PK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://api.github.com; frame-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="theme-color" content="#082b59">
+<title>HospitalPro Studio · Admin Dashboard</title>
+<link rel="stylesheet" href="/assets/hp-admin.css">
+<script defer src="/assets/hp-admin.js"></script>
+</head>
+<body>
+<div id="notice" role="status" aria-live="polite" class="toast" hidden></div>
+<section id="login-screen" class="login-screen">
+ <div class="login-brand"><div class="logo-mark">H<span>+</span></div><span>HospitalPro <strong>Studio</strong></span></div>
+ <div class="login-card">
+  <div class="icon-circle">✦</div>
+  <p class="eyebrow">CONTENT MANAGEMENT</p>
+  <h1>Your website, under your control.</h1>
+  <p class="muted">Manage doctor and hospital listings, update SEO and website pages, and publish through your connected GitHub repository.</p>
+  <div class="secure-note"><strong>GitHub authorization required</strong><p>Use a short-lived fine-grained GitHub access token limited to <code>hospitalpro26/hospitalpro-site</code> with <strong>Contents: Read and write</strong>. It stays in this browser tab's memory only and is cleared when you refresh or lock the dashboard.</p></div>
+  <form id="login-form">
+   <label for="token">Fine-grained GitHub access token</label>
+   <input id="token" type="password" required autocomplete="off" spellcheck="false" placeholder="github_pat_••••••••••">
+   <button type="submit" id="connect" class="btn primary full">Connect securely →</button>
+  </form>
+  <p id="login-error" class="error" aria-live="polite"></p>
+  <div class="login-footer"><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">Create a fine-grained token ↗</a><a href="https://github.com/hospitalpro26/hospitalpro-site" target="_blank" rel="noopener noreferrer">View repository ↗</a></div>
+  <p class="tiny">This is a GitHub Pages dashboard, not a separate server. Anyone can view the sign-in screen, but only a GitHub account with repository write permission can publish. Do not enter passwords or patient records here.</p>
+ </div>
+</section>
+<div id="studio" class="app" hidden>
+ <aside class="sidebar">
+  <div class="side-brand"><div class="logo-mark small">H<span>+</span></div><div><strong>HospitalPro</strong><small>STUDIO / ADMIN</small></div></div>
+  <nav aria-label="Dashboard navigation" id="nav">
+   <button data-view="overview" class="nav-link active"><span>◫</span> Overview</button>
+   <button data-view="doctors" class="nav-link"><span>♧</span> Doctors <b id="side-doctor-count">—</b></button>
+   <button data-view="hospitals" class="nav-link"><span>▦</span> Hospitals <b id="side-hospital-count">—</b></button>
+   <button data-view="pages" class="nav-link"><span>▤</span> Pages &amp; SEO</button>
+   <button data-view="media" class="nav-link"><span>▧</span> Media library</button>
+  </nav>
+  <div class="sidebar-bottom">
+   <a href="/" target="_blank" rel="noopener noreferrer">↗ View live website</a>
+   <a href="https://github.com/hospitalpro26/hospitalpro-site/actions" target="_blank" rel="noopener noreferrer">↗ Deployment activity</a>
+   <button id="lock" class="lock">⇥ Lock dashboard</button>
+   <span class="tiny">© HospitalPro · Health Care, Connected.</span>
+  </div>
+ </aside>
+ <div class="main-area">
+  <header class="topbar"><div><button id="menu-toggle" aria-label="Toggle navigation" class="mobile-menu">☰</button><span class="breadcrumb">Workspace / <b id="current-view">Overview</b></span></div><div class="top-right"><span id="account-name" class="account"></span><span class="live-dot"></span><span>Connected to GitHub</span></div></header>
+  <main class="content">
+   <section id="view-overview" class="view">
+    <div class="page-title"><div><p class="eyebrow">YOUR CONTROL CENTRE</p><h1>Good to see you back.</h1><p class="muted">Publish updates to HospitalPro without manually navigating GitHub files.</p></div><a class="btn soft" href="/" target="_blank" rel="noopener noreferrer">View website ↗</a></div>
+    <div class="stat-grid"><div class="stat"><span>DOCTOR LISTINGS</span><strong id="count-doctors">—</strong><small>Curated public directory</small></div><div class="stat"><span>HOSPITAL LISTINGS</span><strong id="count-hospitals">—</strong><small>Featured centres</small></div><div class="stat"><span>WEBSITE PAGES</span><strong id="count-pages">—</strong><small>Editable static pages</small></div><div class="stat"><span>GITHUB BRANCH</span><strong>main</strong><small>Publishing destination</small></div></div>
+    <div class="overview-grid"><div class="panel"><div class="panel-heading"><h2>Quick actions</h2><p class="muted">Choose what you want to update.</p></div><div class="action-grid"><button data-go="doctors" class="action-tile"><strong>＋ Add or edit doctor</strong><span>Name, city, specialty, degree, links</span></button><button data-go="hospitals" class="action-tile"><strong>＋ Update a hospital</strong><span>Hospital name, description, city, links</span></button><button data-go="pages" class="action-tile"><strong>▤ Edit a webpage</strong><span>SEO metadata or HTML source</span></button><button data-go="media" class="action-tile"><strong>▧ Upload an image</strong><span>Publish media to the GitHub repository</span></button></div></div>
+    <div class="panel"><div class="panel-heading"><h2>How publishing works</h2></div><ol class="steps"><li>Open an existing listing or page and update its details.</li><li>Review your edits and click <b>Publish to GitHub</b>.</li><li>GitHub Pages rebuilds the website. Directory registries also trigger the directory synchronization workflow.</li><li>Check the live site after the deployment finishes.</li></ol><div class="warning">Updating a directory registry does <b>not</b> automatically update every standalone doctor profile, city landing page, or the Slashcure platform. Review those separately.</div></div></div>
+   </section>
+   <section id="view-doctors" class="view" hidden>
+    <div class="page-title"><div><p class="eyebrow">DIRECTORY MANAGEMENT</p><h1>Doctors</h1><p class="muted">Edit doctor listings used by the main Find Doctors directory.</p></div><button id="new-doctor" class="btn primary">＋ Add doctor</button></div>
+    <div class="editor-layout">
+     <div class="panel listing-panel"><label class="sr-only" for="doctor-search">Search doctors</label><input id="doctor-search" type="search" placeholder="Search name, city, specialty…"><div class="list-summary" id="doctor-summary"></div><div id="doctor-list" class="item-list"></div></div>
+     <div class="panel edit-panel">
+      <div class="panel-heading"><h2 id="doctor-form-title">Select a doctor</h2><p class="muted">Edits are published to the public directory. Check accuracy before saving.</p></div>
+      <form id="doctor-form" class="edit-form" hidden>
+       <label>Name <input name="name" required maxlength="160"></label>
+       <div class="form-row"><label>City <input name="city" required maxlength="90"></label><label>Specialty <input name="specialty" required maxlength="130"></label></div>
+       <label>Hospital or clinic <input name="hospital" maxlength="240"></label>
+       <label>Qualifications <input name="degree" maxlength="240"></label>
+       <label>HospitalPro profile path <input name="hospitalpro" placeholder="/dr-example.html" maxlength="260"></label>
+       <label>Slashcure profile link <input name="slashcure" type="url" placeholder="https://slashcure.com/..." required maxlength="800"></label>
+       <div class="form-actions"><button type="submit" class="btn primary">Publish doctor listing</button><button id="cancel-doctor" type="button" class="btn soft">Cancel</button></div>
+       <p class="hint">This updates <code>assets/doctors-registry.json</code>. Existing standalone profiles and city landing pages still require individual edits.</p>
+      </form>
+      <p id="doctor-empty" class="empty-state">Choose a doctor from the left, or add a new listing.</p>
+     </div>
+    </div>
+   </section>
+   <section id="view-hospitals" class="view" hidden>
+    <div class="page-title"><div><p class="eyebrow">DIRECTORY MANAGEMENT</p><h1>Hospitals &amp; clinics</h1><p class="muted">Maintain details displayed on the Hospitals directory.</p></div><button id="new-hospital" class="btn primary">＋ Add hospital</button></div>
+    <div class="editor-layout"><div class="panel listing-panel"><label class="sr-only" for="hospital-search">Search hospitals</label><input id="hospital-search" type="search" placeholder="Search hospitals or city…"><div class="list-summary" id="hospital-summary"></div><div id="hospital-list" class="item-list"></div></div>
+    <div class="panel edit-panel"><div class="panel-heading"><h2 id="hospital-form-title">Select a hospital</h2><p class="muted">Update public hospital information.</p></div>
+     <form id="hospital-form" class="edit-form" hidden>
+      <label>Name <input name="name" required maxlength="170"></label>
+      <div class="form-row"><label>City <input name="city" required maxlength="90"></label><label>Category <input name="category" required maxlength="100"></label></div>
+      <label>Public description <textarea name="description" rows="4" required maxlength="700"></textarea></label>
+      <label>Slashcure or official listing URL <input name="url" required maxlength="800"></label>
+      <label>Local HospitalPro profile path <input name="local" placeholder="/hospitals/centre-city/" maxlength="260"></label>
+      <label>Related city directory path <input name="directory" placeholder="/doctors-in-sukkur/" required maxlength="200"></label>
+      <div class="form-actions"><button class="btn primary" type="submit">Publish hospital listing</button><button id="cancel-hospital" type="button" class="btn soft">Cancel</button></div>
+      <p class="hint">This updates <code>assets/hospitals-registry.json</code>. Standalone hospital pages require separate editing.</p>
+     </form>
+     <p id="hospital-empty" class="empty-state">Choose a hospital from the left, or add a new listing.</p>
+    </div></div>
+   </section>
+   <section id="view-pages" class="view" hidden>
+    <div class="page-title"><div><p class="eyebrow">WEBSITE CONTENT</p><h1>Pages &amp; SEO</h1><p class="muted">Edit existing HTML pages directly while preserving GitHub version history.</p></div><a href="https://github.com/hospitalpro26/hospitalpro-site" class="btn soft" target="_blank" rel="noopener noreferrer">Repository ↗</a></div>
+    <div class="editor-layout pages-layout"><div class="panel listing-panel"><input id="page-search" aria-label="Search pages" type="search" placeholder="Search website pages…"><div id="page-summary" class="list-summary"></div><div id="page-list" class="item-list"></div></div>
+    <div class="panel edit-panel"><div class="panel-heading"><h2 id="page-form-title">Choose a page</h2><p class="muted" id="page-path">Select an HTML page to load its current published source.</p></div>
+     <div id="page-controls" hidden>
+      <div class="seg-tabs"><button type="button" id="tab-seo" class="selected">Simple SEO editor</button><button type="button" id="tab-html">Advanced HTML</button></div>
+      <div id="seo-panel" class="edit-form">
+       <label>Browser page title <input id="seo-title" maxlength="190"></label>
+       <label>Search description <textarea id="seo-desc" rows="3" maxlength="400"></textarea></label>
+       <label>Main heading (H1) <input id="seo-h1" maxlength="250"></label>
+       <div id="h1-help" class="hint"></div>
+       <p class="hint">This updates page title, description and social-sharing metadata. Pages with styled or nested H1 headings are protected from automatic heading replacement; use the advanced editor if needed.</p>
+       <button type="button" id="save-seo" class="btn primary">Publish SEO changes</button>
+      </div>
+      <div id="html-panel" class="edit-form" hidden>
+       <div class="warning"><b>Advanced:</b> editing HTML can affect layout, scripts and JSON-LD. Use this only when you understand the page structure. GitHub retains history so changes can be reverted.</div>
+       <label>Full HTML source <textarea id="page-code" spellcheck="false" class="code-editor" rows="22"></textarea></label>
+       <div class="form-actions"><button type="button" class="btn primary" id="save-html">Publish HTML changes</button><button type="button" id="preview-html" class="btn soft">Preview without scripts</button></div>
+       <div id="preview-box" hidden><h3>Static preview (scripts disabled)</h3><iframe id="html-preview" title="Webpage preview" sandbox=""></iframe></div>
+      </div>
+     </div><p id="page-empty" class="empty-state">Choose a page to edit its SEO or HTML.</p>
+    </div></div>
+   </section>
+   <section id="view-media" class="view" hidden>
+    <div class="page-title"><div><p class="eyebrow">FILE MANAGEMENT</p><h1>Media library</h1><p class="muted">Upload approved images to HospitalPro's public assets directory.</p></div></div>
+    <div class="panel upload-panel"><div class="upload-icon">▧</div><h2>Upload an image</h2><p class="muted">Images are committed to <code>assets/uploads/</code>. Supported: JPEG, PNG, WebP and GIF up to 1.5 MB per file.</p>
+     <form id="upload-form" class="edit-form"><label for="image-file">Choose an image</label><input type="file" id="image-file" accept="image/jpeg,image/png,image/webp,image/gif" required><label for="image-name">File name (optional)</label><input id="image-name" placeholder="doctor-name-photo.webp" maxlength="140"><button type="submit" class="btn primary">Upload to GitHub</button></form>
+     <p id="upload-result" class="hint"></p>
+     <div class="warning">Only upload photos you have permission to publish. Never upload patient records or identifying medical images without explicit authorization.</div>
+    </div>
+   </section>
+  </main>
+ </div>
+</div>
+</body>
+</html>
