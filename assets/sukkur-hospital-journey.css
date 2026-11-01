@@ -6,7 +6,7 @@
 .hp-hj-kicker{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:850;color:#116da9}
 .hp-hj-intro h2{font-weight:900;font-size:clamp(24px,3vw,36px);line-height:1.15;margin:7px 0 8px;color:#102f51}
 .hp-hj-intro p{max-width:780px;color:#416580;line-height:1.6;font-size:15px;margin:0}
-.hp-hj-scene{height:455px;position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(192,235,255,.35),rgba(236,254,246,.1) 76%,#b9e6a7 76%,#a9d993 100%)}
+.hp-hj-scene{height:455px;position:relative;overflow:hidden;background:linear-gradient(180deg,#c8ecff 0%,#e9faff 59%,#cbeeb6 60%,#9dd28b 100%)}
 .hp-hj-scene:before{content:"";position:absolute;width:95px;height:95px;border-radius:50%;background:#ffe28a;top:22px;right:13%;opacity:.8;box-shadow:0 0 0 15px rgba(255,230,155,.19)}
 .hp-hj-cloud{position:absolute;display:block;border-radius:50px;width:78px;height:24px;background:rgba(255,255,255,.84);top:42px;left:12%;filter:drop-shadow(18px -9px 0 rgba(255,255,255,.85));animation:hp-hj-cloud 22s ease-in-out infinite alternate;pointer-events:none}
 .hp-hj-cloud:nth-child(2){top:90px;left:56%;transform:scale(.65);animation-duration:29s}
@@ -23,6 +23,19 @@
 .hp-hj-window-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;position:absolute;left:12px;right:12px;top:54px}
 .hp-hj-window-grid i{display:block;height:19px;background:linear-gradient(135deg,#7fc8ed,#d7f7ff);border:2px solid #468dbd;border-radius:3px;box-shadow:inset -2px 0 0 rgba(255,255,255,.5)}
 .hp-hj-sign{position:absolute;top:13px;left:-12px;right:-12px;min-height:36px;padding:4px 6px;background:#fff;border:2px solid #7db7d6;border-radius:7px;display:grid;place-items:center;line-height:1.14;font-size:11px;text-align:center;color:#153c66;font-weight:850;box-shadow:0 3px 0 rgba(47,108,143,.11)}
+
+/* Supplied SICVD Sukkur building photograph, animated as a themed hospital stop. */
+.hp-hj .hp-hj-building--sicvd{background:#a7cfe7;border:3px solid #cc6b6a;border-bottom:6px solid #a23f4a;width:178px;height:150px;overflow:visible;box-shadow:0 9px 23px rgba(21,78,122,.18)}
+.hp-hj .hp-hj-building--sicvd:before{content:"♥";background:#fff;color:#d84451;z-index:4;border-color:#d9959b;animation:hp-hj-heart 1.8s ease-in-out infinite}
+.hp-hj .hp-hj-building--sicvd:after{display:none}
+.hp-hj .hp-hj-building--sicvd .hp-hj-building-photo{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:center center;border-radius:6px 6px 0 0;filter:saturate(1.12) contrast(1.06);animation:hp-hj-photo-zoom 8s ease-in-out infinite alternate}
+.hp-hj .hp-hj-building--sicvd .hp-hj-sign{z-index:3;top:16px;background:rgba(255,255,255,.96);border-color:#c95665;color:#b72e3c;font-size:13px;box-shadow:0 2px 8px rgba(11,45,66,.15)}
+.hp-hj .hp-hj-cardiac{position:absolute;z-index:2;right:8px;bottom:8px;display:grid;place-items:center;background:#fff;border:2px solid #d4505e;color:#d44350;border-radius:50%;width:30px;height:30px;font-size:19px;animation:hp-hj-heart 1.8s ease-in-out infinite;box-shadow:0 0 0 5px rgba(255,255,255,.35)}
+@keyframes hp-hj-photo-zoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+@keyframes hp-hj-heart{0%,100%{transform:translateX(-50%) scale(1)}35%{transform:translateX(-50%) scale(1.10)}}
+.hp-hj .hp-hj-cardiac{animation-name:hp-hj-cardiac-pulse}
+@keyframes hp-hj-cardiac-pulse{0%,100%{transform:scale(1)}35%{transform:scale(1.16)}}
+
 .hp-hj-building[data-kind="red"]{background:linear-gradient(90deg,#ffe5e7,#fff,#ffebed);border-color:#e69ba5;border-bottom-color:#b85e70}
 .hp-hj-building[data-kind="red"] .hp-hj-sign{border-color:#e98d9a}
 .hp-hj-building[data-kind="heart"]:before{content:"♥";color:#db4859}
@@ -35,8 +48,6 @@
 .hp-hj-building[data-kind="gold"] .hp-hj-sign{border-color:#e1ba63}
 .hp-hj-station{position:relative;display:flex;align-items:center;justify-content:center;min-height:46px;max-width:205px;color:#103a61;font-size:13px;line-height:1.2;font-weight:850;text-align:center;text-wrap:balance}
 .hp-hj-station::before{content:"";width:11px;height:11px;background:#f47069;border:3px solid white;box-shadow:0 0 0 3px #ef6a67;border-radius:50%;position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);z-index:3}
-.hp-hj-road{position:absolute;z-index:3;bottom:0;left:0;right:0;height:74px;background:linear-gradient(#768caa,#647b98);border-top:9px solid #fff6cf;pointer-events:none;box-shadow:0 -4px 0 rgba(38,134,88,.18)}
-.hp-hj-road:before{content:"";position:absolute;top:31px;left:0;width:200%;border-top:4px dashed rgba(255,255,255,.88);animation:hp-hj-stripes 5s linear infinite}
 .hp-hj-traveler{position:absolute;top:0;left:0;height:89px;width:60px;z-index:5;pointer-events:none;filter:drop-shadow(0 5px 4px rgba(25,47,74,.25));will-change:transform}
 .hp-hj-traveler svg{height:100%;width:100%;overflow:visible}
 .hp-hj-traveler .hp-hj-leg1,.hp-hj-traveler .hp-hj-leg2,.hp-hj-traveler .hp-hj-arm1,.hp-hj-traveler .hp-hj-arm2{transform-box:fill-box;transform-origin:top center;animation:hp-hj-step .63s ease-in-out infinite alternate}
@@ -53,9 +64,8 @@
 .hp-hj-action--link:hover,.hp-hj-action--link:focus-visible{background:#09538c;color:#fff}
 .hp-hj-footnote{padding:0 clamp(18px,4vw,42px) 16px;font-size:12px;line-height:1.5;color:#50718b;background:rgba(255,255,255,.77)}
 .hp-hj[aria-busy="true"]{opacity:.92}
-.hp-hj.is-paused .hp-hj-traveler,.hp-hj.is-paused .hp-hj-traveler *, .hp-hj.is-paused .hp-hj-cloud,.hp-hj.is-paused .hp-hj-road:before{animation-play-state:paused!important}
+.hp-hj.is-paused .hp-hj-traveler,.hp-hj.is-paused .hp-hj-traveler *, .hp-hj.is-paused .hp-hj-cloud,.hp-hj.is-paused .hp-hj-building-photo,.hp-hj.is-paused .hp-hj-cardiac{animation-play-state:paused!important}
 @keyframes hp-hj-cloud{from{translate:0 0}to{translate:36px 0}}
-@keyframes hp-hj-stripes{to{transform:translateX(-54px)}}
 @keyframes hp-hj-step{from{transform:rotate(-23deg)}to{transform:rotate(23deg)}}
 @keyframes hp-hj-bob{to{transform:translateY(-3px)}}
 
