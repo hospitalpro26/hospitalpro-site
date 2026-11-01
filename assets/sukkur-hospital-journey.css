@@ -37,7 +37,7 @@
 .hp-hj-station::before{content:"";width:11px;height:11px;background:#f47069;border:3px solid white;box-shadow:0 0 0 3px #ef6a67;border-radius:50%;position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);z-index:3}
 .hp-hj-road{position:absolute;z-index:3;bottom:0;left:0;right:0;height:74px;background:linear-gradient(#768caa,#647b98);border-top:9px solid #fff6cf;pointer-events:none;box-shadow:0 -4px 0 rgba(38,134,88,.18)}
 .hp-hj-road:before{content:"";position:absolute;top:31px;left:0;width:200%;border-top:4px dashed rgba(255,255,255,.88);animation:hp-hj-stripes 5s linear infinite}
-.hp-hj-traveler{position:absolute;bottom:43px;left:clamp(30px,13%,157px);height:119px;width:72px;z-index:5;pointer-events:none;filter:drop-shadow(0 5px 4px rgba(25,47,74,.25));animation:hp-hj-bob .5s ease-in-out infinite alternate}
+.hp-hj-traveler{position:absolute;bottom:10px;left:clamp(30px,13%,157px);height:119px;width:72px;z-index:5;pointer-events:none;filter:drop-shadow(0 5px 4px rgba(25,47,74,.25));animation:hp-hj-bob .5s ease-in-out infinite alternate}
 .hp-hj-traveler svg{height:100%;width:100%;overflow:visible}
 .hp-hj-traveler .hp-hj-leg1,.hp-hj-traveler .hp-hj-leg2,.hp-hj-traveler .hp-hj-arm1,.hp-hj-traveler .hp-hj-arm2{transform-box:fill-box;transform-origin:top center;animation:hp-hj-step .63s ease-in-out infinite alternate}
 .hp-hj-traveler .hp-hj-leg2,.hp-hj-traveler .hp-hj-arm1{animation-direction:alternate-reverse}
