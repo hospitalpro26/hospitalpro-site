@@ -14,7 +14,7 @@
     {name:"Mustafai General Hospital Sukkur",sign:"Mustafai General Hospital",type:"pink",url:null}
   ];
   const escapeHtml = s => String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  const character = \`<svg viewBox="0 0 90 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  const character = `<svg viewBox="0 0 90 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <ellipse cx="47" cy="144" rx="27" ry="5" fill="#355777" opacity=".2"/>
     <g class="hp-hj-leg2"><path d="M46 91L59 126" stroke="#223d5d" stroke-width="12" stroke-linecap="round"/><path d="M58 127l12 7" stroke="#fff" stroke-width="10" stroke-linecap="round"/><path d="M57 134h15" stroke="#438dcc" stroke-width="4" stroke-linecap="round"/></g>
     <g class="hp-hj-leg1"><path d="M40 91L31 126" stroke="#304b70" stroke-width="12" stroke-linecap="round"/><path d="M29 128l-8 6" stroke="#fff" stroke-width="10" stroke-linecap="round"/><path d="M18 134h16" stroke="#438dcc" stroke-width="4" stroke-linecap="round"/></g>
@@ -32,43 +32,43 @@
     <circle cx="36" cy="32" r="2.5" fill="#2b3b4a"/><circle cx="55" cy="32" r="2.5" fill="#2b3b4a"/>
     <path d="M40 43q7 7 13-1" fill="none" stroke="#ad685f" stroke-width="2.5" stroke-linecap="round"/>
     <ellipse cx="25" cy="37" rx="4" ry="7" fill="#ffbf98"/>
-  </svg>\`;
-  const bridge = \`<svg class="hp-hj-bridge" viewBox="0 0 220 100" fill="none" aria-hidden="true"><path d="M0 70H220M10 70Q110-55 210 70M10 70L35 47L54 28L78 13L110 5L145 16L170 33L190 51L210 70" stroke="#ad5a5f" stroke-width="5"/><path d="M15 68V80M38 44V75M62 26V77M88 10V78M110 5V80M135 10V77M163 25V80M186 47V78M209 68V80" stroke="#9a5664" stroke-width="2"/><path d="M0 81H220" stroke="#739fbe" stroke-width="6"/></svg>\`;
+  </svg>`;
+  const bridge = `<svg class="hp-hj-bridge" viewBox="0 0 220 100" fill="none" aria-hidden="true"><path d="M0 70H220M10 70Q110-55 210 70M10 70L35 47L54 28L78 13L110 5L145 16L170 33L190 51L210 70" stroke="#ad5a5f" stroke-width="5"/><path d="M15 68V80M38 44V75M62 26V77M88 10V78M110 5V80M135 10V77M163 25V80M186 47V78M209 68V80" stroke="#9a5664" stroke-width="2"/><path d="M0 81H220" stroke="#739fbe" stroke-width="6"/></svg>`;
   const windowGrid = "<span class='hp-hj-window-grid'>" + "<i></i>".repeat(9) + "</span>";
   function render(root, ordinal) {
     const headingId = "hp-hj-heading-"+ordinal;
-    root.innerHTML = \`<section class="hp-hj" aria-labelledby="\${headingId}">
+    root.innerHTML = `<section class="hp-hj" aria-labelledby="${headingId}">
       <div class="hp-hj-intro">
         <span class="hp-hj-kicker">📍 Discover Sukkur • Animated hospital journey</span>
-        <h2 id="\${headingId}">Take a walk through Sukkur's hospitals</h2>
+        <h2 id="${headingId}">Take a walk through Sukkur's hospitals</h2>
         <p>Travel alongside our little healthcare explorer. Discover 10 hospitals and healthcare centers, one stop at a time.</p>
       </div>
       <div class="hp-hj-scene" aria-label="Illustrated route past ten Sukkur hospitals">
         <span class="hp-hj-cloud"></span><span class="hp-hj-cloud"></span><span class="hp-hj-cloud"></span>
-        \${bridge}
+        ${bridge}
         <div class="hp-hj-rail" tabindex="0" role="group" aria-label="Hospital stops. Swipe or use previous and next buttons.">
-          \${hospitals.map((h,i)=>\`<button type="button" class="hp-hj-stop" data-hj-stop="\${i}" aria-label="Stop \${i+1}: \${escapeHtml(h.name)}" aria-current="\${i===0?"step":"false"}">
-            <span class="hp-hj-building" data-kind="\${h.type}" aria-hidden="true"><span class="hp-hj-sign">\${escapeHtml(h.sign)}</span>\${windowGrid}</span>
-            <span class="hp-hj-station">\${escapeHtml(h.name)}</span>
-          </button>\`).join("")}
+          ${hospitals.map((h,i)=>`<button type="button" class="hp-hj-stop" data-hj-stop="${i}" aria-label="Stop ${i+1}: ${escapeHtml(h.name)}" aria-current="${i===0?"step":"false"}">
+            <span class="hp-hj-building" data-kind="${h.type}" aria-hidden="true"><span class="hp-hj-sign">${escapeHtml(h.sign)}</span>${windowGrid}</span>
+            <span class="hp-hj-station">${escapeHtml(h.name)}</span>
+          </button>`).join("")}
         </div>
         <div class="hp-hj-road" aria-hidden="true"></div>
-        <div class="hp-hj-traveler" aria-hidden="true">\${character}</div>
+        <div class="hp-hj-traveler" aria-hidden="true">${character}</div>
       </div>
       <div class="hp-hj-bottom">
         <div class="hp-hj-current" aria-live="polite" aria-atomic="true">
           <span class="hp-hj-count">Stop 1 of 10</span>
-          <span class="hp-hj-selected">\${escapeHtml(hospitals[0].name)}</span>
+          <span class="hp-hj-selected">${escapeHtml(hospitals[0].name)}</span>
         </div>
         <div class="hp-hj-actions">
           <button type="button" class="hp-hj-action" data-hj-prev aria-label="Previous hospital">← Previous</button>
           <button type="button" class="hp-hj-action" data-hj-pause aria-pressed="false">⏸ Pause</button>
           <button type="button" class="hp-hj-action" data-hj-next aria-label="Next hospital">Next →</button>
-          <a class="hp-hj-action hp-hj-action--link" data-hj-open href="\${hospitals[0].url}">View hospital →</a>
+          <a class="hp-hj-action hp-hj-action--link" data-hj-open href="${hospitals[0].url}">View hospital →</a>
         </div>
       </div>
       <p class="hp-hj-footnote">A playful discovery trail, not a geographic route or hospital ranking. For stops without a dedicated page, the link opens Sukkur's doctors directory.</p>
-    </section>\`;
+    </section>`;
     const section=root.querySelector(".hp-hj"), rail=root.querySelector(".hp-hj-rail"), stops=[...root.querySelectorAll("[data-hj-stop]")];
     const count=root.querySelector(".hp-hj-count"),selected=root.querySelector(".hp-hj-selected"), open=root.querySelector("[data-hj-open]"), toggle=root.querySelector("[data-hj-pause]");
     let current=0,manualPause=false,hover=false,inView=false;
