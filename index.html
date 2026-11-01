@@ -672,6 +672,18 @@ section{padding:44px 0 6px}
 @media(prefers-reduced-motion:reduce){.hp-lahore-orbit,.hp-lahore-center{animation:none}}
 .hp-kirpal-home{display:grid;grid-template-columns:190px 1fr;gap:23px;align-items:center;padding:28px;margin:24px 0;border-radius:25px;background:linear-gradient(112deg,#082b57,#125884,#087987);color:white;box-shadow:0 20px 46px -29px #0a3f73}.hp-kirpal-symbol{height:195px;border-radius:20px;background:#ffffff19;border:1px solid #ffffff45;display:grid;place-items:center;font-size:77px;animation:hp-kirpal-float 6s ease-in-out infinite}.hp-kirpal-label{color:#affbdf;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:850}.hp-kirpal-home h3{color:#fff;font-size:clamp(25px,3vw,35px);margin:7px 0}.hp-kirpal-home p{font-size:13px;color:#e4f3ff;line-height:1.65;margin:8px 0}.hp-kirpal-degrees{font-weight:800}.hp-kirpal-home a{display:inline-block;margin-top:10px;background:#fff;color:#0b5489;font-size:12px;font-weight:850;padding:11px 17px;border-radius:40px}@keyframes hp-kirpal-float{50%{transform:translateY(-10px)}}@media(max-width:700px){.hp-kirpal-home{grid-template-columns:1fr;padding:19px}.hp-kirpal-symbol{height:130px}}@media(prefers-reduced-motion:reduce){.hp-kirpal-symbol{animation:none}}</style>
 <!-- Publication refresh: HospitalPro homepage and Sukkur City FAQ updates, 2026-10-18. -->
+<style id="hp-city-picker-styles">
+.hp-city-picker{background:#fff;border:1px solid #c9daf4;border-radius:17px;padding:15px;margin:14px 0;box-shadow:0 8px 20px -15px #184a94}
+.hp-city-picker-heading{font-weight:750;color:#10346e;font-size:15px}
+.hp-city-picker-heading span{display:block;color:#53677e;font-weight:400;font-size:12px;margin-top:4px}
+.hp-city-picker-controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.hp-city-picker-controls select,.hp-city-picker-controls button{border:1px solid #b8cde9;border-radius:9px;padding:10px 12px;background:white;color:#113968;font:600 14px system-ui,sans-serif;cursor:pointer}
+.hp-city-picker-controls select{flex:1;min-width:155px}
+.hp-city-picker-controls #hp-detect-city{background:#135cbb;color:white;border-color:#135cbb}
+.hp-city-picker-controls button:focus-visible,.hp-city-picker-controls select:focus-visible{outline:3px solid #f1ab45;outline-offset:2px}
+.hp-city-picker small{display:block;font-size:11px;color:#5b6c83;margin-top:9px}
+.hp-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+</style>
 </head>
 <body>
 
@@ -700,6 +712,15 @@ section{padding:44px 0 6px}
         <input id="q" type="search" placeholder="Search doctors, hospitals, specialties or city..." aria-label="Search">
         <button id="goBtn" type="button">Search</button>
       </form>
+      <div class="hp-city-picker" aria-label="Personalize doctors by city">
+  <div class="hp-city-picker-heading">📍 Doctors and hospitals near you <span id="hp-location-status" role="status" aria-live="polite">Choose your city to see local profiles first.</span></div>
+  <div class="hp-city-picker-controls">
+    <label for="hp-city-select" class="hp-sr-only">Select your city</label>
+    <select id="hp-city-select" aria-label="Select your city"><option value="">All cities</option><option>Sukkur</option><option>Khairpur</option><option>Ghotki</option><option>Larkana</option><option>Hyderabad</option><option>Lahore</option><option>Karachi</option><option>Shikarpur</option><option>Pano Aqil</option><option>Quetta</option><option>Peshawar</option></select>
+    <button id="hp-detect-city" type="button">◎ Detect my city</button><button id="hp-reset-city" type="button">Show all cities</button>
+  </div>
+  <small>Location access is optional. Coordinates stay in your browser and are not stored or sent to HospitalPro.</small>
+</div>
       <div class="hp-hero-fastlinks" aria-label="Quick access to Slashcure services">
         <a class="hp-hero-primary" href="/find-doctors/">Search HospitalPro Doctor Finder ↗</a>
         <a class="hp-hero-secondary" href="/hospitals/">Explore HospitalPro Hospitals ↗</a>
@@ -1205,6 +1226,11 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp
 
 var dgrid=document.getElementById('dgrid'), hgrid=document.getElementById('hgrid');
 var q=document.getElementById('q'), cat='', term='';
+var hpSelectedCity='';
+var hpCityNames=['Sukkur','Khairpur','Ghotki','Larkana','Hyderabad','Lahore','Karachi','Shikarpur','Pano Aqil','Quetta','Peshawar'];
+function hpCityMatch(loc,city){return !!city && String(loc||'').toLowerCase().indexOf(city.toLowerCase())!==-1;}
+function hpCityFirst(a,b){return Number(hpCityMatch(b.loc,hpSelectedCity))-Number(hpCityMatch(a.loc,hpSelectedCity));}
+
 
 function dCard(d){
   return '<article class="dc"><div class="ph" style="background:linear-gradient(160deg,'+d.col+',#10213f)">'+initials(d.n)+
@@ -1289,11 +1315,12 @@ function match(text){return !term || text.toLowerCase().indexOf(term)>-1}
 function render(){
   var ds=DOCTORS.filter(function(d){return (!cat||d.cat===cat)&&match([d.n,d.sp,d.cat,d.loc,d.deg,(d.extra&&d.extra.treats)||''].join(' '))});
   var hs=HOSPITALS.filter(function(h){return !cat&&match([h.n,h.loc,h.tags.join(' ')].join(' '))||(cat&&match(h.n+' '+h.loc)&&false)});
+  ds.sort(hpCityFirst); hs.sort(hpCityFirst);
   if(!cat && !term && ds.length){
     var featured=ds.slice().sort(function(a,b){
       var order=['Dr. Naveed Ahmed Mahar','Dr. Aaisha Aman','Dr. Murk Channa','Dr. Riaz Hussain Hakro','Dr. Sajid Khadim','Dr. Aneel Ahmed Ghanghro','Dr. Ahmed Raza Laghari','Dr. Habibullah Maitlo','Dr. Kanwal Aijaz','Dr. Imran Ali Kalwar','Dr. Komal Kandhir'];
       var ai=order.indexOf(a.n),bi=order.indexOf(b.n);
-      return (ai<0?99:ai)-(bi<0?99:bi);
+      return hpCityFirst(a,b) || ((ai<0?99:ai)-(bi<0?99:bi));
     });
     var cards=featured.map(dCard2).join('');
     dgrid.classList.add('hp-moving-doctors');
@@ -1337,6 +1364,49 @@ document.getElementById('goBtn').addEventListener('click',function(){
 });
 
 render();
+/* Optional, consent-based city-first personalization: no external geolocation API. */
+(function(){
+  var select=document.getElementById('hp-city-select');
+  var status=document.getElementById('hp-location-status');
+  var button=document.getElementById('hp-detect-city');
+  if(!select||!status||!button)return;
+  var known=[
+    ['Sukkur',27.7052,68.8574],['Khairpur',27.5295,68.7592],['Ghotki',28.0060,69.3152],
+    ['Larkana',27.5590,68.2120],['Hyderabad',25.3960,68.3578],['Lahore',31.5204,74.3587],
+    ['Karachi',24.8607,67.0011],['Shikarpur',27.9556,68.6382],['Pano Aqil',27.8564,69.1127],
+    ['Quetta',30.1798,66.9750],['Peshawar',34.0151,71.5249]
+  ];
+  function distance(lat,lon,a,b){
+    var r=Math.PI/180,dlat=(a-lat)*r,dlon=(b-lon)*r;
+    var h=Math.sin(dlat/2)**2+Math.cos(lat*r)*Math.cos(a*r)*Math.sin(dlon/2)**2;
+    return 12742*Math.asin(Math.min(1,Math.sqrt(h)));
+  }
+  function choose(name,message){
+    hpSelectedCity=name;
+    select.value=name;
+    status.textContent=message||(name?'Showing '+name+' doctors and hospitals first.':'Showing all cities.');
+    try{if(name)localStorage.setItem('hospitalpro-city',name);else localStorage.removeItem('hospitalpro-city');}catch(e){}
+    render();
+  }
+  select.addEventListener('change',function(){choose(select.value);});
+  document.getElementById('hp-reset-city').addEventListener('click',function(){choose('');});
+  button.addEventListener('click',function(){
+    if(!navigator.geolocation){status.textContent='Location is unavailable. Please choose your city.';return;}
+    button.disabled=true;status.textContent='Requesting location permission…';
+    navigator.geolocation.getCurrentPosition(function(pos){
+      button.disabled=false;
+      var lat=pos.coords.latitude,lon=pos.coords.longitude;
+      var nearest=known.map(function(c){return {name:c[0],km:distance(lat,lon,c[1],c[2])};}).sort(function(a,b){return a.km-b.km})[0];
+      if(nearest&&nearest.km<=90){
+        choose(nearest.name,'Nearby city: '+nearest.name+'. Local profiles are shown first; you can change the city.');
+      }else{status.textContent='No nearby supported city detected. Please select a city manually.';}
+    },function(err){
+      button.disabled=false;
+      status.textContent=err.code===1?'Location permission declined. Please choose your city.':'Location could not be detected. Please choose your city.';
+    },{enableHighAccuracy:false,timeout:12000,maximumAge:300000});
+  });
+  try{var saved=localStorage.getItem('hospitalpro-city');if(hpCityNames.indexOf(saved)!==-1)choose(saved);}catch(e){}
+})();
 
 /* ---- moving effects: reveal on scroll + cinematic finale ---- */
 (function(){
