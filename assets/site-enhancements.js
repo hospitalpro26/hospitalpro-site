@@ -78,9 +78,9 @@ else animateSlashcureButtons();
 
 /* Shared site-wide directory assistant. The homepage also includes the script directly; the assistant guards duplicate initialization. */
 (function(){
-  if(document.querySelector('script[src="/assets/hospitalpro-chatbot.js"]'))return;
+  if(document.querySelector('script[src^="/assets/hospitalpro-chatbot.js"]'))return;
   var script=document.createElement("script");
-  script.src="/assets/hospitalpro-chatbot.js";
+  script.src="/assets/hospitalpro-chatbot.js?v=2";
   script.defer=true;
   document.head.appendChild(script);
 })();
