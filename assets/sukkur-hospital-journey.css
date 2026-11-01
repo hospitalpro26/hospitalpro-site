@@ -6,7 +6,7 @@
 .hp-hj-kicker{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:850;color:#116da9}
 .hp-hj-intro h2{font-weight:900;font-size:clamp(24px,3vw,36px);line-height:1.15;margin:7px 0 8px;color:#102f51}
 .hp-hj-intro p{max-width:780px;color:#416580;line-height:1.6;font-size:15px;margin:0}
-.hp-hj-scene{height:340px;position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(192,235,255,.35),rgba(236,254,246,.1) 76%,#b9e6a7 76%,#a9d993 100%)}
+.hp-hj-scene{height:455px;position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(192,235,255,.35),rgba(236,254,246,.1) 76%,#b9e6a7 76%,#a9d993 100%)}
 .hp-hj-scene:before{content:"";position:absolute;width:95px;height:95px;border-radius:50%;background:#ffe28a;top:22px;right:13%;opacity:.8;box-shadow:0 0 0 15px rgba(255,230,155,.19)}
 .hp-hj-cloud{position:absolute;display:block;border-radius:50px;width:78px;height:24px;background:rgba(255,255,255,.84);top:42px;left:12%;filter:drop-shadow(18px -9px 0 rgba(255,255,255,.85));animation:hp-hj-cloud 22s ease-in-out infinite alternate;pointer-events:none}
 .hp-hj-cloud:nth-child(2){top:90px;left:56%;transform:scale(.65);animation-duration:29s}
@@ -37,7 +37,7 @@
 .hp-hj-station::before{content:"";width:11px;height:11px;background:#f47069;border:3px solid white;box-shadow:0 0 0 3px #ef6a67;border-radius:50%;position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);z-index:3}
 .hp-hj-road{position:absolute;z-index:3;bottom:0;left:0;right:0;height:74px;background:linear-gradient(#768caa,#647b98);border-top:9px solid #fff6cf;pointer-events:none;box-shadow:0 -4px 0 rgba(38,134,88,.18)}
 .hp-hj-road:before{content:"";position:absolute;top:31px;left:0;width:200%;border-top:4px dashed rgba(255,255,255,.88);animation:hp-hj-stripes 5s linear infinite}
-.hp-hj-traveler{position:absolute;bottom:10px;left:clamp(30px,13%,157px);height:119px;width:72px;z-index:5;pointer-events:none;filter:drop-shadow(0 5px 4px rgba(25,47,74,.25));animation:hp-hj-bob .5s ease-in-out infinite alternate}
+.hp-hj-traveler{position:absolute;top:0;left:0;height:89px;width:60px;z-index:5;pointer-events:none;filter:drop-shadow(0 5px 4px rgba(25,47,74,.25));will-change:transform}
 .hp-hj-traveler svg{height:100%;width:100%;overflow:visible}
 .hp-hj-traveler .hp-hj-leg1,.hp-hj-traveler .hp-hj-leg2,.hp-hj-traveler .hp-hj-arm1,.hp-hj-traveler .hp-hj-arm2{transform-box:fill-box;transform-origin:top center;animation:hp-hj-step .63s ease-in-out infinite alternate}
 .hp-hj-traveler .hp-hj-leg2,.hp-hj-traveler .hp-hj-arm1{animation-direction:alternate-reverse}
@@ -58,14 +58,23 @@
 @keyframes hp-hj-stripes{to{transform:translateX(-54px)}}
 @keyframes hp-hj-step{from{transform:rotate(-23deg)}to{transform:rotate(23deg)}}
 @keyframes hp-hj-bob{to{transform:translateY(-3px)}}
+
+/* The cartoon travels across rooftops as the hospital track moves underneath. */
+.hp-hj.is-hopping .hp-hj-rail{scroll-snap-type:none;scroll-behavior:auto}
+.hp-hj.is-hopping .hp-hj-traveler .hp-hj-leg1,
+.hp-hj.is-hopping .hp-hj-traveler .hp-hj-leg2{animation:hp-hj-kick .5s ease-in-out infinite alternate}
+.hp-hj-traveler.is-landing::after{content:"✦  ✧  ✦";position:absolute;left:-14px;bottom:-10px;color:#f9a945;font-size:19px;letter-spacing:2px;white-space:nowrap;pointer-events:none;animation:hp-hj-land .43s ease-out both}
+@keyframes hp-hj-kick{from{transform:rotate(-36deg)}to{transform:rotate(38deg)}}
+@keyframes hp-hj-land{from{opacity:1;transform:translateY(0) scale(.6)}to{opacity:0;transform:translateY(12px) scale(1.45)}}
+
 @media(max-width:700px){
 .hp-hj{margin:22px auto 30px;border-radius:19px}
 .hp-hj-intro{padding-top:21px}
 .hp-hj-intro p{font-size:13px}
-.hp-hj-scene{height:310px}
+.hp-hj-scene{height:415px}
 .hp-hj-rail{padding-left:75px;padding-right:40px;scroll-padding-left:75px;gap:10px}
 .hp-hj-stop{flex-basis:205px}
-.hp-hj-traveler{left:11px;transform:scale(.83);transform-origin:bottom left}
+.hp-hj-traveler{width:50px;height:75px}
 .hp-hj-bottom{grid-template-columns:1fr}
 .hp-hj-actions{justify-content:space-between}
 .hp-hj-action--link{flex:1}
