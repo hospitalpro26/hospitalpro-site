@@ -5,7 +5,7 @@
     {name:"Dr. Ziauddin Hospital Sukkur",sign:"Dr. Ziauddin Hospital",type:"blue",url:"/hospitals/dr-ziauddin-hospital-sukkur/"},
     {name:"Sindh Rangers Hospital Sukkur",sign:"Sindh Rangers Hospital",type:"red",url:null},
     {name:"River City Hospital Sukkur",sign:"River City Hospital",type:"green",url:"/hospitals/river-city-hospital-sukkur/"},
-    {name:"NICVD Hospital Sukkur",sign:"NICVD Sukkur",type:"heart",url:null},
+    {name:"SICVD Hospital Sukkur",sign:"SICVD Sukkur",type:"heart",url:null,photo:"/assets/sicvd-sukkur-journey.jpg"},
     {name:"Alkhidmat Mother & Child Health Care Center",sign:"Alkhidmat Mother & Child",type:"pink",url:"/hospitals/alkhidmat-mother-child-health-care-center/"},
     {name:"Hira Medical Center Sukkur",sign:"Hira Medical Center",type:"blue",url:"/hospitals/hira-medical-centre-sukkur/"},
     {name:"Dr. Shahid Mirani Hospital",sign:"Dr. Shahid Mirani Hospital",type:"gold",url:null},
@@ -51,11 +51,10 @@
         ${bridge}
         <div class="hp-hj-rail" tabindex="0" role="group" aria-label="Hospital stops. Swipe or use previous and next buttons.">
           ${hospitals.map((h,i)=>`<button type="button" class="hp-hj-stop" data-hj-stop="${i}" aria-label="Stop ${i+1}: ${escapeHtml(h.name)}" aria-current="${i===0?"step":"false"}">
-            <span class="hp-hj-building" data-kind="${h.type}" aria-hidden="true"><span class="hp-hj-sign">${escapeHtml(h.sign)}</span>${windowGrid}</span>
+            <span class="hp-hj-building${h.photo?" hp-hj-building--sicvd":""}" data-kind="${h.type}" aria-hidden="true">${h.photo?`<img class="hp-hj-building-photo" src="${h.photo}" alt="" loading="lazy" decoding="async"><span class="hp-hj-cardiac" aria-hidden="true">♥</span>`:windowGrid}<span class="hp-hj-sign">${escapeHtml(h.sign)}</span></span>
             <span class="hp-hj-station">${escapeHtml(h.name)}</span>
           </button>`).join("")}
         </div>
-        <div class="hp-hj-road" aria-hidden="true"></div>
         <div class="hp-hj-traveler" aria-hidden="true">${character}</div>
       </div>
       <div class="hp-hj-bottom">
@@ -70,7 +69,7 @@
           <a class="hp-hj-action hp-hj-action--link" data-hj-open href="${hospitals[0].url}">View hospital →</a>
         </div>
       </div>
-      <p class="hp-hj-footnote">A playful discovery trail, not a geographic route or hospital ranking. For stops without a dedicated page, the link opens Sukkur's doctors directory. <a href="/sukkur-hospital-journey/">Open full journey ↗</a></p>
+      <p class="hp-hj-footnote">A playful rooftop-jumping discovery trail, not a geographic route or hospital ranking. For stops without a dedicated page, the link opens Sukkur's doctors directory. <a href="/sukkur-hospital-journey/">Open full journey ↗</a></p>
     </section>`;
 
     const section=root.querySelector(".hp-hj"), scene=root.querySelector(".hp-hj-scene"), rail=root.querySelector(".hp-hj-rail");
