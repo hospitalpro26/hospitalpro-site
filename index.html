@@ -1224,8 +1224,8 @@ var CITIES = [
 ];
 
 var HOSPITALS = [
-  {n:"NEO Medical Center", loc:"Karachi & Lahore", tags:["Multi-Specialty Care","Modern Facilities"], g:"#3a78d8,#12347a", url:"https://slashcure.com/hospitals/lahore/neo-medical-center"},
-  {n:"Tabba Medical Center", loc:"Hyderabad", tags:["Cardiac Care","Diagnostic Services"], g:"#5b6c86,#26324a", url:"https://slashcure.com/hospitals/hyderabad/tabba-heart-institute"},
+  {n:"NEO Medical Center", loc:"Lahore", tags:["Multi-Specialty Care","Modern Facilities"], g:"#3a78d8,#12347a", url:"https://slashcure.com/hospitals/lahore/neo-medical-center", hospitalpro:"/hospitals/neo-medical-center-lahore/"},
+  {n:"Tabba Medical Center", loc:"Hyderabad", tags:["Cardiac Care","Diagnostic Services"], g:"#5b6c86,#26324a", url:"https://slashcure.com/hospitals"},
   {n:"SMBBIT Trauma Centre", loc:"Karachi", tags:["Emergency & Trauma","Specialist OPD"], g:"#d4553f,#7d2214", url:SLASHCURE},
   {n:"Haseeb Medicare Hospital", loc:"Pano Aqil", tags:["24/7 Emergency","ICU / NICU"], g:"#2f9a8a,#115247", url:"https://slashcure.com/hospitals/pano-aqil/haseeb-medicare-hospital"},
   {n:"Hussain Diagnostic Center", loc:"Khairpur Mir's", tags:["Ultrasound","Laboratory"], g:"#2f6fb5,#123e6e", url:SLASHCURE}
@@ -1249,7 +1249,7 @@ function dCard(d){
     '<div class="ic">'+d.ic+'</div></div>'+
     '<div class="db"><h3>'+esc(d.n)+'</h3><div class="sp">'+esc(d.sp)+'</div><div class="dg">'+esc(d.deg)+'</div>'+
     '<div class="lc">📍 '+esc(d.loc)+'</div><div class="lc">🕒 '+esc(d.tm)+'</div><div class="gap"></div>'+
-    '<a class="btn" href="'+esc(d.url)+'">View on Slashcure →</a></div></article>';
+    '<div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn" href="'+esc(d.hospitalpro||"/find-doctors/")+'">HospitalPro profile →</a><a class="btn" href="'+esc(d.url)+'" target="_blank" rel="noopener noreferrer">Slashcure profile ↗</a></div></div></article>';
 }
 var KOMAL_URL="https://slashcure.com/consultant-physiotherapists/sukkur/dr-komal-kandhir-pt";
 /* Page on this site with more about Dr. Komal. Upload your own HTML file to the repo with exactly this name. */
@@ -1311,15 +1311,15 @@ function dCard2(d){
       '<div class="dr-row"><i>📍</i><div><b>'+esc(d.loc)+'</b></div></div>'+
       '<div class="dr-row"><i>🕒</i><div><b>'+times+'</b></div></div>'+
     '</div>'+
-    '<div class="dr-foot"><a class="btn" href="'+esc(d.hospitalpro||d.url)+'">HospitalPro Profile →</a>'+
-    '<a class="btn call" href="'+esc(d.url)+'" aria-label="View '+esc(d.n)+' on Slashcure" title="Full profile on Slashcure">🔗</a></div></div></article>';
+    '<div class="dr-foot"><a class="btn" href="'+esc(d.hospitalpro||"/find-doctors/")+'" title="View HospitalPro doctor profile">HospitalPro →</a>'+
+    '<a class="btn" href="'+esc(d.url)+'" target="_blank" rel="noopener noreferrer" aria-label="View '+esc(d.n)+' on Slashcure" title="View doctor on Slashcure">Slashcure ↗</a></div></div></article>';
 }
 
 function hCard(h){
   return '<article class="hc"><div class="hi" style="--g:linear-gradient(135deg,'+h.g+')"><span>'+esc(h.n)+'</span></div>'+
     '<div class="hb"><h3>'+esc(h.n)+'</h3><div class="lc">📍 '+esc(h.loc)+'</div>'+
     '<div class="tg">'+h.tags.map(function(t){return '<span>'+esc(t)+'</span>'}).join('')+'</div>'+
-    '<a class="btn" href="'+esc(h.url)+'">View on Slashcure →</a></div></article>';
+    '<div style="display:flex;flex-wrap:wrap;gap:8px"><a class="btn" href="'+esc(h.hospitalpro||"/hospitals/")+'">'+(h.hospitalpro?'HospitalPro profile':'HospitalPro directory')+' →</a><a class="btn" href="'+esc(h.url)+'" target="_blank" rel="noopener noreferrer">'+(h.url.indexOf("/hospitals/")>=0?'View on Slashcure':'Explore Slashcure')+' ↗</a></div></div></article>';
 }
 function match(text){return !term || text.toLowerCase().indexOf(term)>-1}
 
